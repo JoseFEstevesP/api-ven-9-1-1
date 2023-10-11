@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "Node16",
+    "paths": {
+      "#Config/*": ["./src/config/*"],
+      "#Constants/*": ["./src/constants/*"],
+      "#Controllers/*": ["./src/controllers/*"],
+      "#Dto/*": ["./src/dto/*"],
+      "#Functions/*": ["./src/functions/*"],
+      "#Middleware/*": ["./src/middleware/*"],
+      "#Routes/*": ["./src/routes/*"],
+      "#Schemas/*": ["./src/schemas/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

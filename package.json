@@ -1,0 +1,56 @@
+{
+  "author": "José Esteves",
+  "dependencies": {
+    "@sinclair/typebox": "0.25.21",
+    "ajv": "8.12.0",
+    "ajv-errors": "3.0.0",
+    "ajv-formats": "2.1.1",
+    "bcrypt": "5.1.0",
+    "dotenv": "16.0.3",
+    "express": "4.18.2",
+    "jose": "4.11.2",
+    "mongoose": "6.6.1",
+    "pg": "8.11.0",
+    "pg-hstore": "2.3.4",
+    "sequelize": "6.32.0"
+  },
+  "description": "API de",
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.3",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^2.7.1"
+  },
+  "imports": {
+    "#Config/*": "./src/config/*",
+    "#Constants/*": "./src/constants/*",
+    "#Controllers/*": "./src/controllers/*",
+    "#Dto/*": "./src/dto/*",
+    "#Functions/*": "./src/functions/*",
+    "#Middleware/*": "./src/middleware/*",
+    "#Routes/*": "./src/routes/*",
+    "#Schemas/*": "./src/schemas/*"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.{js,md}": "prettier --write"
+  },
+  "name": "user-management",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "format": "prettier --write .",
+    "lint": "eslint src/**/*.js --fix",
+    "postinstall": "npm run prepare",
+    "prepare": "husky install",
+    "prettier": "prettier --write .",
+    "start": "node src/index.js"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
