@@ -4,4 +4,5 @@ export const permissions = {
   create: 'CREATE',
   update: 'UPDATE',
   delete: 'DELETE',
+  super: 'SUPER',
 };
