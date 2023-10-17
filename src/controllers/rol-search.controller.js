@@ -15,7 +15,9 @@ const rolSearchController = async (req, res) => {
     page,
   });
   if (!rows.length)
-    return res.status(404).send({ errors: ['No se a encontrado ningún rol'] });
+    return res
+      .status(404)
+      .send({ errors: [{ uid: 'No se a encontrado ningún rol' }] });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
   const nextPage = Number(totalPage) + 1;

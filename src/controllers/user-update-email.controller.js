@@ -5,10 +5,12 @@ const userUpdateEmailController = async (req, res) => {
   const { email, password } = req.body;
   const existingUserById = await User.findByPk(id);
   if (!existingUserById)
-    return res.status(401).send({ errors: ['Usuario no autorizado'] });
+    return res.status(401).send({ errors: [{ uid: 'Usuario no autorizado' }] });
   const checkPassword = await compare(password, existingUserById.password);
   if (!checkPassword)
-    return res.status(401).send({ errors: ['Credenciales incorrectas'] });
+    return res
+      .status(401)
+      .send({ errors: [{ uid: 'Credenciales incorrectas' }] });
   existingUserById.email = email;
   await existingUserById.save();
   return res.send({ msg: 'Email del usuario actualizado' });

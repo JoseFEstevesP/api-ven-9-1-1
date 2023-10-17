@@ -4,7 +4,7 @@ import rolRegisterController from '#Controllers/rol-register.controller.js';
 import rolSearchController from '#Controllers/rol-search.controller.js';
 import rolSearchItemController from '#Controllers/rol-searchItem.controller.js';
 import rolUpdateController from '#Controllers/rol-update.controller.js';
-import deleteDTO from '#Dto/rol-delete.dto.js';
+import deleteDTO from '#Dto/delete.dto.js';
 import rolRegisterDTO from '#Dto/rol-register.dto.js';
 import createPermissions from '#Middleware/rol-create.middleware.js';
 import deletePermissions from '#Middleware/rol-delete.middleware.js';

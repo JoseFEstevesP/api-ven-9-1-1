@@ -7,11 +7,11 @@ const rolRegisterController = async (req, res) => {
   if (existingRolById)
     return res
       .status(409)
-      .send({ errors: ['Ya existe un rol con ese id registrado'] });
+      .send({ errors: [{ uid: 'Ya existe un rol con ese id registrado' }] });
   if (existingRolName)
-    return res
-      .status(409)
-      .send({ errors: ['Ya existe un rol con ese nombre registrado'] });
+    return res.status(409).send({
+      errors: [{ uid: 'Ya existe un rol con ese nombre registrado' }],
+    });
   const rol = await Rol.create({
     uid,
     name,

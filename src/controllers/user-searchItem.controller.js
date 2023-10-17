@@ -6,7 +6,8 @@ const userSearchItemController = async (req, res) => {
   if (!user)
     return res
       .status(404)
-      .send({ errors: ['No se a encontrado ningún usuario'] });
+      .send({ errors: [{ uid: 'No se a encontrado ningún usuario' }] });
+
   return res.status(200).send(user);
 };
 

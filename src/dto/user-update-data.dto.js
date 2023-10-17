@@ -1,12 +1,12 @@
-import { Type } from '@sinclair/typebox';
-import Ajv from 'ajv';
-import addErrors from 'ajv-errors';
+import { regExpPassword } from '#Constants/reg-exp.js';
 import {
   ciDTOSchemas,
   nameDTOSchemas,
   surnameDTOSchemas,
 } from '#Dto/dto-types.js';
-import { regExpPassword } from '#Constants/reg-exp.js';
+import { Type } from '@sinclair/typebox';
+import Ajv from 'ajv';
+import addErrors from 'ajv-errors';
 const updateDataDTOSchema = Type.Object(
   {
     name: nameDTOSchemas,
@@ -29,9 +29,11 @@ const validateSchema = ajv.compile(updateDataDTOSchema);
 const userUpdateDataDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
-    return res
-      .status(400)
-      .send({ errors: validateSchema.errors.map((error) => error.message) });
+    return res.status(400).send({
+      errors: validateSchema.errors.map((error) => {
+        return { [error.instancePath.split('/')[1]]: error.message };
+      }),
+    });
   next();
 };
 export default userUpdateDataDTO;

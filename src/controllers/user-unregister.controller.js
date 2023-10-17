@@ -5,10 +5,12 @@ const userUnregisterController = async (req, res) => {
   const { password } = req.body;
   const existingUserById = await User.findByPk(id);
   if (!existingUserById)
-    return res.status(401).send({ errors: ['Usuario no autorizado'] });
+    return res.status(401).send({ errors: [{ uid: 'Usuario no autorizado' }] });
   const checkPassword = await compare(password, existingUserById.password);
   if (!checkPassword)
-    return res.status(401).send({ errors: ['Credenciales incorrectas'] });
+    return res
+      .status(401)
+      .send({ errors: [{ uid: 'Credenciales incorrectas' }] });
   await existingUserById.destroy();
   return res.send({ msg: 'Usuario eliminado' });
 };

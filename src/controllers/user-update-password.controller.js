@@ -6,10 +6,12 @@ const userUpdatePasswordController = async (req, res) => {
   const { oldPassword, newPassword } = req.body;
   const existingUserById = await User.findByPk(id);
   if (!existingUserById)
-    return res.status(401).send({ errors: ['Usuario no autorizado'] });
+    return res.status(401).send({ errors: [{ uid: 'Usuario no autorizado' }] });
   const checkPassword = await compare(oldPassword, existingUserById.password);
   if (!checkPassword)
-    return res.status(401).send({ errors: ['Credenciales incorrectas'] });
+    return res
+      .status(401)
+      .send({ errors: [{ uid: 'Credenciales incorrectas' }] });
   const hashedPassword = await hash(newPassword, SALT);
   existingUserById.password = hashedPassword;
   await existingUserById.save();

@@ -26,9 +26,11 @@ const validateSchema = ajv.compile(loginDTOSchema);
 const userLoginDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
-    return res
-      .status(400)
-      .send({ errors: validateSchema.errors.map((error) => error.message) });
+    return res.status(400).send({
+      errors: validateSchema.errors.map((error) => {
+        return { [error.instancePath.split('/')[1]]: error.message };
+      }),
+    });
   next();
 };
 export default userLoginDTO;

@@ -1,9 +1,9 @@
+import { regExpPassword } from '#Constants/reg-exp.js';
+import { emailDTOSchemas, passwordDTOSchemas } from '#Dto/dto-types.js';
 import { Type } from '@sinclair/typebox';
 import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
 import addErrors from 'ajv-errors';
-import { emailDTOSchemas, passwordDTOSchemas } from '#Dto/dto-types.js';
-import { regExpPassword } from '#Constants/reg-exp.js';
+import addFormats from 'ajv-formats';
 const updateEmailDTOSchema = Type.Object(
   {
     email: emailDTOSchemas,
@@ -26,9 +26,11 @@ const validateSchema = ajv.compile(updateEmailDTOSchema);
 const userUpdateEmailDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
-    return res
-      .status(400)
-      .send({ errors: validateSchema.errors.map((error) => error.message) });
+    return res.status(400).send({
+      errors: validateSchema.errors.map((error) => {
+        return { [error.instancePath.split('/')[1]]: error.message };
+      }),
+    });
   next();
 };
 export default userUpdateEmailDTO;
