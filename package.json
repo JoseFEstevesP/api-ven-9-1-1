@@ -1,5 +1,5 @@
 {
-  "author": "José Esteves",
+  "author": "Carlos Flores, Carlos La Concha, Freddy Moreno, José Esteves, Oswaldo Chinchilla",
   "dependencies": {
     "@sinclair/typebox": "0.25.21",
     "ajv": "8.12.0",
@@ -15,7 +15,7 @@
     "pg-hstore": "2.3.4",
     "sequelize": "6.32.0"
   },
-  "description": "API de",
+  "description": "API para el ven 9-1-1",
   "devDependencies": {
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
@@ -42,7 +42,7 @@
     "*.js": "eslint --fix",
     "*.{js,md}": "prettier --write"
   },
-  "name": "user-management",
+  "name": "api-ven-9-1-1",
   "scripts": {
     "dev": "nodemon src/index.js",
     "format": "prettier --write .",
