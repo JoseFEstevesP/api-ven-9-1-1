@@ -11,6 +11,8 @@ const userSearchController = async (req, res) => {
         { ci: { [Op.iLike]: `%${search}%` } },
         { surname: { [Op.iLike]: `%${search}%` } },
         { email: { [Op.iLike]: `%${search}%` } },
+        { uidRol: { [Op.iLike]: `%${search}%` } },
+        { uidSite: { [Op.iLike]: `%${search}%` } },
       ],
     },
     limit,

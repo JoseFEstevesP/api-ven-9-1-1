@@ -4,7 +4,6 @@ import {
   emailDTOSchemas,
   idDTOSchemas,
   nameDTOSchemas,
-  passwordDTOSchemas,
   surnameDTOSchemas,
 } from '#Dto/dto-types.js';
 import { Type } from '@sinclair/typebox';
@@ -18,7 +17,6 @@ const registerDTOSchema = Type.Object(
     name: nameDTOSchemas,
     surname: surnameDTOSchemas,
     email: emailDTOSchemas,
-    password: passwordDTOSchemas,
     uidRol: idDTOSchemas,
     uidSite: idDTOSchemas,
   },
@@ -36,7 +34,7 @@ ajv.addFormat('password', regExpPassword);
 addFormats(ajv, ['email', 'uuid']);
 addErrors(ajv);
 const validateSchema = ajv.compile(registerDTOSchema);
-const userRegisterDTO = (req, res, next) => {
+const userUpdateDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
     return res.status(400).send({
@@ -46,4 +44,4 @@ const userRegisterDTO = (req, res, next) => {
     });
   next();
 };
-export default userRegisterDTO;
+export default userUpdateDTO;

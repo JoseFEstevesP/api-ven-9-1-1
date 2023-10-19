@@ -9,6 +9,7 @@ import userUnregisterController from '#Controllers/user-unregister.controller.js
 import userUpdateDataController from '#Controllers/user-update-data.controller.js';
 import userUpdateEmailController from '#Controllers/user-update-email.controller.js';
 import userUpdatePasswordController from '#Controllers/user-update-password.controller.js';
+import userUpdateController from '#Controllers/user-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import userLoginDTO from '#Dto/user-login.dto.js';
 import userRegisterDTO from '#Dto/user-register.dto.js';
@@ -16,6 +17,7 @@ import userUnregisterDTO from '#Dto/user-unregister.dto.js';
 import userUpdateDataDTO from '#Dto/user-update-data.dto.js';
 import userUpdateEmailDTO from '#Dto/user-update-email.dto.js';
 import userUpdatePasswordDTO from '#Dto/user-update-password.dto.js';
+import userUpdateDTO from '#Dto/user-update.dto.js';
 import createPermissions from '#Middleware/rol-create.middleware.js';
 import deletePermissions from '#Middleware/rol-delete.middleware.js';
 import profilePermissions from '#Middleware/rol-profile.middleware.js';
@@ -45,6 +47,13 @@ userRoutes.get(
   userSearchItemController
 );
 userRoutes.get('/search', userJWTDTO, readPermissions, userSearchController);
+userRoutes.patch(
+  '/update',
+  userJWTDTO,
+  profilePermissions,
+  userUpdateDTO,
+  userUpdateController
+);
 userRoutes.patch(
   '/update-data',
   userJWTDTO,
