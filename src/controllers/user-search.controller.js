@@ -2,21 +2,24 @@ import { User } from '#Schemas/user.schema.js';
 import { Op } from 'sequelize';
 
 const userSearchController = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 10, uidSite } = req.query;
   const { search } = req.body;
+  const { id } = req;
+  const user = await User.findByPk(id);
+  const site = uidSite || user.uidSite;
   const { rows, count } = await User.findAndCountAll({
     where: {
+      uidSite: site,
       [Op.or]: [
         { name: { [Op.iLike]: `%${search}%` } },
         { ci: { [Op.iLike]: `%${search}%` } },
         { surname: { [Op.iLike]: `%${search}%` } },
         { email: { [Op.iLike]: `%${search}%` } },
         { uidRol: { [Op.iLike]: `%${search}%` } },
-        { uidSite: { [Op.iLike]: `%${search}%` } },
       ],
     },
     limit,
-    page,
+    offset: page,
   });
   if (!rows.length)
     return res

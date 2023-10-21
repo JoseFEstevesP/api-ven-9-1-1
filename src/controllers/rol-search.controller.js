@@ -12,7 +12,7 @@ const rolSearchController = async (req, res) => {
       ],
     },
     limit,
-    page,
+    offset: page,
   });
   if (!rows.length)
     return res

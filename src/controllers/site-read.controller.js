@@ -4,7 +4,7 @@ const siteReadController = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   const { rows, count } = await Site.findAndCountAll({
     limit,
-    page,
+    offset: page,
   });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
