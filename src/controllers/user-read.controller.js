@@ -8,7 +8,7 @@ const userReadController = async (req, res) => {
   const { rows, count } = await User.findAndCountAll({
     where: { uidSite: site },
     limit,
-    offset: page,
+    offset: (page - 1) * limit,
   });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
