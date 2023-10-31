@@ -1,10 +1,16 @@
 import { Rol } from '#Schemas/rol.schema.js';
 
 const rolReadController = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const {
+    page = 1,
+    limit = 10,
+    orderProperty = 'name',
+    order = 'ASC',
+  } = req.query;
   const { rows, count } = await Rol.findAndCountAll({
     limit,
     offset: (page - 1) * limit,
+    order: [[orderProperty, order]],
   });
 
   const pages = Math.ceil(count / limit);

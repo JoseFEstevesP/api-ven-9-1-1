@@ -46,7 +46,12 @@ userRoutes.get(
   readPermissions,
   userSearchItemController
 );
-userRoutes.get('/search', userJWTDTO, readPermissions, userSearchController);
+userRoutes.get(
+  '/search/:search',
+  userJWTDTO,
+  readPermissions,
+  userSearchController
+);
 userRoutes.patch(
   '/update',
   userJWTDTO,

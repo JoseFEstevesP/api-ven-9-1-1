@@ -13,6 +13,7 @@ const userJWTDTO = async (req, res, next) => {
     );
     req.id = payload.id;
     req.uidRol = payload.uidRol;
+    req.uidSite = payload.uidSite;
     next();
   } catch (error) {
     return res.status(401).send({ errors: ['Usuario no autorizado'] });

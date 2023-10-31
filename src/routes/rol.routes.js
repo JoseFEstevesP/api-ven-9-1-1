@@ -1,5 +1,6 @@
 import rolDeleteController from '#Controllers/rol-delete.controller.js';
 import rolReadController from '#Controllers/rol-read.controller.js';
+import rolReadOfLimitController from '#Controllers/rol-readOfLimit.controller.js';
 import rolRegisterController from '#Controllers/rol-register.controller.js';
 import rolSearchController from '#Controllers/rol-search.controller.js';
 import rolSearchItemController from '#Controllers/rol-searchItem.controller.js';
@@ -24,12 +25,23 @@ rolRoutes.post(
 );
 rolRoutes.get('/list', userJWTDTO, readPermissions, rolReadController);
 rolRoutes.get(
+  '/list_of_limit',
+  userJWTDTO,
+  readPermissions,
+  rolReadOfLimitController
+);
+rolRoutes.get(
   '/item/:uid',
   userJWTDTO,
   readPermissions,
   rolSearchItemController
 );
-rolRoutes.get('/search', userJWTDTO, readPermissions, rolSearchController);
+rolRoutes.get(
+  '/search/:search',
+  userJWTDTO,
+  readPermissions,
+  rolSearchController
+);
 rolRoutes.patch(
   '/update',
   userJWTDTO,

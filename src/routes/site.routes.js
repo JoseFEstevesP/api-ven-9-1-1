@@ -1,5 +1,6 @@
 import siteDeleteController from '#Controllers/site-delete.controller.js';
 import siteReadController from '#Controllers/site-read.controller.js';
+import siteReadOfLimitController from '#Controllers/site-readOfLimit.controller.js';
 import siteRegisterController from '#Controllers/site-register.controller.js';
 import siteSearchController from '#Controllers/site-search.controller.js';
 import siteSearchItemController from '#Controllers/site-searchItem.controller.js';
@@ -24,12 +25,23 @@ siteRoutes.post(
 );
 siteRoutes.get('/list', userJWTDTO, readPermissions, siteReadController);
 siteRoutes.get(
+  '/list_of_limit',
+  userJWTDTO,
+  readPermissions,
+  siteReadOfLimitController
+);
+siteRoutes.get(
   '/item/:uid',
   userJWTDTO,
   readPermissions,
   siteSearchItemController
 );
-siteRoutes.get('/search', userJWTDTO, readPermissions, siteSearchController);
+siteRoutes.get(
+  '/search/:search',
+  userJWTDTO,
+  readPermissions,
+  siteSearchController
+);
 siteRoutes.patch(
   '/update',
   userJWTDTO,

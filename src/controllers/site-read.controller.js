@@ -1,10 +1,16 @@
 import { Site } from '#Schemas/site.schema.js';
 
 const siteReadController = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const {
+    page = 1,
+    limit = 10,
+    orderProperty = 'name',
+    order = 'ASC',
+  } = req.query;
   const { rows, count } = await Site.findAndCountAll({
     limit,
     offset: (page - 1) * limit,
+    order: [[orderProperty, order]],
   });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;

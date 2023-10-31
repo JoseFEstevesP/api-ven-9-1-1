@@ -18,6 +18,7 @@ const userLoginController = async (req, res) => {
   const jwtConstructor = new SignJWT({
     id: existingUserByCi.uid,
     uidRol: existingUserByCi.uidRol,
+    uidSite: existingUserByCi.uidSite,
   });
   const { permissions } = await Rol.findByPk(existingUserByCi.uidRol);
   const jwt = await jwtConstructor
@@ -25,6 +26,10 @@ const userLoginController = async (req, res) => {
     .setIssuedAt()
     .setExpirationTime('7d')
     .sign(coder(process.env.JWT_PRIVATE_KEY));
-  return res.send({ JWT: jwt, rol: permissions });
+  return res.send({
+    JWT: jwt,
+    rol: permissions,
+    site: existingUserByCi.uidSite,
+  });
 };
 export default userLoginController;
