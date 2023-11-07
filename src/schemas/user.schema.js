@@ -1,5 +1,6 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
+import { Technology } from './technology.schema.js';
 
 export const User = sequelize.define('user', {
   uid: {
@@ -37,4 +38,17 @@ export const User = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '1',
+  },
+});
+User.hasMany(Technology, {
+  foreignKey: 'uidUser',
+  sourceKey: 'uid',
+});
+Technology.belongsTo(User, {
+  foreignKey: 'uidUser',
+  targetId: 'uid',
 });

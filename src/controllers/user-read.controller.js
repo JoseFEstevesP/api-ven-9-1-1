@@ -5,15 +5,16 @@ import { User } from '#Schemas/user.schema.js';
 const userReadController = async (req, res) => {
   const {
     page = 1,
-    limit = 10,
+    limit = 20,
     uidSite: uidSiteQuery,
     orderProperty = 'name',
     order = 'ASC',
+    status = '1',
   } = req.query;
   const { uidSite, id } = req;
   const site = uidSiteQuery || uidSite;
   const { rows, count } = await User.findAndCountAll({
-    where: { uidSite: site },
+    where: { uidSite: site, status },
     attributes: { exclude: ['password'] },
     limit,
     offset: (page - 1) * limit,

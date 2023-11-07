@@ -6,10 +6,11 @@ import { Op } from 'sequelize';
 const userSearchController = async (req, res) => {
   const {
     page = 1,
-    limit = 10,
+    limit = 20,
     uidSite,
     orderProperty = 'name',
     order = 'ASC',
+    status = '1',
   } = req.query;
   const { search } = req.params;
   const { id } = req;
@@ -18,6 +19,7 @@ const userSearchController = async (req, res) => {
   const { rows, count } = await User.findAndCountAll({
     where: {
       uidSite: site,
+      status,
       [Op.or]: [
         { name: { [Op.iLike]: `%${search}%` } },
         { ci: { [Op.iLike]: `%${search}%` } },

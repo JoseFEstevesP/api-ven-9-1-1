@@ -6,6 +6,10 @@ import { SignJWT } from 'jose';
 const userLoginController = async (req, res) => {
   const { ci, password } = req.body;
   const existingUserByCi = await User.findOne({ where: { ci } });
+  if (existingUserByCi.status !== '1')
+    return res
+      .status(410)
+      .send({ errors: [{ uid: 'Este usuario fue eliminado' }] });
   if (!existingUserByCi)
     return res
       .status(401)
