@@ -2,7 +2,7 @@ import { Site } from '#Schemas/site.schema.js';
 
 const siteSearchItemController = async (req, res) => {
   const { uid } = req.params;
-  const site = await Site.findByPk(uid);
+  const site = await Site.findOne({ where: { uid, status: '1' } });
   if (!site)
     return res
       .status(404)

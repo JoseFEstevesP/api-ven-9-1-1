@@ -1,6 +1,7 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
 import { User } from './user.schema.js';
+import { Technology } from './technology.schema.js';
 
 export const Site = sequelize.define('site', {
   uid: {
@@ -20,6 +21,11 @@ export const Site = sequelize.define('site', {
     type: DataTypes.STRING(3000),
     allowNull: false,
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '1',
+  },
 });
 
 Site.hasMany(User, {
@@ -27,6 +33,14 @@ Site.hasMany(User, {
   sourceKey: 'uid',
 });
 User.belongsTo(Site, {
-  foreignKey: 'uidRol',
+  foreignKey: 'uidSite',
+  targetId: 'uid',
+});
+Site.hasMany(Technology, {
+  foreignKey: 'uidSite',
+  sourceKey: 'uid',
+});
+Technology.belongsTo(Site, {
+  foreignKey: 'uidSite',
   targetId: 'uid',
 });
