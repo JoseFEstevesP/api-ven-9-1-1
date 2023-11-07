@@ -2,7 +2,7 @@ import { Site } from '#Schemas/site.schema.js';
 
 const siteUpdateController = async (req, res) => {
   const { uid, name, direction } = req.body;
-  const existingSiteById = await Site.findByPk(uid);
+  const existingSiteById = await Site.findOne({ where: { uid, status: '1' } });
   if (!existingSiteById)
     return res.status(404).send({ errors: [{ uid: 'Sede no encontrada' }] });
   existingSiteById.name = name;

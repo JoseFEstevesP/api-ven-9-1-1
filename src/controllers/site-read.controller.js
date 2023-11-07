@@ -3,11 +3,13 @@ import { Site } from '#Schemas/site.schema.js';
 const siteReadController = async (req, res) => {
   const {
     page = 1,
-    limit = 10,
+    limit = 20,
     orderProperty = 'name',
     order = 'ASC',
+    status = '1',
   } = req.query;
   const { rows, count } = await Site.findAndCountAll({
+    where: { status },
     limit,
     offset: (page - 1) * limit,
     order: [[orderProperty, order]],
