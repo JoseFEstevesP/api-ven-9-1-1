@@ -4,13 +4,15 @@ import { Op } from 'sequelize';
 const rolSearchController = async (req, res) => {
   const {
     page = 1,
-    limit = 10,
+    limit = 20,
     orderProperty = 'name',
     order = 'ASC',
+    status = '1',
   } = req.query;
   const { search } = req.params;
   const { rows, count } = await Rol.findAndCountAll({
     where: {
+      status,
       [Op.or]: [
         { name: { [Op.iLike]: `%${search}%` } },
         { permissions: { [Op.iLike]: `%${search}%` } },

@@ -2,7 +2,7 @@ import { Rol } from '#Schemas/rol.schema.js';
 
 const rolSearchItemController = async (req, res) => {
   const { uid } = req.params;
-  const rol = await Rol.findByPk(uid);
+  const rol = await Rol.findOne({ where: { uid, status: '1' } });
   if (!rol)
     return res
       .status(404)
