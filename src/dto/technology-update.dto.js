@@ -16,7 +16,7 @@ const registerDTOSchema = Type.Object(
     dateOfAcquisition: permissionsDTOSchemas,
     warranty: permissionsDTOSchemas,
     remarks: permissionsDTOSchemas,
-    code: permissionsDTOSchemas,
+    codeBN: permissionsDTOSchemas,
   },
   {
     additionalProperties: false,

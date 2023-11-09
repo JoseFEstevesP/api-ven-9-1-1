@@ -20,6 +20,10 @@ export const Technology = sequelize.define('technology', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  serial: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   quantity: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -48,7 +52,7 @@ export const Technology = sequelize.define('technology', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  code: {
+  codeBN: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false,

@@ -4,12 +4,15 @@ const technologyReadController = async (req, res) => {
   const {
     page = 1,
     limit = 20,
+    uidSite: uidSiteQuery,
     orderProperty = 'description',
     order = 'ASC',
     status = '1',
   } = req.query;
+  const { uidSite } = req;
+  const site = uidSiteQuery || uidSite;
   const { rows, count } = await Technology.findAndCountAll({
-    where: { status },
+    where: { uidSite: site, status },
     limit,
     offset: (page - 1) * limit,
     order: [[orderProperty, order]],
