@@ -1,11 +1,13 @@
 import { Technology } from '#Schemas/technology.schema.js';
 
 const technologyRegisterController = async (req, res) => {
+  const { id, uidSite } = req;
   const {
     uid,
     description,
     brand,
     model,
+    serial,
     quantity,
     value,
     state,
@@ -13,9 +15,7 @@ const technologyRegisterController = async (req, res) => {
     dateOfAcquisition,
     warranty,
     remarks,
-    code,
-    uidUser,
-    uidSite,
+    codeBN,
   } = req.body;
   const existingTechnologyById = await Technology.findByPk(uid);
   if (existingTechnologyById) {
@@ -33,7 +33,9 @@ const technologyRegisterController = async (req, res) => {
       });
     }
   }
-  const existingTechnologyCode = await Technology.findOne({ where: { code } });
+  const existingTechnologyCode = await Technology.findOne({
+    where: { codeBN },
+  });
   if (existingTechnologyCode) {
     if (existingTechnologyCode.status !== '1') {
       return res.status(409).send({
@@ -48,11 +50,29 @@ const technologyRegisterController = async (req, res) => {
         errors: [{ uid: 'Ya existe una Tecnología con ese código registrado' }],
       });
   }
+  const existingTechnologySerial = await Technology.findOne({
+    where: { serial },
+  });
+  if (existingTechnologySerial) {
+    if (existingTechnologySerial.status !== '1') {
+      return res.status(409).send({
+        errors: [
+          {
+            uid: 'Ya existe una Tecnología con ese serial, pero fue deshabilitado',
+          },
+        ],
+      });
+    } else
+      return res.status(409).send({
+        errors: [{ uid: 'Ya existe una Tecnología con ese serial registrado' }],
+      });
+  }
   const technology = await Technology.create({
     uid,
     description,
     brand,
     model,
+    serial,
     quantity,
     value,
     state,
@@ -60,8 +80,8 @@ const technologyRegisterController = async (req, res) => {
     dateOfAcquisition,
     warranty,
     remarks,
-    code,
-    uidUser,
+    codeBN,
+    uidUser: id,
     uidSite,
   });
   await technology.save();

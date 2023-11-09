@@ -9,6 +9,7 @@ const registerDTOSchema = Type.Object(
     description: permissionsDTOSchemas,
     brand: permissionsDTOSchemas,
     model: permissionsDTOSchemas,
+    serial: permissionsDTOSchemas,
     quantity: permissionsDTOSchemas,
     value: permissionsDTOSchemas,
     state: permissionsDTOSchemas,
@@ -16,9 +17,7 @@ const registerDTOSchema = Type.Object(
     dateOfAcquisition: permissionsDTOSchemas,
     warranty: permissionsDTOSchemas,
     remarks: permissionsDTOSchemas,
-    code: permissionsDTOSchemas,
-    uidUser: idDTOSchemas,
-    uidSite: idDTOSchemas,
+    codeBN: permissionsDTOSchemas,
   },
   {
     additionalProperties: false,

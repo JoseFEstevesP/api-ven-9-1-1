@@ -6,6 +6,7 @@ const technologyUpdateController = async (req, res) => {
     description,
     brand,
     model,
+    serial,
     quantity,
     value,
     state,
@@ -13,7 +14,7 @@ const technologyUpdateController = async (req, res) => {
     dateOfAcquisition,
     warranty,
     remarks,
-    code,
+    codeBN,
   } = req.body;
   const existingTechnologyById = await Technology.findOne({
     where: { uid, status: '1' },
@@ -25,6 +26,7 @@ const technologyUpdateController = async (req, res) => {
   existingTechnologyById.description = description;
   existingTechnologyById.brand = brand;
   existingTechnologyById.model = model;
+  existingTechnologyById.serial = serial;
   existingTechnologyById.quantity = quantity;
   existingTechnologyById.value = value;
   existingTechnologyById.state = state;
@@ -32,7 +34,7 @@ const technologyUpdateController = async (req, res) => {
   existingTechnologyById.dateOfAcquisition = dateOfAcquisition;
   existingTechnologyById.warranty = warranty;
   existingTechnologyById.remarks = remarks;
-  existingTechnologyById.code = code;
+  existingTechnologyById.codeBN = codeBN;
   await existingTechnologyById.save();
   return res.status(201).send({ msg: 'Tecnología actualizada con éxito' });
 };
