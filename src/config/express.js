@@ -1,3 +1,4 @@
+import consumablesRoutes from '#Routes/consumables.routes.js';
 import rolRoutes from '#Routes/rol.routes.js';
 import siteRoutes from '#Routes/site.routes.js';
 import technologyRoutes from '#Routes/technology.routes.js';
@@ -13,4 +14,5 @@ expressApp.use('/user', userRoutes);
 expressApp.use('/rol', rolRoutes);
 expressApp.use('/site', siteRoutes);
 expressApp.use('/technology', technologyRoutes);
+expressApp.use('/consumables', consumablesRoutes);
 export default expressApp;

@@ -1,6 +1,7 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
 import { Technology } from './technology.schema.js';
+import { Consumables } from './consumables.schema.js';
 
 export const User = sequelize.define('user', {
   uid: {
@@ -49,6 +50,14 @@ User.hasMany(Technology, {
   sourceKey: 'uid',
 });
 Technology.belongsTo(User, {
+  foreignKey: 'uidUser',
+  targetId: 'uid',
+});
+User.hasMany(Consumables, {
+  foreignKey: 'uidUser',
+  sourceKey: 'uid',
+});
+Consumables.belongsTo(User, {
   foreignKey: 'uidUser',
   targetId: 'uid',
 });

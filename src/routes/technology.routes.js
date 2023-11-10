@@ -6,7 +6,6 @@ import technologySearchItemController from '#Controllers/technology-searchItem.c
 import technologyUpdateController from '#Controllers/technology-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import technologyRegisterDTO from '#Dto/technology-register.dto.js';
-import technologyUpdateDTO from '#Dto/technology-update.dto.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
 import createPermissions from '#Middleware/rol-create.middleware.js';
 import deletePermissions from '#Middleware/rol-delete.middleware.js';
@@ -51,7 +50,7 @@ technologyRoutes.patch(
   userJWTDTO,
   updatePermissions,
   gaPermissions,
-  technologyUpdateDTO,
+  technologyRegisterDTO,
   technologyUpdateController
 );
 technologyRoutes.delete(
