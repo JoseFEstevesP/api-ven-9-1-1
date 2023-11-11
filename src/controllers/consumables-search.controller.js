@@ -14,6 +14,7 @@ const consumablesSearchController = async (req, res) => {
       status,
       [Op.or]: [
         { description: { [Op.iLike]: `%${search}%` } },
+        { serial: { [Op.iLike]: `%${search}%` } },
         { brand: { [Op.iLike]: `%${search}%` } },
         { quantity: { [Op.iLike]: `%${search}%` } },
         { value: { [Op.iLike]: `%${search}%` } },

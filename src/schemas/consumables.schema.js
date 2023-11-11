@@ -12,6 +12,10 @@ export const Consumables = sequelize.define('consumables', {
     type: DataTypes.STRING(3000),
     allowNull: false,
   },
+	serial: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   brand: {
     type: DataTypes.STRING,
     allowNull: false,

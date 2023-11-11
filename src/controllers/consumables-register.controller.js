@@ -5,6 +5,7 @@ const consumablesRegisterController = async (req, res) => {
   const {
     uid,
     description,
+    serial,
     brand,
     quantity,
     value,
@@ -18,7 +19,7 @@ const consumablesRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Este consumible ya esta registrado, pero fue deshabilitado',
+            uid: 'Ya existe un consumible con ese id, pero fue deshabilitado',
           },
         ],
       });
@@ -28,9 +29,28 @@ const consumablesRegisterController = async (req, res) => {
       });
     }
   }
+  const existingConsumablesBySerial = await Consumables.findOne({
+    where: { serial },
+  });
+  if (existingConsumablesBySerial) {
+    if (existingConsumablesBySerial.status !== '1') {
+      return res.status(409).send({
+        errors: [
+          {
+            uid: 'Ya existe un consumible con ese serial, pero fue deshabilitado',
+          },
+        ],
+      });
+    } else {
+      return res.status(409).send({
+        errors: [{ uid: 'Ya existe un consumible con ese serial registrado' }],
+      });
+    }
+  }
   const consumables = await Consumables.create({
     uid,
     description,
+    serial,
     brand,
     quantity,
     value,

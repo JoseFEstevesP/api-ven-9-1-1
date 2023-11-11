@@ -4,6 +4,7 @@ const consumablesUpdateController = async (req, res) => {
   const {
     uid,
     description,
+    serial,
     brand,
     quantity,
     value,
@@ -19,6 +20,7 @@ const consumablesUpdateController = async (req, res) => {
       .status(404)
       .send({ errors: [{ uid: 'Consumible no encontrado' }] });
   existingConsumablesById.description = description;
+  existingConsumablesById.serial = serial;
   existingConsumablesById.brand = brand;
   existingConsumablesById.quantity = quantity;
   existingConsumablesById.value = value;
