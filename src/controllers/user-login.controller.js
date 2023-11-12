@@ -19,7 +19,7 @@ const userLoginController = async (req, res) => {
     uidRol: existingUserByCi.uidRol,
     uidSite: existingUserByCi.uidSite,
   });
-  const { permissions } = await Rol.findByPk({
+  const { permissions } = await Rol.findOne({
     where: { uid: existingUserByCi.uidRol, status: '1' },
   });
   const jwt = await jwtConstructor
