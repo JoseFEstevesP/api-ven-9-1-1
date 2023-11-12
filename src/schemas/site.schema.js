@@ -4,6 +4,7 @@ import { User } from './user.schema.js';
 import { Technology } from './technology.schema.js';
 import { Consumables } from './consumables.schema.js';
 import { Furniture } from './furniture.schema.js';
+import { Vehicle } from './vehicle.schema.js';
 
 export const Site = sequelize.define('site', {
   uid: {
@@ -59,6 +60,14 @@ Site.hasMany(Furniture, {
   sourceKey: 'uid',
 });
 Furniture.belongsTo(Site, {
+  foreignKey: 'uidSite',
+  targetId: 'uid',
+});
+Site.hasMany(Vehicle, {
+  foreignKey: 'uidSite',
+  sourceKey: 'uid',
+});
+Vehicle.belongsTo(Site, {
   foreignKey: 'uidSite',
   targetId: 'uid',
 });
