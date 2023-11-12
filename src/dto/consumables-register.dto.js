@@ -2,15 +2,20 @@ import { Type } from '@sinclair/typebox';
 import Ajv from 'ajv';
 import addErrors from 'ajv-errors';
 import addFormats from 'ajv-formats';
-import { idDTOSchemas, permissionsDTOSchemas } from './dto-types.js';
+import {
+  idDTOSchemas,
+  permissionsDTOSchemas,
+  quantityDTOSchemas,
+  valueDTOSchemas,
+} from './dto-types.js';
 const registerDTOSchema = Type.Object(
   {
     uid: idDTOSchemas,
     description: permissionsDTOSchemas,
     serial: permissionsDTOSchemas,
     brand: permissionsDTOSchemas,
-    quantity: permissionsDTOSchemas,
-    value: permissionsDTOSchemas,
+    quantity: quantityDTOSchemas,
+    value: valueDTOSchemas,
     location: permissionsDTOSchemas,
     dateOfAcquisition: permissionsDTOSchemas,
     remarks: permissionsDTOSchemas,

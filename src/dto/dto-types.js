@@ -6,14 +6,16 @@ export const idDTOSchemas = Type.String({
     format: 'El formato de uid no valido, debe de ser uuid4',
   },
 });
+
 export const ciDTOSchemas = Type.String({
   minLength: 6,
   maxLength: 9,
   errorMessage: {
-    minLength: 'Ingrese una CI valida, mínimo 7 caracteres',
+    minLength: 'Ingrese una CI valida, mínimo 6 caracteres',
     maxLength: 'Ingrese una CI valida, máximo 8 caracteres',
   },
 });
+
 export const nameDTOSchemas = Type.String({
   minLength: 2,
   maxLength: 20,
@@ -51,9 +53,27 @@ export const passwordDTOSchemas = Type.String({
     maxLength: 'La clave debe de tener un máximo de 25 caracteres de longitud',
   },
 });
-export const permissionsDTOSchemas = Type.String({
+
+export const quantityDTOSchemas = Type.String({
+  minLength: 1,
   errorMessage: {
     type: 'El tipo nota no es valido, debe de ser una cadena de texto',
+    minLength:
+      'El campo cantidad debe de tener minimo 1 caracteres de longitud',
+  },
+});
+export const valueDTOSchemas = Type.String({
+  minLength: 2,
+  errorMessage: {
+    type: 'El tipo nota no es valido, debe de ser una cadena de texto',
+    minLength: 'El campo valor debe de tener minimo 2 caracteres de longitud',
+  },
+});
+export const permissionsDTOSchemas = Type.String({
+  minLength: 3,
+  errorMessage: {
+    type: 'El tipo nota no es valido, debe de ser una cadena de texto',
+    minLength: 'Ningún campo debe de esta vacío',
   },
 });
 export const siteDTOSchemas = Type.String({
