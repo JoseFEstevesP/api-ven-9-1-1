@@ -1,3 +1,4 @@
+import { furnitureMSG } from '#Constants/system.js';
 import { Furniture } from '#Schemas/furniture.schema.js';
 
 const furnitureUpdateController = async (req, res) => {
@@ -18,9 +19,7 @@ const furnitureUpdateController = async (req, res) => {
     where: { uid, status: '1' },
   });
   if (!existingFurnitureById)
-    return res
-      .status(404)
-      .send({ errors: [{ uid: 'Mobiliario no encontrada' }] });
+    return res.status(404).send({ errors: [{ uid: furnitureMSG.noFound }] });
   existingFurnitureById.description = description;
   existingFurnitureById.serial = serial;
   existingFurnitureById.quantity = quantity;
@@ -32,6 +31,6 @@ const furnitureUpdateController = async (req, res) => {
   existingFurnitureById.remarks = remarks;
   existingFurnitureById.codeBN = codeBN;
   await existingFurnitureById.save();
-  return res.status(201).send({ msg: 'Mobiliario actualizada con éxito' });
+  return res.status(201).send({ msg: furnitureMSG.update.msg });
 };
 export default furnitureUpdateController;

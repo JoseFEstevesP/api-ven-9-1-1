@@ -25,9 +25,11 @@ const userReadController = async (req, res) => {
     .filter((item) => item.uid !== id)
     .map(async (item) => {
       const { uid, name, surname, ci, email, uidRol, uidSite } = item;
-      const { name: nameRol } = await Rol.findOne({ where: { uid: uidRol } });
+      const { name: nameRol } = await Rol.findOne({
+        where: { uid: uidRol, status },
+      });
       const { name: nameSite } = await Site.findOne({
-        where: { uid: uidSite },
+        where: { uid: uidSite, status },
       });
       return {
         uid,

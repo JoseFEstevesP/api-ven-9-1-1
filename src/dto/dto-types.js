@@ -57,7 +57,7 @@ export const passwordDTOSchemas = Type.String({
 export const quantityDTOSchemas = Type.String({
   minLength: 1,
   errorMessage: {
-    type: 'El tipo nota no es valido, debe de ser una cadena de texto',
+    type: 'El campo no es valido, debe de ser una cadena de texto',
     minLength:
       'El campo cantidad debe de tener minimo 1 caracteres de longitud',
   },
@@ -65,19 +65,27 @@ export const quantityDTOSchemas = Type.String({
 export const valueDTOSchemas = Type.String({
   minLength: 2,
   errorMessage: {
-    type: 'El tipo nota no es valido, debe de ser una cadena de texto',
+    type: 'El campo no es valido, debe de ser una cadena de texto',
     minLength: 'El campo valor debe de tener minimo 2 caracteres de longitud',
   },
 });
 export const permissionsDTOSchemas = Type.String({
   minLength: 3,
   errorMessage: {
-    type: 'El tipo nota no es valido, debe de ser una cadena de texto',
+    type: 'El campo no es valido, debe de ser una cadena de texto',
     minLength: 'Ningún campo debe de esta vacío',
+  },
+});
+export const placeDTOSchemas = Type.String({
+  minLength: 8,
+  errorMessage: {
+    type: 'El campo no es valido, debe de ser una cadena de texto',
+    minLength:
+      'El campo placa debe tener un formato de tres letras seguidas de un guión y cuatro números',
   },
 });
 export const siteDTOSchemas = Type.String({
   errorMessage: {
-    type: 'El tipo nota no es valido, debe de ser una cadena de texto',
+    type: 'El campo no es valido, debe de ser una cadena de texto',
   },
 });

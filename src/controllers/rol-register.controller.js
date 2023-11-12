@@ -1,3 +1,4 @@
+import { rolMSG } from '#Constants/system.js';
 import { Rol } from '#Schemas/rol.schema.js';
 
 const rolRegisterController = async (req, res) => {
@@ -9,14 +10,14 @@ const rolRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Este rol ya esta registrado, pero fue deshabilitado',
+            uid: rolMSG.register.uid.status,
           },
         ],
       });
     } else {
       return res
         .status(409)
-        .send({ errors: [{ uid: 'Ya existe un rol con ese id registrado' }] });
+        .send({ errors: [{ uid: rolMSG.register.uid.default }] });
     }
   }
   if (existingRolName) {
@@ -24,13 +25,13 @@ const rolRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Este nombre de rol ya está registrado, pero fue deshabilitado',
+            uid: rolMSG.register.uid.status,
           },
         ],
       });
     } else {
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe un rol con ese nombre registrado' }],
+        errors: [{ uid: rolMSG.register.uid.default }],
       });
     }
   }
@@ -40,6 +41,6 @@ const rolRegisterController = async (req, res) => {
     permissions,
   });
   await rol.save();
-  return res.status(201).send({ msg: 'Rol registrado con éxito' });
+  return res.status(201).send({ msg: rolMSG.register.msg });
 };
 export default rolRegisterController;

@@ -1,4 +1,4 @@
-import { limitPage } from '#Constants/system.js';
+import { limitPage, userMSG } from '#Constants/system.js';
 import { Rol } from '#Schemas/rol.schema.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
@@ -34,9 +34,7 @@ const userSearchController = async (req, res) => {
     order: [[orderProperty, order]],
   });
   if (!rows.length)
-    return res
-      .status(404)
-      .send({ errors: [{ uid: 'No se a encontrado ningún usuario' }] });
+    return res.status(404).send({ errors: [{ uid: userMSG.noFound }] });
   const data = rows
     .filter((item) => item.uid !== id)
     .map(async (item) => {

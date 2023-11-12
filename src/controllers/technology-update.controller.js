@@ -1,3 +1,4 @@
+import { technologyMSG } from '#Constants/system.js';
 import { Technology } from '#Schemas/technology.schema.js';
 
 const technologyUpdateController = async (req, res) => {
@@ -20,9 +21,7 @@ const technologyUpdateController = async (req, res) => {
     where: { uid, status: '1' },
   });
   if (!existingTechnologyById)
-    return res
-      .status(404)
-      .send({ errors: [{ uid: 'Tecnología no encontrada' }] });
+    return res.status(404).send({ errors: [{ uid: technologyMSG.noFound }] });
   existingTechnologyById.description = description;
   existingTechnologyById.brand = brand;
   existingTechnologyById.model = model;
@@ -36,6 +35,6 @@ const technologyUpdateController = async (req, res) => {
   existingTechnologyById.remarks = remarks;
   existingTechnologyById.codeBN = codeBN;
   await existingTechnologyById.save();
-  return res.status(201).send({ msg: 'Tecnología actualizada con éxito' });
+  return res.status(201).send({ msg: technologyMSG.update.msg });
 };
 export default technologyUpdateController;

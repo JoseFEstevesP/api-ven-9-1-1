@@ -1,3 +1,4 @@
+import { technologyMSG } from '#Constants/system.js';
 import { Technology } from '#Schemas/technology.schema.js';
 
 const technologyRegisterController = async (req, res) => {
@@ -23,13 +24,13 @@ const technologyRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Este tecnologia ya esta registrada, pero fue deshabilitada',
+            uid: technologyMSG.register.uid.status,
           },
         ],
       });
     } else {
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe una Tecnología con ese id registrado' }],
+        errors: [{ uid: technologyMSG.register.uid.default }],
       });
     }
   }
@@ -41,13 +42,13 @@ const technologyRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Ya existe una Tecnología con ese código, pero fue deshabilitado',
+            uid: technologyMSG.register.codeBN.status,
           },
         ],
       });
     } else
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe una Tecnología con ese código registrado' }],
+        errors: [{ uid: technologyMSG.register.codeBN.default }],
       });
   }
   const existingTechnologySerial = await Technology.findOne({
@@ -58,13 +59,13 @@ const technologyRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Ya existe una Tecnología con ese serial, pero fue deshabilitado',
+            uid: technologyMSG.register.serial.status,
           },
         ],
       });
     } else
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe una Tecnología con ese serial registrado' }],
+        errors: [{ uid: technologyMSG.register.serial.default }],
       });
   }
   const technology = await Technology.create({
@@ -85,6 +86,6 @@ const technologyRegisterController = async (req, res) => {
     uidSite,
   });
   await technology.save();
-  return res.status(201).send({ msg: 'Tecnología registrada con éxito' });
+  return res.status(201).send({ msg: technologyMSG.register.msg });
 };
 export default technologyRegisterController;

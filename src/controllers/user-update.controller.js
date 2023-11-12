@@ -1,3 +1,4 @@
+import { userMSG } from '#Constants/system.js';
 import { User } from '#Schemas/user.schema.js';
 
 const userUpdateController = async (req, res) => {
@@ -5,7 +6,7 @@ const userUpdateController = async (req, res) => {
 
   const existingUser = await User.findOne({ where: { uid, status: '1' } });
   if (!existingUser)
-    return res.status(401).send({ errors: [{ uid: 'Usuario no encontrado' }] });
+    return res.status(401).send({ errors: [{ uid: userMSG.noFound }] });
   existingUser.ci = ci;
   existingUser.name = name;
   existingUser.surname = surname;
@@ -13,6 +14,6 @@ const userUpdateController = async (req, res) => {
   existingUser.uidRol = uidRol;
   existingUser.uidSite = uidSite;
   await existingUser.save();
-  return res.send({ msg: 'Usuario actualizado' });
+  return res.send({ msg: userMSG.update.msg });
 };
 export default userUpdateController;

@@ -1,4 +1,4 @@
-import { limitPage } from '#Constants/system.js';
+import { limitPage, siteMSG } from '#Constants/system.js';
 import { Site } from '#Schemas/site.schema.js';
 import { Op } from 'sequelize';
 
@@ -28,9 +28,7 @@ const siteSearchController = async (req, res) => {
     order: [[orderProperty, order]],
   });
   if (!rows.length)
-    return res
-      .status(404)
-      .send({ errors: [{ uid: 'No se a encontrado ningúna sede' }] });
+    return res.status(404).send({ errors: [{ uid: siteMSG.noFound }] });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
   const nextPage = Number(totalPage) + 1;

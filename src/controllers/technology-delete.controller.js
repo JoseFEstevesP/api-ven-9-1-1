@@ -1,3 +1,4 @@
+import { technologyMSG } from '#Constants/system.js';
 import { Technology } from '#Schemas/technology.schema.js';
 const technologyDeleteController = async (req, res) => {
   const { uid } = req.body;
@@ -5,11 +6,9 @@ const technologyDeleteController = async (req, res) => {
     where: { uid, status: '1' },
   });
   if (!existingTechnologyById)
-    return res
-      .status(401)
-      .send({ errors: [{ uid: 'Tecnología no encontrada' }] });
+    return res.status(401).send({ errors: [{ uid: technologyMSG.noFound }] });
   existingTechnologyById.status = '0';
   await existingTechnologyById.save();
-  return res.send({ msg: 'Tecnología eliminada' });
+  return res.send({ msg: technologyMSG.delete.msg });
 };
 export default technologyDeleteController;

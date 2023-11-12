@@ -1,3 +1,4 @@
+import { consumablesMSG } from '#Constants/system.js';
 import { Consumables } from '#Schemas/consumables.schema.js';
 
 const consumablesRegisterController = async (req, res) => {
@@ -19,13 +20,13 @@ const consumablesRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Ya existe un consumible con ese id, pero fue deshabilitado',
+            uid: consumablesMSG.register.uid.status,
           },
         ],
       });
     } else {
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe una consumible con ese id registrado' }],
+        errors: [{ uid: consumablesMSG.register.uid.default }],
       });
     }
   }
@@ -37,13 +38,13 @@ const consumablesRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Ya existe un consumible con ese serial, pero fue deshabilitado',
+            uid: consumablesMSG.register.serial.status,
           },
         ],
       });
     } else {
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe un consumible con ese serial registrado' }],
+        errors: [{ uid: consumablesMSG.register.serial.default }],
       });
     }
   }
@@ -61,6 +62,6 @@ const consumablesRegisterController = async (req, res) => {
     uidSite,
   });
   await consumables.save();
-  return res.status(201).send({ msg: 'Consumible registrada con éxito' });
+  return res.status(201).send({ msg: consumablesMSG.register.msg });
 };
 export default consumablesRegisterController;

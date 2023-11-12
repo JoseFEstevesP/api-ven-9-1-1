@@ -1,4 +1,5 @@
 import { SALT } from '#Constants/salt.js';
+import { userMSG } from '#Constants/system.js';
 import { User } from '#Schemas/user.schema.js';
 import { hash } from 'bcrypt';
 const userRegisterController = async (req, res) => {
@@ -7,11 +8,11 @@ const userRegisterController = async (req, res) => {
   if (existingUserById) {
     if (existingUserById.status !== '1') {
       return res.status(410).send({
-        errors: [{ uid: 'Este usuario fue deshabilitado' }],
+        errors: [{ uid: userMSG.register.uid.status }],
       });
     } else {
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe un usuario con ese id registrado' }],
+        errors: [{ uid: userMSG.register.uid.default }],
       });
     }
   }
@@ -19,15 +20,11 @@ const userRegisterController = async (req, res) => {
   if (existingUserByEmail) {
     if (existingUserByEmail.status !== '1') {
       return res.status(409).send({
-        errors: [
-          {
-            uid: 'Este correo ya está registrado, pero fue deshabilitado',
-          },
-        ],
+        errors: [{ uid: userMSG.register.email.status }],
       });
     } else {
       return res.status(409).send({
-        errors: [{ email: 'Ya existe un usuario con ese correo registrado' }],
+        errors: [{ email: userMSG.register.email.default }],
       });
     }
   }
@@ -43,6 +40,6 @@ const userRegisterController = async (req, res) => {
     uidSite,
   });
   await user.save();
-  return res.status(201).send({ msg: 'Usuario registrado con éxito' });
+  return res.status(201).send({ msg: userMSG.register.msg });
 };
 export default userRegisterController;

@@ -1,3 +1,4 @@
+import { consumablesMSG } from '#Constants/system.js';
 import { Consumables } from '#Schemas/consumables.schema.js';
 
 const consumablesUpdateController = async (req, res) => {
@@ -16,9 +17,7 @@ const consumablesUpdateController = async (req, res) => {
     where: { uid, status: '1' },
   });
   if (!existingConsumablesById)
-    return res
-      .status(404)
-      .send({ errors: [{ uid: 'Consumible no encontrado' }] });
+    return res.status(404).send({ errors: [{ uid: consumablesMSG.noFound }] });
   existingConsumablesById.description = description;
   existingConsumablesById.serial = serial;
   existingConsumablesById.brand = brand;
@@ -28,6 +27,6 @@ const consumablesUpdateController = async (req, res) => {
   existingConsumablesById.dateOfAcquisition = dateOfAcquisition;
   existingConsumablesById.remarks = remarks;
   await existingConsumablesById.save();
-  return res.status(201).send({ msg: 'Consumible actualizado con éxito' });
+  return res.status(201).send({ msg: consumablesMSG.update.msg });
 };
 export default consumablesUpdateController;

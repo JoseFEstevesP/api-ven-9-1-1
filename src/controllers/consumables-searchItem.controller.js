@@ -1,3 +1,4 @@
+import { consumablesMSG } from '#Constants/system.js';
 import { Consumables } from '#Schemas/consumables.schema.js';
 
 const consumablesSearchItemController = async (req, res) => {
@@ -6,9 +7,7 @@ const consumablesSearchItemController = async (req, res) => {
     where: { uid, status: '1' },
   });
   if (!consumables)
-    return res
-      .status(404)
-      .send({ errors: [{ uid: 'No se a encontrado ningún consumible' }] });
+    return res.status(404).send({ errors: [{ uid: consumablesMSG.noFound }] });
   return res.status(200).send(consumables);
 };
 export default consumablesSearchItemController;

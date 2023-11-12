@@ -1,3 +1,4 @@
+import { furnitureMSG } from '#Constants/system.js';
 import { Furniture } from '#Schemas/furniture.schema.js';
 
 const furnitureRegisterController = async (req, res) => {
@@ -21,13 +22,13 @@ const furnitureRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Este mobiliario ya esta registrada, pero fue deshabilitada',
+            uid: furnitureMSG.register.uid.status,
           },
         ],
       });
     } else {
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe una mobiliario con ese id registrado' }],
+        errors: [{ uid: furnitureMSG.register.uid.default }],
       });
     }
   }
@@ -39,13 +40,13 @@ const furnitureRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Ya existe una mobiliario con ese código, pero fue deshabilitado',
+            uid: furnitureMSG.register.codeBN.status,
           },
         ],
       });
     } else
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe una mobiliario con ese código registrado' }],
+        errors: [{ uid: furnitureMSG.register.codeBN.default }],
       });
   }
   const existingFurnitureSerial = await Furniture.findOne({
@@ -56,13 +57,13 @@ const furnitureRegisterController = async (req, res) => {
       return res.status(409).send({
         errors: [
           {
-            uid: 'Ya existe una mobiliario con ese serial, pero fue deshabilitado',
+            uid: furnitureMSG.register.serial.status,
           },
         ],
       });
     } else
       return res.status(409).send({
-        errors: [{ uid: 'Ya existe una mobiliario con ese serial registrado' }],
+        errors: [{ uid: furnitureMSG.register.serial.default }],
       });
   }
   const furniture = await Furniture.create({
@@ -81,6 +82,6 @@ const furnitureRegisterController = async (req, res) => {
     uidSite,
   });
   await furniture.save();
-  return res.status(201).send({ msg: 'Mobiliario registrada con éxito' });
+  return res.status(201).send({ msg: furnitureMSG.register.msg });
 };
 export default furnitureRegisterController;

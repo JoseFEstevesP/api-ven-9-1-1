@@ -1,4 +1,4 @@
-import { limitPage } from '#Constants/system.js';
+import { limitPage, technologyMSG } from '#Constants/system.js';
 import { Technology } from '#Schemas/technology.schema.js';
 import { Op } from 'sequelize';
 
@@ -22,6 +22,7 @@ const technologySearchController = async (req, res) => {
         { description: { [Op.iLike]: `%${search}%` } },
         { brand: { [Op.iLike]: `%${search}%` } },
         { model: { [Op.iLike]: `%${search}%` } },
+        { serial: { [Op.iLike]: `%${search}%` } },
         { quantity: { [Op.iLike]: `%${search}%` } },
         { value: { [Op.iLike]: `%${search}%` } },
         { state: { [Op.iLike]: `%${search}%` } },
@@ -37,9 +38,7 @@ const technologySearchController = async (req, res) => {
     order: [[orderProperty, order]],
   });
   if (!rows.length)
-    return res
-      .status(404)
-      .send({ errors: [{ uid: 'No se a encontrado ningúa Tecnología' }] });
+    return res.status(404).send({ errors: [{ uid: technologyMSG.noFound }] });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
   const nextPage = Number(totalPage) + 1;

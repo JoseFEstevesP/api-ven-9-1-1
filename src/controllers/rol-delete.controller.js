@@ -1,19 +1,18 @@
+import { rolMSG } from '#Constants/system.js';
 import { Rol } from '#Schemas/rol.schema.js';
 import { User } from '#Schemas/user.schema.js';
 const rolDeleteController = async (req, res) => {
   const { uid } = req.body;
   const existingRolById = await Rol.findOne({ where: { uid, status: '1' } });
   if (!existingRolById)
-    return res.status(401).send({ errors: [{ uid: 'Rol no encontrado' }] });
+    return res.status(401).send({ errors: [{ uid: rolMSG.noFound }] });
   const userRelation = await User.findAll({
     where: { uidRol: uid, status: '1' },
   });
   if (userRelation.length > 0)
-    return res
-      .status(401)
-      .send({ errors: [{ uid: 'Rol vinculado a un usuario' }] });
+    return res.status(401).send({ errors: [{ uid: rolMSG.delete.user }] });
   existingRolById.status = '0';
   await existingRolById.save();
-  return res.send({ msg: 'Rol eliminado' });
+  return res.send({ msg: rolMSG.delete.msg });
 };
 export default rolDeleteController;
