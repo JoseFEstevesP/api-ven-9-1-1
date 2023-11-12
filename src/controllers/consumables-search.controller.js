@@ -1,16 +1,21 @@
+import { limitPage } from '#Constants/system.js';
 import { Consumables } from '#Schemas/consumables.schema.js';
 import { Op } from 'sequelize';
 const consumablesSearchController = async (req, res) => {
+  const { uidSite } = req;
   const {
     page = 1,
-    limit = 20,
+    limit = limitPage,
+    uidSite: uidSiteQuery,
     orderProperty = 'description',
     order = 'ASC',
     status = '1',
   } = req.query;
   const { search } = req.params;
+  const site = uidSiteQuery || uidSite;
   const { rows, count } = await Consumables.findAndCountAll({
     where: {
+      uidSite: site,
       status,
       [Op.or]: [
         { description: { [Op.iLike]: `%${search}%` } },

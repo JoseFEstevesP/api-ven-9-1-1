@@ -1,9 +1,10 @@
+import { limitPage } from '#Constants/system.js';
 import { Technology } from '#Schemas/technology.schema.js';
 
 const technologyReadController = async (req, res) => {
   const {
     page = 1,
-    limit = 20,
+    limit = limitPage,
     uidSite: uidSiteQuery,
     orderProperty = 'description',
     order = 'ASC',

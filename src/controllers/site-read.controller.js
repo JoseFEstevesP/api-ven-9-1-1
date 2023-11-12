@@ -1,9 +1,10 @@
+import { limitPage } from '#Constants/system.js';
 import { Site } from '#Schemas/site.schema.js';
 
 const siteReadController = async (req, res) => {
   const {
     page = 1,
-    limit = 20,
+    limit = limitPage,
     orderProperty = 'name',
     order = 'ASC',
     status = '1',

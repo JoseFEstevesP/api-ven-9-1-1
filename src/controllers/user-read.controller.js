@@ -1,3 +1,4 @@
+import { limitPage } from '#Constants/system.js';
 import { Rol } from '#Schemas/rol.schema.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
@@ -5,7 +6,7 @@ import { User } from '#Schemas/user.schema.js';
 const userReadController = async (req, res) => {
   const {
     page = 1,
-    limit = 20,
+    limit = limitPage,
     uidSite: uidSiteQuery,
     orderProperty = 'name',
     order = 'ASC',

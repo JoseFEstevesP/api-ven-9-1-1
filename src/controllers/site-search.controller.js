@@ -1,17 +1,22 @@
+import { limitPage } from '#Constants/system.js';
 import { Site } from '#Schemas/site.schema.js';
 import { Op } from 'sequelize';
 
 const siteSearchController = async (req, res) => {
+  const { uidSite } = req;
   const {
     page = 1,
-    limit = 20,
+    limit = limitPage,
+    uidSite: uidSiteQuery,
     orderProperty = 'name',
     order = 'ASC',
     status = '1',
   } = req.query;
   const { search } = req.params;
+  const site = uidSiteQuery || uidSite;
   const { rows, count } = await Site.findAndCountAll({
     where: {
+      uidSite: site,
       status,
       [Op.or]: [
         { name: { [Op.iLike]: `%${search}%` } },

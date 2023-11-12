@@ -1,9 +1,10 @@
+import { limitPage } from '#Constants/system.js';
 import { Rol } from '#Schemas/rol.schema.js';
 
 const rolReadController = async (req, res) => {
   const {
     page = 1,
-    limit = 20,
+    limit = limitPage,
     orderProperty = 'name',
     order = 'ASC',
     status = '1',

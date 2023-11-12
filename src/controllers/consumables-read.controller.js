@@ -1,9 +1,10 @@
+import { limitPage } from '#Constants/system.js';
 import { Consumables } from '#Schemas/consumables.schema.js';
 
 const consumablesReadController = async (req, res) => {
   const {
     page = 1,
-    limit = 20,
+    limit = limitPage,
     uidSite: uidSiteQuery,
     orderProperty = 'description',
     order = 'ASC',

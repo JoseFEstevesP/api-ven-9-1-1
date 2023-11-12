@@ -1,21 +1,21 @@
+import { limitPage } from '#Constants/system.js';
 import { Rol } from '#Schemas/rol.schema.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import { Op } from 'sequelize';
 
 const userSearchController = async (req, res) => {
+  const { id, uidSite } = req;
   const {
     page = 1,
-    limit = 20,
-    uidSite,
+    limit = limitPage,
+    uidSite: uidSiteQuery,
     orderProperty = 'name',
     order = 'ASC',
     status = '1',
   } = req.query;
   const { search } = req.params;
-  const { id } = req;
-  const user = await User.findByPk(id);
-  const site = uidSite || user.uidSite;
+  const site = uidSiteQuery || uidSite;
   const { rows, count } = await User.findAndCountAll({
     where: {
       uidSite: site,
