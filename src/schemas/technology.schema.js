@@ -32,7 +32,7 @@ export const Technology = sequelize.define('technology', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  state: {
+  condition: {
     type: DataTypes.STRING,
     allowNull: false,
   },

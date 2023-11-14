@@ -1,8 +1,10 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
-import { Technology } from './technology.schema.js';
 import { Consumables } from './consumables.schema.js';
 import { Furniture } from './furniture.schema.js';
+import { Purchase } from './purchase.schema.js';
+import { Report } from './report.schema.js';
+import { Technology } from './technology.schema.js';
 import { Vehicle } from './vehicle.schema.js';
 
 export const User = sequelize.define('user', {
@@ -76,6 +78,22 @@ User.hasMany(Vehicle, {
   sourceKey: 'uid',
 });
 Vehicle.belongsTo(User, {
+  foreignKey: 'uidUser',
+  targetId: 'uid',
+});
+User.hasMany(Purchase, {
+  foreignKey: 'uidUser',
+  sourceKey: 'uid',
+});
+Purchase.belongsTo(User, {
+  foreignKey: 'uidUser',
+  targetId: 'uid',
+});
+User.hasMany(Report, {
+  foreignKey: 'uidUser',
+  sourceKey: 'uid',
+});
+Report.belongsTo(User, {
   foreignKey: 'uidUser',
   targetId: 'uid',
 });

@@ -15,7 +15,7 @@ const registerDTOSchema = Type.Object(
     serial: permissionsDTOSchemas,
     quantity: quantityDTOSchemas,
     value: valueDTOSchemas,
-    state: permissionsDTOSchemas,
+    condition: permissionsDTOSchemas,
     location: permissionsDTOSchemas,
     dateOfAcquisition: permissionsDTOSchemas,
     warranty: permissionsDTOSchemas,

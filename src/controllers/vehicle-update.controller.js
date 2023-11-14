@@ -10,7 +10,7 @@ const vehicleUpdateController = async (req, res) => {
     place,
     quantity,
     value,
-    state,
+    condition,
     location,
     dateOfAcquisition,
     warranty,
@@ -28,7 +28,7 @@ const vehicleUpdateController = async (req, res) => {
   existingVehicleById.place = place;
   existingVehicleById.quantity = quantity;
   existingVehicleById.value = value;
-  existingVehicleById.state = state;
+  existingVehicleById.condition = condition;
   existingVehicleById.location = location;
   existingVehicleById.dateOfAcquisition = dateOfAcquisition;
   existingVehicleById.warranty = warranty;

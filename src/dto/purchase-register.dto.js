@@ -11,18 +11,17 @@ import {
 const registerDTOSchema = Type.Object(
   {
     uid: idDTOSchemas,
-    description: permissionsDTOSchemas,
+    product: permissionsDTOSchemas,
+    serial: permissionsDTOSchemas,
     brand: permissionsDTOSchemas,
     model: permissionsDTOSchemas,
-    serial: permissionsDTOSchemas,
-    quantity: quantityDTOSchemas,
+    dateOfPurchase: permissionsDTOSchemas,
     value: valueDTOSchemas,
-    condition: permissionsDTOSchemas,
-    location: permissionsDTOSchemas,
-    dateOfAcquisition: permissionsDTOSchemas,
+    quantity: quantityDTOSchemas,
+    supplier: permissionsDTOSchemas,
     warranty: permissionsDTOSchemas,
-    remarks: permissionsDTOSchemas,
-    codeBN: permissionsDTOSchemas,
+    orderNumber: permissionsDTOSchemas,
+    location: permissionsDTOSchemas,
   },
   {
     additionalProperties: false,
@@ -37,7 +36,7 @@ const ajv = new Ajv({ allErrors: true })
 addFormats(ajv, ['uuid']);
 addErrors(ajv);
 const validateSchema = ajv.compile(registerDTOSchema);
-const technologyRegisterDTO = (req, res, next) => {
+const purchaseRegisterDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
     return res.status(400).send({
@@ -47,4 +46,4 @@ const technologyRegisterDTO = (req, res, next) => {
     });
   next();
 };
-export default technologyRegisterDTO;
+export default purchaseRegisterDTO;

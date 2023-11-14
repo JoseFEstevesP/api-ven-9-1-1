@@ -1,36 +1,35 @@
-import { limitPage, vehicleMSG } from '#Constants/system.js';
-import { Vehicle } from '#Schemas/vehicle.schema.js';
+import { limitPage, purchaseMSG } from '#Constants/system.js';
+import { Purchase } from '#Schemas/purchase.schema.js';
 import { Op } from 'sequelize';
 
-const vehicleSearchController = async (req, res) => {
+const purchaseSearchController = async (req, res) => {
   const { uidSite } = req;
   const {
     page = 1,
     limit = limitPage,
     uidSite: uidSiteQuery,
-    orderProperty = 'description',
+    orderProperty = 'product',
     order = 'ASC',
     status = '1',
   } = req.query;
   const { search } = req.params;
   const site = uidSiteQuery || uidSite;
-  const { rows, count } = await Vehicle.findAndCountAll({
+  const { rows, count } = await Purchase.findAndCountAll({
     where: {
       uidSite: site,
       status,
       [Op.or]: [
-        { description: { [Op.iLike]: `%${search}%` } },
+        { product: { [Op.iLike]: `%${search}%` } },
+        { serial: { [Op.iLike]: `%${search}%` } },
         { brand: { [Op.iLike]: `%${search}%` } },
         { model: { [Op.iLike]: `%${search}%` } },
-        { place: { [Op.iLike]: `%${search}%` } },
-        { quantity: { [Op.iLike]: `%${search}%` } },
+        { dateOfPurchase: { [Op.iLike]: `%${search}%` } },
         { value: { [Op.iLike]: `%${search}%` } },
-        { condition: { [Op.iLike]: `%${search}%` } },
-        { location: { [Op.iLike]: `%${search}%` } },
-        { dateOfAcquisition: { [Op.iLike]: `%${search}%` } },
+        { quantity: { [Op.iLike]: `%${search}%` } },
+        { supplier: { [Op.iLike]: `%${search}%` } },
         { warranty: { [Op.iLike]: `%${search}%` } },
-        { remarks: { [Op.iLike]: `%${search}%` } },
-        { codeBN: { [Op.iLike]: `%${search}%` } },
+        { orderNumber: { [Op.iLike]: `%${search}%` } },
+        { location: { [Op.iLike]: `%${search}%` } },
       ],
     },
     limit,
@@ -38,7 +37,7 @@ const vehicleSearchController = async (req, res) => {
     order: [[orderProperty, order]],
   });
   if (!rows.length)
-    return res.status(404).send({ errors: [{ uid: vehicleMSG.search.uid }] });
+    return res.status(404).send({ errors: [{ uid: purchaseMSG.noFound }] });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
   const nextPage = Number(totalPage) + 1;
@@ -54,4 +53,4 @@ const vehicleSearchController = async (req, res) => {
   });
 };
 
-export default vehicleSearchController;
+export default purchaseSearchController;

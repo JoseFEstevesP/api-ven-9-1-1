@@ -8,7 +8,7 @@ const furnitureUpdateController = async (req, res) => {
     serial,
     quantity,
     value,
-    state,
+    condition,
     location,
     dateOfAcquisition,
     warranty,
@@ -24,7 +24,7 @@ const furnitureUpdateController = async (req, res) => {
   existingFurnitureById.serial = serial;
   existingFurnitureById.quantity = quantity;
   existingFurnitureById.value = value;
-  existingFurnitureById.state = state;
+  existingFurnitureById.condition = condition;
   existingFurnitureById.location = location;
   existingFurnitureById.dateOfAcquisition = dateOfAcquisition;
   existingFurnitureById.warranty = warranty;

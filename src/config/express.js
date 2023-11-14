@@ -1,5 +1,7 @@
 import consumablesRoutes from '#Routes/consumables.routes.js';
 import furnitureRoutes from '#Routes/furniture.routes.js';
+import purchaseRoutes from '#Routes/purchase.routes.js';
+import reportRoutes from '#Routes/report.routes.js';
 import rolRoutes from '#Routes/rol.routes.js';
 import siteRoutes from '#Routes/site.routes.js';
 import technologyRoutes from '#Routes/technology.routes.js';
@@ -19,4 +21,6 @@ expressApp.use('/technology', technologyRoutes);
 expressApp.use('/consumables', consumablesRoutes);
 expressApp.use('/furniture', furnitureRoutes);
 expressApp.use('/vehicle', vehicleRoutes);
+expressApp.use('/purchase', purchaseRoutes);
+expressApp.use('/report', reportRoutes);
 export default expressApp;

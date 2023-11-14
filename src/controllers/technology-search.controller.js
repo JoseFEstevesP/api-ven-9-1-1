@@ -13,6 +13,7 @@ const technologySearchController = async (req, res) => {
     status = '1',
   } = req.query;
   const { search } = req.params;
+  console.log('technologySearchController -> search:', search);
   const site = uidSiteQuery || uidSite;
   const { rows, count } = await Technology.findAndCountAll({
     where: {
@@ -25,12 +26,12 @@ const technologySearchController = async (req, res) => {
         { serial: { [Op.iLike]: `%${search}%` } },
         { quantity: { [Op.iLike]: `%${search}%` } },
         { value: { [Op.iLike]: `%${search}%` } },
-        { state: { [Op.iLike]: `%${search}%` } },
+        { condition: { [Op.iLike]: `%${search}%` } },
         { location: { [Op.iLike]: `%${search}%` } },
         { dateOfAcquisition: { [Op.iLike]: `%${search}%` } },
         { warranty: { [Op.iLike]: `%${search}%` } },
         { remarks: { [Op.iLike]: `%${search}%` } },
-        { code: { [Op.iLike]: `%${search}%` } },
+        { codeBN: { [Op.iLike]: `%${search}%` } },
       ],
     },
     limit,

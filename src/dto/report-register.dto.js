@@ -2,27 +2,18 @@ import { Type } from '@sinclair/typebox';
 import Ajv from 'ajv';
 import addErrors from 'ajv-errors';
 import addFormats from 'ajv-formats';
-import {
-  idDTOSchemas,
-  permissionsDTOSchemas,
-  quantityDTOSchemas,
-  valueDTOSchemas,
-} from './dto-types.js';
+import { idDTOSchemas, permissionsDTOSchemas } from './dto-types.js';
 const registerDTOSchema = Type.Object(
   {
     uid: idDTOSchemas,
+    goods: permissionsDTOSchemas,
     description: permissionsDTOSchemas,
-    brand: permissionsDTOSchemas,
-    model: permissionsDTOSchemas,
-    serial: permissionsDTOSchemas,
-    quantity: quantityDTOSchemas,
-    value: valueDTOSchemas,
+    proposedSolution: permissionsDTOSchemas,
     condition: permissionsDTOSchemas,
     location: permissionsDTOSchemas,
-    dateOfAcquisition: permissionsDTOSchemas,
-    warranty: permissionsDTOSchemas,
-    remarks: permissionsDTOSchemas,
-    codeBN: permissionsDTOSchemas,
+    dateOfReport: permissionsDTOSchemas,
+    timeOfReport: permissionsDTOSchemas,
+    serialOrCodeBN: permissionsDTOSchemas,
   },
   {
     additionalProperties: false,
@@ -37,7 +28,7 @@ const ajv = new Ajv({ allErrors: true })
 addFormats(ajv, ['uuid']);
 addErrors(ajv);
 const validateSchema = ajv.compile(registerDTOSchema);
-const technologyRegisterDTO = (req, res, next) => {
+const reportRegisterDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
     return res.status(400).send({
@@ -47,4 +38,4 @@ const technologyRegisterDTO = (req, res, next) => {
     });
   next();
 };
-export default technologyRegisterDTO;
+export default reportRegisterDTO;

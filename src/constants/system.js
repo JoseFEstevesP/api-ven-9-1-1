@@ -170,3 +170,45 @@ export const consumablesMSG = {
     msg: 'Consumible eliminada con éxito',
   },
 };
+export const purchaseMSG = {
+  register: {
+    uid: {
+      status: 'Esta Compra  ya esta registrada, pero fue deshabilitada',
+      default: 'Esta Compra ya esta registrada',
+    },
+    orderNumber: {
+      status:
+        'Ya existe una Compra con ese Numero de orden, pero fue deshabilitado',
+      default: 'Ya existe una Compra con ese Numero de orden',
+    },
+    msg: 'Compra registrada con éxito',
+  },
+  noFound: 'No se a encontrado ninguna Compra',
+  update: {
+    msg: 'Compra actualizada con éxito',
+  },
+  delete: {
+    msg: 'Compra eliminada con éxito',
+  },
+};
+export const reportMSG = {
+  register: {
+    uid: {
+      status: 'Este Reporte ya esta registrado, pero fue deshabilitado',
+      default: 'Este Reporte ya esta registrado',
+    },
+    serialOrCodeBN: {
+      status:
+        'Ya existe una Reporte con ese Serial o Código de BN, pero fue deshabilitado',
+      default: 'Ya existe una Reporte con ese Serial o Código de BN',
+    },
+    msg: 'Reporte registrado con éxito',
+  },
+  noFound: 'No se a encontrado ninguna reporte',
+  update: {
+    msg: 'Reporte actualizado con éxito',
+  },
+  delete: {
+    msg: 'Reporte eliminado con éxito',
+  },
+};

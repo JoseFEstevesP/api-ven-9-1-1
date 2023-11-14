@@ -1,22 +1,30 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
 
-export const Furniture = sequelize.define('furniture', {
+export const Purchase = sequelize.define('purchase', {
   uid: {
     type: DataTypes.STRING,
     primaryKey: true,
     allowNull: false,
     unique: true,
   },
-  description: {
-    type: DataTypes.STRING(3000),
+  product: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   serial: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  quantity: {
+  brand: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  model: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  dateOfPurchase: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -24,15 +32,11 @@ export const Furniture = sequelize.define('furniture', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  condition: {
+  quantity: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  location: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  dateOfAcquisition: {
+  supplier: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -40,13 +44,12 @@ export const Furniture = sequelize.define('furniture', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  remarks: {
+  orderNumber: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  codeBN: {
+  location: {
     type: DataTypes.STRING,
-    unique: true,
     allowNull: false,
   },
   status: {

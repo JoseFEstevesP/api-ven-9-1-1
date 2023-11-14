@@ -32,7 +32,7 @@ export const Vehicle = sequelize.define('vehicle', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  state: {
+  condition: {
     type: DataTypes.STRING,
     allowNull: false,
   },

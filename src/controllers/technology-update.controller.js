@@ -10,7 +10,7 @@ const technologyUpdateController = async (req, res) => {
     serial,
     quantity,
     value,
-    state,
+    condition,
     location,
     dateOfAcquisition,
     warranty,
@@ -28,7 +28,7 @@ const technologyUpdateController = async (req, res) => {
   existingTechnologyById.serial = serial;
   existingTechnologyById.quantity = quantity;
   existingTechnologyById.value = value;
-  existingTechnologyById.state = state;
+  existingTechnologyById.condition = condition;
   existingTechnologyById.location = location;
   existingTechnologyById.dateOfAcquisition = dateOfAcquisition;
   existingTechnologyById.warranty = warranty;
