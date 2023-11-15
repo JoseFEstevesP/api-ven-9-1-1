@@ -1,36 +1,32 @@
-import { limitPage, technologyMSG } from '#Constants/system.js';
-import { Technology } from '#Schemas/technology.schema.js';
+import { breakdownReportMSG, limitPage } from '#Constants/system.js';
+import { BreakdownReport } from '#Schemas/breakdownReport.schema.js';
 import { Op } from 'sequelize';
 
-const technologySearchController = async (req, res) => {
+const breakdownReportSearchController = async (req, res) => {
   const { uidSite } = req;
   const {
     page = 1,
     limit = limitPage,
     uidSite: uidSiteQuery,
-    orderProperty = 'description',
+    orderProperty = 'goods',
     order = 'ASC',
     status = '1',
   } = req.query;
   const { search } = req.params;
   const site = uidSiteQuery || uidSite;
-  const { rows, count } = await Technology.findAndCountAll({
+  const { rows, count } = await BreakdownReport.findAndCountAll({
     where: {
       uidSite: site,
       status,
       [Op.or]: [
+        { goods: { [Op.iLike]: `%${search}%` } },
         { description: { [Op.iLike]: `%${search}%` } },
-        { brand: { [Op.iLike]: `%${search}%` } },
-        { model: { [Op.iLike]: `%${search}%` } },
-        { serial: { [Op.iLike]: `%${search}%` } },
-        { quantity: { [Op.iLike]: `%${search}%` } },
-        { value: { [Op.iLike]: `%${search}%` } },
+        { proposedSolution: { [Op.iLike]: `%${search}%` } },
         { condition: { [Op.iLike]: `%${search}%` } },
         { location: { [Op.iLike]: `%${search}%` } },
-        { dateOfAcquisition: { [Op.iLike]: `%${search}%` } },
-        { warranty: { [Op.iLike]: `%${search}%` } },
-        { remarks: { [Op.iLike]: `%${search}%` } },
-        { codeBN: { [Op.iLike]: `%${search}%` } },
+        { dateOfReport: { [Op.iLike]: `%${search}%` } },
+        { timeOfReport: { [Op.iLike]: `%${search}%` } },
+        { serialOrCodeBN: { [Op.iLike]: `%${search}%` } },
       ],
     },
     limit,
@@ -38,7 +34,9 @@ const technologySearchController = async (req, res) => {
     order: [[orderProperty, order]],
   });
   if (!rows.length)
-    return res.status(404).send({ errors: [{ uid: technologyMSG.noFound }] });
+    return res
+      .status(404)
+      .send({ errors: [{ uid: breakdownReportMSG.noFound }] });
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
   const nextPage = Number(totalPage) + 1;
@@ -54,4 +52,4 @@ const technologySearchController = async (req, res) => {
   });
 };
 
-export default technologySearchController;
+export default breakdownReportSearchController;

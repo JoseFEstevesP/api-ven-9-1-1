@@ -1,7 +1,7 @@
 import { limitPage } from '#Constants/system.js';
-import { Report } from '#Schemas/report.schema.js';
+import { BreakdownReport } from '#Schemas/breakdownReport.schema.js';
 
-const reportReadController = async (req, res) => {
+const breakdownReportReadController = async (req, res) => {
   const {
     page = 1,
     limit = limitPage,
@@ -12,7 +12,7 @@ const reportReadController = async (req, res) => {
   } = req.query;
   const { uidSite } = req;
   const site = uidSiteQuery || uidSite;
-  const { rows, count } = await Report.findAndCountAll({
+  const { rows, count } = await BreakdownReport.findAndCountAll({
     where: { uidSite: site, status },
     limit,
     offset: (page - 1) * limit,
@@ -34,4 +34,4 @@ const reportReadController = async (req, res) => {
   });
 };
 
-export default reportReadController;
+export default breakdownReportReadController;

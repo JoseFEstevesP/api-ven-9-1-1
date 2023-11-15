@@ -1,7 +1,7 @@
-import { reportMSG } from '#Constants/system.js';
-import { Report } from '#Schemas/report.schema.js';
+import { breakdownReportMSG } from '#Constants/system.js';
+import { BreakdownReport } from '#Schemas/breakdownReport.schema.js';
 
-const reportUpdateController = async (req, res) => {
+const breakdownReportUpdateController = async (req, res) => {
   const {
     uid,
     goods,
@@ -13,11 +13,13 @@ const reportUpdateController = async (req, res) => {
     timeOfReport,
     serialOrCodeBN,
   } = req.body;
-  const existingReportById = await Report.findOne({
+  const existingReportById = await BreakdownReport.findOne({
     where: { uid, status: '1' },
   });
   if (!existingReportById)
-    return res.status(404).send({ errors: [{ uid: reportMSG.noFound }] });
+    return res
+      .status(404)
+      .send({ errors: [{ uid: breakdownReportMSG.noFound }] });
   existingReportById.goods = goods;
   existingReportById.description = description;
   existingReportById.proposedSolution = proposedSolution;
@@ -27,6 +29,6 @@ const reportUpdateController = async (req, res) => {
   existingReportById.timeOfReport = timeOfReport;
   existingReportById.serialOrCodeBN = serialOrCodeBN;
   await existingReportById.save();
-  return res.status(201).send({ msg: reportMSG.update.msg });
+  return res.status(201).send({ msg: breakdownReportMSG.update.msg });
 };
-export default reportUpdateController;
+export default breakdownReportUpdateController;

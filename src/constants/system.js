@@ -191,24 +191,25 @@ export const purchaseMSG = {
     msg: 'Compra eliminada con éxito',
   },
 };
-export const reportMSG = {
+export const breakdownReportMSG = {
   register: {
     uid: {
-      status: 'Este Reporte ya esta registrado, pero fue deshabilitado',
-      default: 'Este Reporte ya esta registrado',
+      status:
+        'Este Reporte de avería ya esta registrado, pero fue deshabilitado',
+      default: 'Este Reporte de avería ya esta registrado',
     },
     serialOrCodeBN: {
       status:
-        'Ya existe una Reporte con ese Serial o Código de BN, pero fue deshabilitado',
-      default: 'Ya existe una Reporte con ese Serial o Código de BN',
+        'Ya existe una Reporte de avería con ese Serial o Código de BN, pero fue deshabilitado',
+      default: 'Ya existe una Reporte de avería con ese Serial o Código de BN',
     },
-    msg: 'Reporte registrado con éxito',
+    msg: 'Reporte de avería registrado con éxito',
   },
-  noFound: 'No se a encontrado ninguna reporte',
+  noFound: 'No se a encontrado ninguna reporte de avería',
   update: {
-    msg: 'Reporte actualizado con éxito',
+    msg: 'Reporte de avería actualizado con éxito',
   },
   delete: {
-    msg: 'Reporte eliminado con éxito',
+    msg: 'Reporte de avería eliminado con éxito',
   },
 };

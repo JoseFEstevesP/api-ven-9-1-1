@@ -28,7 +28,7 @@ const ajv = new Ajv({ allErrors: true })
 addFormats(ajv, ['uuid']);
 addErrors(ajv);
 const validateSchema = ajv.compile(registerDTOSchema);
-const reportRegisterDTO = (req, res, next) => {
+const breakdownReportRegisterDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
     return res.status(400).send({
@@ -38,4 +38,4 @@ const reportRegisterDTO = (req, res, next) => {
     });
   next();
 };
-export default reportRegisterDTO;
+export default breakdownReportRegisterDTO;

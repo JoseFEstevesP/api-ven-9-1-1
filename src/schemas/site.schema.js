@@ -1,9 +1,9 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
+import { BreakdownReport } from './breakdownReport.schema.js';
 import { Consumables } from './consumables.schema.js';
 import { Furniture } from './furniture.schema.js';
 import { Purchase } from './purchase.schema.js';
-import { Report } from './report.schema.js';
 import { Technology } from './technology.schema.js';
 import { User } from './user.schema.js';
 import { Vehicle } from './vehicle.schema.js';
@@ -81,11 +81,11 @@ Purchase.belongsTo(Site, {
   foreignKey: 'uidSite',
   targetId: 'uid',
 });
-Site.hasMany(Report, {
+Site.hasMany(BreakdownReport, {
   foreignKey: 'uidSite',
   sourceKey: 'uid',
 });
-Report.belongsTo(Site, {
+BreakdownReport.belongsTo(Site, {
   foreignKey: 'uidSite',
   targetId: 'uid',
 });
