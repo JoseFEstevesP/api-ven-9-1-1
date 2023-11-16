@@ -18,13 +18,14 @@ const purchaseReadController = async (req, res) => {
     offset: (page - 1) * limit,
     order: [[orderProperty, order]],
   });
-
+  const valueTotal = rows.reduce((acc, item) => acc + Number(item.value), 0);
   const pages = Math.ceil(count / limit);
   const totalPage = page > pages ? pages : page;
   const nextPage = Number(totalPage) + 1;
   const previousPage = Number(totalPage) - 1;
   return res.status(200).send({
     rows,
+    valueTotal,
     count,
     currentPage: Number(totalPage),
     nextPage: nextPage <= pages ? nextPage : null,

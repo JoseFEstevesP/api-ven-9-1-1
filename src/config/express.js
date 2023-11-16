@@ -9,10 +9,24 @@ import userRoutes from '#Routes/user.routes.js';
 import vehicleRoutes from '#Routes/vehicle.routes.js';
 import cors from 'cors';
 import express from 'express';
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://ven911j30.vercel.app',
+];
 const expressApp = express();
 // middleware
 expressApp.use(express.json());
-expressApp.use(cors());
+expressApp.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Origen no permitido'), false);
+      }
+    },
+  })
+);
 // routes
 expressApp.use('/user', userRoutes);
 expressApp.use('/rol', rolRoutes);
