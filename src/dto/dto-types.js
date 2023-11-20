@@ -17,19 +17,19 @@ export const ciDTOSchemas = Type.String({
 });
 
 export const nameDTOSchemas = Type.String({
-  minLength: 2,
+  minLength: 3,
   maxLength: 20,
   errorMessage: {
-    minLength: 'El nombre debe de tener un mínimo de 2 caracteres de longitud',
+    minLength: 'El nombre debe de tener un mínimo de 3 caracteres de longitud',
     maxLength: 'El nombre debe de tener un máximo de 20 caracteres de longitud',
   },
 });
 export const surnameDTOSchemas = Type.String({
-  minLength: 4,
+  minLength: 3,
   maxLength: 50,
   errorMessage: {
     minLength:
-      'El apellido debe de tener un mínimo de 4 caracteres de longitud',
+      'El apellido debe de tener un mínimo de 3 caracteres de longitud',
     maxLength:
       'El apellido debe de tener un máximo de 50 caracteres de longitud',
   },
