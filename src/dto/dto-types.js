@@ -70,7 +70,7 @@ export const valueDTOSchemas = Type.String({
   },
 });
 export const permissionsDTOSchemas = Type.String({
-  minLength: 3,
+  minLength: 2,
   errorMessage: {
     type: 'El campo no es valido, debe de ser una cadena de texto',
     minLength: 'Ningún campo debe de esta vacío',

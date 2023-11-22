@@ -3,6 +3,7 @@ import userLoginController from '#Controllers/user-login.controller.js';
 import userProfileController from '#Controllers/user-profile.controller.js';
 import userReadController from '#Controllers/user-read.controller.js';
 import userRegisterController from '#Controllers/user-register.controller.js';
+import userReportController from '#Controllers/user-report.controller.js';
 import userSearchController from '#Controllers/user-search.controller.js';
 import userSearchItemController from '#Controllers/user-searchItem.controller.js';
 import userUnregisterController from '#Controllers/user-unregister.controller.js';
@@ -52,6 +53,7 @@ userRoutes.get(
   readPermissions,
   userSearchController
 );
+userRoutes.get('/report', userJWTDTO, readPermissions, userReportController);
 userRoutes.patch(
   '/update',
   userJWTDTO,

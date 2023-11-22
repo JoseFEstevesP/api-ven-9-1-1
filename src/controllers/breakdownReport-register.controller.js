@@ -1,17 +1,18 @@
 import { breakdownReportMSG } from '#Constants/system.js';
 import { BreakdownReport } from '#Schemas/breakdownReport.schema.js';
-
+import moment from 'moment';
+moment.locale('es-VE');
 const breakdownReportRegisterController = async (req, res) => {
   const { id, uidSite } = req;
   const {
     uid,
     goods,
-    description,
+    problem,
+    symptoms,
     proposedSolution,
     condition,
+    breakdownDepartment,
     location,
-    dateOfReport,
-    timeOfReport,
     serialOrCodeBN,
   } = req.body;
   const existingReportById = await BreakdownReport.findByPk(uid);
@@ -50,12 +51,14 @@ const breakdownReportRegisterController = async (req, res) => {
   const technology = await BreakdownReport.create({
     uid,
     goods,
-    description,
+    problem,
+    symptoms,
     proposedSolution,
     condition,
+    breakdownDepartment,
     location,
-    dateOfReport,
-    timeOfReport,
+    dateOfReport: moment().format('DD-MM-YYYY'),
+    timeOfReport: moment().format('hh:mm A'),
     serialOrCodeBN,
     uidUser: id,
     uidSite,

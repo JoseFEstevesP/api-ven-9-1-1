@@ -20,9 +20,11 @@ const breakdownReportSearchController = async (req, res) => {
       status,
       [Op.or]: [
         { goods: { [Op.iLike]: `%${search}%` } },
-        { description: { [Op.iLike]: `%${search}%` } },
+        { problem: { [Op.iLike]: `%${search}%` } },
+        { symptoms: { [Op.iLike]: `%${search}%` } },
         { proposedSolution: { [Op.iLike]: `%${search}%` } },
         { condition: { [Op.iLike]: `%${search}%` } },
+        { breakdownDepartment: { [Op.iLike]: `%${search}%` } },
         { location: { [Op.iLike]: `%${search}%` } },
         { dateOfReport: { [Op.iLike]: `%${search}%` } },
         { timeOfReport: { [Op.iLike]: `%${search}%` } },

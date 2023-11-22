@@ -7,12 +7,12 @@ const registerDTOSchema = Type.Object(
   {
     uid: idDTOSchemas,
     goods: permissionsDTOSchemas,
-    description: permissionsDTOSchemas,
+    problem: permissionsDTOSchemas,
+    symptoms: permissionsDTOSchemas,
     proposedSolution: permissionsDTOSchemas,
     condition: permissionsDTOSchemas,
+    breakdownDepartment: permissionsDTOSchemas,
     location: permissionsDTOSchemas,
-    dateOfReport: permissionsDTOSchemas,
-    timeOfReport: permissionsDTOSchemas,
     serialOrCodeBN: permissionsDTOSchemas,
   },
   {

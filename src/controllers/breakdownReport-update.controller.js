@@ -5,12 +5,12 @@ const breakdownReportUpdateController = async (req, res) => {
   const {
     uid,
     goods,
-    description,
+    problem,
+    symptoms,
     proposedSolution,
     condition,
+    breakdownDepartment,
     location,
-    dateOfReport,
-    timeOfReport,
     serialOrCodeBN,
   } = req.body;
   const existingReportById = await BreakdownReport.findOne({
@@ -21,12 +21,12 @@ const breakdownReportUpdateController = async (req, res) => {
       .status(404)
       .send({ errors: [{ uid: breakdownReportMSG.noFound }] });
   existingReportById.goods = goods;
-  existingReportById.description = description;
+  existingReportById.problem = problem;
+  existingReportById.symptoms = symptoms;
   existingReportById.proposedSolution = proposedSolution;
   existingReportById.condition = condition;
+  existingReportById.breakdownDepartment = breakdownDepartment;
   existingReportById.location = location;
-  existingReportById.dateOfReport = dateOfReport;
-  existingReportById.timeOfReport = timeOfReport;
   existingReportById.serialOrCodeBN = serialOrCodeBN;
   await existingReportById.save();
   return res.status(201).send({ msg: breakdownReportMSG.update.msg });

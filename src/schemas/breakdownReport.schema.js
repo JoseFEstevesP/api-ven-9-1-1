@@ -12,7 +12,11 @@ export const BreakdownReport = sequelize.define('breakdownReport', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  description: {
+  problem: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  symptoms: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -21,6 +25,10 @@ export const BreakdownReport = sequelize.define('breakdownReport', {
     allowNull: false,
   },
   condition: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  breakdownDepartment: {
     type: DataTypes.STRING,
     allowNull: false,
   },
