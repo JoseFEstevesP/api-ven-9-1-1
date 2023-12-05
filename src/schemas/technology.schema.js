@@ -1,7 +1,7 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
 
-export const Technology = sequelize.define('technology', {
+export const Technology = sequelize.define('technologies', {
   uid: {
     type: DataTypes.STRING,
     primaryKey: true,
@@ -27,6 +27,11 @@ export const Technology = sequelize.define('technology', {
   quantity: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  assign: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '0',
   },
   value: {
     type: DataTypes.STRING,

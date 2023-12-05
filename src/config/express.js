@@ -1,3 +1,4 @@
+import assignRoutes from '#Routes/assign.routes.js';
 import breakdownReportRoutes from '#Routes/breakdownReport.routes.js';
 import consumablesRoutes from '#Routes/consumables.routes.js';
 import furnitureRoutes from '#Routes/furniture.routes.js';
@@ -12,9 +13,7 @@ import express from 'express';
 const expressApp = express();
 // middleware
 expressApp.use(express.json());
-expressApp.use(
-  cors()
-);
+expressApp.use(cors());
 // routes
 expressApp.use('/user', userRoutes);
 expressApp.use('/rol', rolRoutes);
@@ -25,4 +24,5 @@ expressApp.use('/furniture', furnitureRoutes);
 expressApp.use('/vehicle', vehicleRoutes);
 expressApp.use('/purchase', purchaseRoutes);
 expressApp.use('/breakdownReport', breakdownReportRoutes);
+expressApp.use('/assign', assignRoutes);
 export default expressApp;

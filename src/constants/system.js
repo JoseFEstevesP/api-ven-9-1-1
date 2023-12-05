@@ -213,3 +213,24 @@ export const breakdownReportMSG = {
     msg: 'Reporte de avería eliminado con éxito',
   },
 };
+export const assignMSG = {
+  register: {
+    uid: {
+      status: 'Esta asignación ya esta registrada, pero fue deshabilitada',
+      default: 'Esta asignación ya esta registrada',
+      lowerQuantity: 'La cantidad no puede ser menor de 1',
+      higherQuantity:
+        'Su cantidad no puede ser mayor de la cantidad registrada del articulo',
+      article: 'Este artículo ya fue asignado',
+      articleNotFound: 'Este artículo no se a encontrado',
+    },
+    msg: 'Asignación registrada con éxito',
+  },
+  noFound: 'No se a encontrado ninguna asignación',
+  update: {
+    msg: 'Asignación actualizada con éxito',
+  },
+  delete: {
+    msg: 'Asignación eliminada con éxito',
+  },
+};

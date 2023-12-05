@@ -1,5 +1,6 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
+import { Assign } from './assign.schema.js';
 import { BreakdownReport } from './breakdownReport.schema.js';
 import { Consumables } from './consumables.schema.js';
 import { Furniture } from './furniture.schema.js';
@@ -7,9 +8,10 @@ import { Purchase } from './purchase.schema.js';
 import { Technology } from './technology.schema.js';
 import { Vehicle } from './vehicle.schema.js';
 
-export const User = sequelize.define('user', {
+export const User = sequelize.define('users', {
   uid: {
     type: DataTypes.STRING,
+    allowNull: false,
     primaryKey: true,
   },
   ci: {
@@ -54,6 +56,14 @@ User.hasMany(Technology, {
   sourceKey: 'uid',
 });
 Technology.belongsTo(User, {
+  foreignKey: 'uidUser',
+  targetId: 'uid',
+});
+User.hasMany(Assign, {
+  foreignKey: 'uidUser',
+  sourceKey: 'uid',
+});
+Assign.belongsTo(User, {
   foreignKey: 'uidUser',
   targetId: 'uid',
 });

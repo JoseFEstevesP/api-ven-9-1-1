@@ -1,18 +1,34 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
 
-export const Furniture = sequelize.define('furnitures', {
+export const Assign = sequelize.define('assign', {
   uid: {
     type: DataTypes.STRING,
     primaryKey: true,
     allowNull: false,
     unique: true,
   },
-  description: {
-    type: DataTypes.STRING(3000),
+  inventory: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
-  serial: {
+  article: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  articleUid: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  department: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  assignmentDate: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  assignmentTime: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -20,39 +36,13 @@ export const Furniture = sequelize.define('furnitures', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  value: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  condition: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  location: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  dateOfAcquisition: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  warranty: {
+  description: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   remarks: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
-  codeBN: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: false,
-  },
-  assign: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: '0',
   },
   status: {
     type: DataTypes.STRING,

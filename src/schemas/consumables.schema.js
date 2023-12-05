@@ -12,7 +12,7 @@ export const Consumables = sequelize.define('consumables', {
     type: DataTypes.STRING(3000),
     allowNull: false,
   },
-	serial: {
+  serial: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -23,6 +23,11 @@ export const Consumables = sequelize.define('consumables', {
   quantity: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  assign: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '0',
   },
   value: {
     type: DataTypes.STRING,
