@@ -1,7 +1,7 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
 
-export const Purchase = sequelize.define('purchase', {
+export const Purchase = sequelize.define('purchases', {
   uid: {
     type: DataTypes.STRING,
     primaryKey: true,

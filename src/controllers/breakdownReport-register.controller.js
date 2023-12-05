@@ -48,7 +48,7 @@ const breakdownReportRegisterController = async (req, res) => {
         errors: [{ uid: breakdownReportMSG.register.serialOrCodeBN.default }],
       });
   }
-  const technology = await BreakdownReport.create({
+  const breakdownReport = await BreakdownReport.create({
     uid,
     goods,
     problem,
@@ -63,7 +63,7 @@ const breakdownReportRegisterController = async (req, res) => {
     uidUser: id,
     uidSite,
   });
-  await technology.save();
+  await breakdownReport.save();
   return res.status(201).send({ msg: breakdownReportMSG.register.msg });
 };
 export default breakdownReportRegisterController;

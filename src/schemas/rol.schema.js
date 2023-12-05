@@ -2,7 +2,7 @@ import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
 import { User } from './user.schema.js';
 
-export const Rol = sequelize.define('rol', {
+export const Rol = sequelize.define('rols', {
   uid: {
     type: DataTypes.STRING,
     primaryKey: true,

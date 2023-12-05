@@ -1,3 +1,4 @@
+// TODO: validar los datos a yeye le salio un error figarse en registrar
 import { userMSG } from '#Constants/system.js';
 import coder from '#Functions/coder.js';
 import { Rol } from '#Schemas/rol.schema.js';

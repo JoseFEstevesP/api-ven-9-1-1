@@ -50,7 +50,6 @@
     "lint": "eslint src/**/*.js --fix",
     "postinstall": "npm run prepare",
     "prepare": "husky install",
-    "prettier": "prettier --write .",
     "start": "node src/index.js"
   },
   "type": "module",
