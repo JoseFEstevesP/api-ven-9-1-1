@@ -1,6 +1,7 @@
 import furnitureDeleteController from '#Controllers/furniture-delete.controller.js';
 import furnitureReadController from '#Controllers/furniture-read.controller.js';
 import furnitureRegisterController from '#Controllers/furniture-register.controller.js';
+import furnitureReportController from '#Controllers/furniture-report.controller.js';
 import furnitureSearchController from '#Controllers/furniture-search.controller.js';
 import furnitureSearchItemController from '#Controllers/furniture-searchItem.controller.js';
 import furnitureUpdateController from '#Controllers/furniture-update.controller.js';
@@ -44,6 +45,12 @@ furnitureRoutes.get(
   readPermissions,
   gaPermissions,
   furnitureSearchController
+);
+furnitureRoutes.get(
+  '/report',
+  userJWTDTO,
+  readPermissions,
+  furnitureReportController
 );
 furnitureRoutes.patch(
   '/update',

@@ -2,6 +2,7 @@ import purchaseSearchController from '#Controllers/product-search.controller.js'
 import purchaseDeleteController from '#Controllers/purchase-delete.controller.js';
 import purchaseReadController from '#Controllers/purchase-read.controller.js';
 import purchaseRegisterController from '#Controllers/purchase-register.controller.js';
+import purchaseReportController from '#Controllers/purchase-report.controller.js';
 import purchaseSearchItemController from '#Controllers/purchase-searchItem.controller.js';
 import purchaseUpdateController from '#Controllers/purchase-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
@@ -44,6 +45,12 @@ purchaseRoutes.get(
   readPermissions,
   gaPermissions,
   purchaseSearchController
+);
+purchaseRoutes.get(
+  '/report',
+  userJWTDTO,
+  readPermissions,
+  purchaseReportController
 );
 purchaseRoutes.patch(
   '/update',

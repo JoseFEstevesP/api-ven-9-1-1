@@ -1,6 +1,7 @@
 import vehicleDeleteController from '#Controllers/vehicle-delete.controller.js';
 import vehicleReadController from '#Controllers/vehicle-read.controller.js';
 import vehicleRegisterController from '#Controllers/vehicle-register.controller.js';
+import vehicleReportController from '#Controllers/vehicle-report.controller.js';
 import vehicleSearchController from '#Controllers/vehicle-search.controller.js';
 import vehicleSearchItemController from '#Controllers/vehicle-searchItem.controller.js';
 import vehicleUpdateController from '#Controllers/vehicle-update.controller.js';
@@ -44,6 +45,12 @@ vehicleRoutes.get(
   readPermissions,
   gaPermissions,
   vehicleSearchController
+);
+vehicleRoutes.get(
+  '/report',
+  userJWTDTO,
+  readPermissions,
+  vehicleReportController
 );
 vehicleRoutes.patch(
   '/update',

@@ -2,6 +2,7 @@ import rolDeleteController from '#Controllers/rol-delete.controller.js';
 import rolReadController from '#Controllers/rol-read.controller.js';
 import rolReadOfLimitController from '#Controllers/rol-readOfLimit.controller.js';
 import rolRegisterController from '#Controllers/rol-register.controller.js';
+import rolReportController from '#Controllers/rol-report.controller.js';
 import rolSearchController from '#Controllers/rol-search.controller.js';
 import rolSearchItemController from '#Controllers/rol-searchItem.controller.js';
 import rolUpdateController from '#Controllers/rol-update.controller.js';
@@ -42,6 +43,7 @@ rolRoutes.get(
   readPermissions,
   rolSearchController
 );
+rolRoutes.get('/report', userJWTDTO, readPermissions, rolReportController);
 rolRoutes.patch(
   '/update',
   userJWTDTO,

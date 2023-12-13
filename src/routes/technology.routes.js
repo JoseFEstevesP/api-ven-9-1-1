@@ -1,6 +1,7 @@
 import technologyDeleteController from '#Controllers/technology-delete.controller.js';
 import technologyReadController from '#Controllers/technology-read.controller.js';
 import technologyRegisterController from '#Controllers/technology-register.controller.js';
+import technologyReportController from '#Controllers/technology-report.controller.js';
 import technologySearchController from '#Controllers/technology-search.controller.js';
 import technologySearchItemController from '#Controllers/technology-searchItem.controller.js';
 import technologyUpdateController from '#Controllers/technology-update.controller.js';
@@ -44,6 +45,12 @@ technologyRoutes.get(
   readPermissions,
   gaPermissions,
   technologySearchController
+);
+technologyRoutes.get(
+  '/report',
+  userJWTDTO,
+  readPermissions,
+  technologyReportController
 );
 technologyRoutes.patch(
   '/update',

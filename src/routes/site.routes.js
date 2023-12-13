@@ -2,6 +2,7 @@ import siteDeleteController from '#Controllers/site-delete.controller.js';
 import siteReadController from '#Controllers/site-read.controller.js';
 import siteReadOfLimitController from '#Controllers/site-readOfLimit.controller.js';
 import siteRegisterController from '#Controllers/site-register.controller.js';
+import siteReportController from '#Controllers/site-report.controller.js';
 import siteSearchController from '#Controllers/site-search.controller.js';
 import siteSearchItemController from '#Controllers/site-searchItem.controller.js';
 import siteUpdateController from '#Controllers/site-update.controller.js';
@@ -42,6 +43,7 @@ siteRoutes.get(
   readPermissions,
   siteSearchController
 );
+siteRoutes.get('/report', userJWTDTO, readPermissions, siteReportController);
 siteRoutes.patch(
   '/update',
   userJWTDTO,

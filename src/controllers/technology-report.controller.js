@@ -1,39 +1,37 @@
-import { Rol } from '#Schemas/rol.schema.js';
 import { Site } from '#Schemas/site.schema.js';
+import { Technology } from '#Schemas/technology.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import moment from 'moment';
 
-const userReportController = async (req, res) => {
+const technologyReportController = async (req, res) => {
   const { id, uidSite } = req;
   const {
     uidSite: uidSiteQuery,
-    orderProperty = 'name',
+    orderProperty = 'description',
     order = 'ASC',
     status = '1',
     dataQuantity = 17,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
-  const userReport = await User.findAll({
+  const technologyReport = await Technology.findAll({
     where: {
       uidSite: site,
       status,
     },
     attributes: {
-      exclude: ['uid', 'password', 'uidRol', 'uidSite'],
+      exclude: ['uid', 'uidSite', 'uidUser'],
     },
     include: [
       {
-        model: Rol,
+        model: User,
         where: { status },
-        attributes: {
-          exclude: ['uid', 'permissions', 'status', 'createdAt', 'updatedAt'],
-        },
+        attributes: ['ci'],
       },
     ],
     order: [[orderProperty, order]],
   });
-  const rows = userReport.reduce((acc, item, index) => {
+  const rows = technologyReport.reduce((acc, item, index) => {
     if (index % dataQuantity === 0) {
       acc.push([item]);
     } else {
@@ -46,10 +44,10 @@ const userReportController = async (req, res) => {
     rows,
     author: `${name} ${surname} CI: ${ci}`,
     siteName,
-    report: 'Usuario',
+    report: 'Tecnologia',
     date: moment().format('DD-MM-YYYY'),
     time: moment().format('hh:mm A'),
   });
 };
 
-export default userReportController;
+export default technologyReportController;

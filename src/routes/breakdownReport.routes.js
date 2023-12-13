@@ -1,6 +1,7 @@
 import breakdownReportDeleteController from '#Controllers/breakdownReport-delete.controller.js';
 import breakdownReportReadController from '#Controllers/breakdownReport-read.controller.js';
 import breakdownReportRegisterController from '#Controllers/breakdownReport-register.controller.js';
+import breakdownReportController from '#Controllers/breakdownReport-report.controller.js';
 import breakdownReportSearchController from '#Controllers/breakdownReport-search.controller.js';
 import breakdownReportSearchItemController from '#Controllers/breakdownReport-searchItem.controller.js';
 import breakdownReportUpdateController from '#Controllers/breakdownReport-update.controller.js';
@@ -44,6 +45,12 @@ breakdownReportRoutes.get(
   readPermissions,
   gaPermissions,
   breakdownReportSearchController
+);
+breakdownReportRoutes.get(
+  '/report',
+  userJWTDTO,
+  readPermissions,
+  breakdownReportController
 );
 breakdownReportRoutes.patch(
   '/update',

@@ -2,6 +2,7 @@ import assignDeleteController from '#Controllers/assign-delete.controller.js';
 import assignReadController from '#Controllers/assign-read.controller.js';
 import inventoryReadController from '#Controllers/assign-readInventory.controller.js';
 import assignRegisterController from '#Controllers/assign-register.controller.js';
+import assignReportController from '#Controllers/assign-report.controller.js';
 import assignSearchController from '#Controllers/assign-search.controller.js';
 import assignSearchItemController from '#Controllers/assign-searchItem.controller.js';
 import assignUpdateController from '#Controllers/assign-update.controller.js';
@@ -52,6 +53,12 @@ assignRoutes.get(
   readPermissions,
   gaPermissions,
   assignSearchController
+);
+assignRoutes.get(
+  '/report',
+  userJWTDTO,
+  readPermissions,
+  assignReportController
 );
 assignRoutes.patch(
   '/update',

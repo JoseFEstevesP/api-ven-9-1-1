@@ -1,6 +1,7 @@
 import consumablesDeleteController from '#Controllers/consumables-delete.controller.js';
 import consumablesReadController from '#Controllers/consumables-read.controller.js';
 import consumablesRegisterController from '#Controllers/consumables-register.controller.js';
+import consumablesReportController from '#Controllers/consumables-report.controller.js';
 import consumablesSearchController from '#Controllers/consumables-search.controller.js';
 import consumablesSearchItemController from '#Controllers/consumables-searchItem.controller.js';
 import consumablesUpdateController from '#Controllers/consumables-update.controller.js';
@@ -44,6 +45,12 @@ consumablesRoutes.get(
   readPermissions,
   gaPermissions,
   consumablesSearchController
+);
+consumablesRoutes.get(
+  '/report',
+  userJWTDTO,
+  readPermissions,
+  consumablesReportController
 );
 consumablesRoutes.patch(
   '/update',
