@@ -21,6 +21,7 @@ const assignSearchController = async (req, res) => {
       [Op.or]: [
         { inventory: { [Op.iLike]: `%${search}%` } },
         { article: { [Op.iLike]: `%${search}%` } },
+        { serialOrCodeBN: { [Op.iLike]: `%${search}%` } },
         { department: { [Op.iLike]: `%${search}%` } },
         { quantity: { [Op.iLike]: `%${search}%` } },
         { description: { [Op.iLike]: `%${search}%` } },

@@ -71,11 +71,13 @@ const assignRegisterController = async (req, res) => {
     });
   inventoryData.assign = `${fullQuantity}`;
   inventoryData.save();
+  const serialOrCodeBN = inventoryData.codeBN || inventoryData.serial;
   const assign = await Assign.create({
     uid,
     inventory,
     article,
     articleUid,
+    serialOrCodeBN,
     department,
     quantity,
     description,

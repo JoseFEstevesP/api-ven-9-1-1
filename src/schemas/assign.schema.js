@@ -20,6 +20,10 @@ export const Assign = sequelize.define('assign', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  serialOrCodeBN: {
+    type: DataTypes.STRING,
+    // allowNull: false,
+  },
   department: {
     type: DataTypes.STRING,
     allowNull: false,

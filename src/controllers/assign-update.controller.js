@@ -94,9 +94,14 @@ const assignUpdateController = async (req, res) => {
     newInventoryData.assign = quantity;
     newInventoryData.save();
   }
+  const inventoryDataFull = await invent[inventory].findOne({
+    where: { uid: articleUid, status: '1' },
+  });
+  const serialOrCodeBN = inventoryDataFull.codeBN || inventoryDataFull.serial;
   existingAssignById.inventory = inventory;
   existingAssignById.article = article;
   existingAssignById.articleUid = articleUid;
+  existingAssignById.serialOrCodeBN = serialOrCodeBN;
   existingAssignById.department = department;
   existingAssignById.quantity = quantity;
   existingAssignById.description = description;
