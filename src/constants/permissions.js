@@ -6,4 +6,11 @@ export const permissions = {
   delete: 'DELETE',
   super: 'SUPER',
   ga: 'GA',
+  site: 'SITE',
+  ocp: 'OCP',
+  gh_aj: 'GH_AJ',
+  pop_psi: 'POP_PSI',
+  tci: 'TCI',
+  uri: 'URI',
+  power: 'POWER',
 };

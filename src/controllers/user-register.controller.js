@@ -1,8 +1,11 @@
+import { permissions } from '#Constants/permissions.js';
 import { SALT } from '#Constants/salt.js';
 import { userMSG } from '#Constants/system.js';
+import { validatePermissions } from '#Functions/validatePermissions.js';
 import { User } from '#Schemas/user.schema.js';
 import { hash } from 'bcrypt';
 const userRegisterController = async (req, res) => {
+  const { uidRol: uidRolUser, uidSite: uidSiteUser } = req;
   const { uid, ci, name, surname, email, password, uidRol, uidSite } = req.body;
   const existingUserById = await User.findByPk(uid);
   if (existingUserById) {
@@ -37,7 +40,9 @@ const userRegisterController = async (req, res) => {
     email,
     password: hashedPassword,
     uidRol,
-    uidSite,
+    uidSite: validatePermissions({ uidRol: uidRolUser, per: permissions.site })
+      ? uidSite
+      : uidSiteUser,
   });
   await user.save();
   return res.status(201).send({ msg: userMSG.register.msg });
