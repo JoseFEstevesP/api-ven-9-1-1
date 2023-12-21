@@ -20,10 +20,6 @@ export const BreakdownReport = sequelize.define('breakdownReport', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  proposedSolution: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   condition: {
     type: DataTypes.STRING,
     allowNull: false,

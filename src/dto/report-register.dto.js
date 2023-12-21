@@ -9,7 +9,6 @@ const registerDTOSchema = Type.Object(
     goods: permissionsDTOSchemas,
     problem: permissionsDTOSchemas,
     symptoms: permissionsDTOSchemas,
-    proposedSolution: permissionsDTOSchemas,
     condition: permissionsDTOSchemas,
     breakdownDepartment: permissionsDTOSchemas,
     location: permissionsDTOSchemas,

@@ -7,7 +7,6 @@ const breakdownReportUpdateController = async (req, res) => {
     goods,
     problem,
     symptoms,
-    proposedSolution,
     condition,
     breakdownDepartment,
     location,
@@ -23,7 +22,6 @@ const breakdownReportUpdateController = async (req, res) => {
   existingReportById.goods = goods;
   existingReportById.problem = problem;
   existingReportById.symptoms = symptoms;
-  existingReportById.proposedSolution = proposedSolution;
   existingReportById.condition = condition;
   existingReportById.breakdownDepartment = breakdownDepartment;
   existingReportById.location = location;
