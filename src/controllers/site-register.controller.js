@@ -1,5 +1,6 @@
 import { siteMSG } from '#Constants/system.js';
 import { Site } from '#Schemas/site.schema.js';
+import moment from 'moment';
 
 const siteRegisterController = async (req, res) => {
   const { uid, name, direction } = req.body;
@@ -39,6 +40,10 @@ const siteRegisterController = async (req, res) => {
     uid,
     name,
     direction,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await site.save();
   return res.status(201).send({ msg: siteMSG.register.msg });

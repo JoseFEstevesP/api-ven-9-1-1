@@ -1,6 +1,7 @@
 import { accidentReportMSG } from '#Constants/system.js';
 import { AccidentReport } from '#Schemas/accidentReport.schema.js';
 import { User } from '#Schemas/user.schema.js';
+import moment from 'moment';
 const accidentReportDeleteController = async (req, res) => {
   const { uid } = req.body;
   const existingAccidentReportById = await AccidentReport.findOne({
@@ -19,6 +20,8 @@ const accidentReportDeleteController = async (req, res) => {
       .send({ errors: [{ uid: accidentReportMSG.delete.user }] });
 
   existingAccidentReportById.status = '0';
+  existingAccidentReportById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingAccidentReportById.updateAtTime = moment().format('hh:mm A');
   await existingAccidentReportById.save();
   return res.send({ msg: accidentReportMSG.delete.msg });
 };

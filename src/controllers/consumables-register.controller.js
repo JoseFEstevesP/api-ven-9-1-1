@@ -1,5 +1,6 @@
 import { consumablesMSG } from '#Constants/system.js';
 import { Consumables } from '#Schemas/consumables.schema.js';
+import moment from 'moment';
 
 const consumablesRegisterController = async (req, res) => {
   const { id, uidSite } = req;
@@ -60,6 +61,10 @@ const consumablesRegisterController = async (req, res) => {
     remarks,
     uidUser: id,
     uidSite,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await consumables.save();
   return res.status(201).send({ msg: consumablesMSG.register.msg });

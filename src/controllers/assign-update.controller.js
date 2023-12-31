@@ -1,6 +1,7 @@
 import { invent } from '#Constants/assignModel.js';
 import { assignMSG } from '#Constants/system.js';
 import { Assign } from '#Schemas/assign.schema.js';
+import moment from 'moment';
 
 const assignUpdateController = async (req, res) => {
   const {
@@ -60,6 +61,8 @@ const assignUpdateController = async (req, res) => {
         ],
       });
     inventoryData.assign = `${fullQuantity}`;
+    inventoryData.updateAtDate = moment().format('YYYY-MM-DD');
+    inventoryData.updateAtTime = moment().format('hh:mm A');
     inventoryData.save();
   }
   if (existingAssignById.articleUid !== articleUid) {
@@ -106,6 +109,8 @@ const assignUpdateController = async (req, res) => {
   existingAssignById.quantity = quantity;
   existingAssignById.description = description;
   existingAssignById.remarks = remarks;
+  existingAssignById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingAssignById.updateAtTime = moment().format('hh:mm A');
   await existingAssignById.save();
   return res.status(201).send({ msg: assignMSG.update.msg });
 };

@@ -1,6 +1,7 @@
 import { invent } from '#Constants/assignModel.js';
 import { assignMSG } from '#Constants/system.js';
 import { Assign } from '#Schemas/assign.schema.js';
+import moment from 'moment';
 const assignDeleteController = async (req, res) => {
   const { uid } = req.body;
   const existingReportById = await Assign.findOne({
@@ -14,6 +15,8 @@ const assignDeleteController = async (req, res) => {
   inventory.assign = `${+inventory.assign - +existingReportById.quantity}`;
   await inventory.save();
   existingReportById.status = '0';
+  existingReportById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingReportById.updateAtTime = moment().format('hh:mm A');
   await existingReportById.save();
   return res.send({ msg: assignMSG.delete.msg });
 };

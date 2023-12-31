@@ -1,5 +1,6 @@
 import { accidentReportMSG } from '#Constants/system.js';
 import { AccidentReport } from '#Schemas/accidentReport.schema.js';
+import moment from 'moment';
 
 const accidentReportUpdateController = async (req, res) => {
   const {
@@ -30,6 +31,8 @@ const accidentReportUpdateController = async (req, res) => {
   existingAccidentReportById.phone = phone;
   existingAccidentReportById.time = time;
   existingAccidentReportById.responseTeam = responseTeam;
+  existingAccidentReportById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingAccidentReportById.updateAtTime = moment().format('hh:mm A');
   await existingAccidentReportById.save();
   return res.status(201).send({ msg: accidentReportMSG.update.msg });
 };

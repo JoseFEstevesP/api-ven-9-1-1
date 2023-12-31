@@ -1,5 +1,6 @@
 import { purchaseMSG } from '#Constants/system.js';
 import { Purchase } from '#Schemas/purchase.schema.js';
+import moment from 'moment';
 
 const purchaseUpdateController = async (req, res) => {
   const {
@@ -32,6 +33,8 @@ const purchaseUpdateController = async (req, res) => {
   existingPurchaseById.warranty = warranty;
   existingPurchaseById.orderNumber = orderNumber;
   existingPurchaseById.location = location;
+  existingPurchaseById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingPurchaseById.updateAtTime = moment().format('hh:mm A');
   await existingPurchaseById.save();
   return res.status(201).send({ msg: purchaseMSG.update.msg });
 };

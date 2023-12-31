@@ -59,4 +59,20 @@ export const Furniture = sequelize.define('furnitures', {
     allowNull: false,
     defaultValue: '1',
   },
+  createAtDate: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+  },
+  createAtTime: {
+    type: DataTypes.TIME,
+    allowNull: false,
+  },
+  updateAtDate: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+  },
+  updateAtTime: {
+    type: DataTypes.TIME,
+    allowNull: false,
+  },
 });

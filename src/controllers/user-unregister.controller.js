@@ -5,6 +5,7 @@ import { Technology } from '#Schemas/technology.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import { Vehicle } from '#Schemas/vehicle.schema.js';
 import { compare } from 'bcrypt';
+import moment from 'moment';
 const userUnregisterController = async (req, res) => {
   const { id } = req;
   const { password } = req.body;
@@ -45,6 +46,8 @@ const userUnregisterController = async (req, res) => {
   if (!checkPassword)
     return res.status(401).send({ errors: [{ uid: userMSG.login.error }] });
   existingUserById.status = '0';
+  existingUserById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingUserById.updateAtTime = moment().format('hh:mm A');
   await existingUserById.save();
   return res.send({ msg: userMSG.delete.msg });
 };

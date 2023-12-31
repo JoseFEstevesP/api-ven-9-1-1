@@ -1,5 +1,6 @@
 import { breakdownReportMSG } from '#Constants/system.js';
 import { BreakdownReport } from '#Schemas/breakdownReport.schema.js';
+import moment from 'moment';
 
 const breakdownReportUpdateController = async (req, res) => {
   const {
@@ -26,6 +27,8 @@ const breakdownReportUpdateController = async (req, res) => {
   existingReportById.breakdownDepartment = breakdownDepartment;
   existingReportById.location = location;
   existingReportById.serialOrCodeBN = serialOrCodeBN;
+  existingReportById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingReportById.updateAtTime = moment().format('hh:mm A');
   await existingReportById.save();
   return res.status(201).send({ msg: breakdownReportMSG.update.msg });
 };

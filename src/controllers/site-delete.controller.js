@@ -5,6 +5,7 @@ import { Site } from '#Schemas/site.schema.js';
 import { Technology } from '#Schemas/technology.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import { Vehicle } from '#Schemas/vehicle.schema.js';
+import moment from 'moment';
 const siteDeleteController = async (req, res) => {
   const { uid } = req.body;
   const existingSiteById = await Site.findOne({ where: { uid, status: '1' } });
@@ -44,6 +45,8 @@ const siteDeleteController = async (req, res) => {
       errors: [{ uid: siteMSG.delete.vehicle }],
     });
   existingSiteById.status = '0';
+  existingSiteById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingSiteById.updateAtTime = moment().format('hh:mm A');
   await existingSiteById.save();
   return res.send({ msg: siteMSG.delete.msg });
 };

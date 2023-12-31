@@ -1,3 +1,4 @@
+import { reportDate } from '#Functions/reportDate.js';
 import { Rol } from '#Schemas/rol.schema.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
@@ -6,18 +7,17 @@ import moment from 'moment';
 const rolReportController = async (req, res) => {
   const { id, uidSite } = req;
   const {
-    uidSite: uidSiteQuery,
     orderProperty = 'name',
     order = 'ASC',
     status = '1',
     dataQuantity = 17,
+    startDate,
+    endDate,
   } = req.query;
-  const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
+
   const rolReport = await Rol.findAll({
-    where: {
-      status,
-    },
+    where: reportDate({ endDate, startDate, status }),
     attributes: {
       exclude: ['uid'],
     },
@@ -31,7 +31,7 @@ const rolReportController = async (req, res) => {
     }
     return acc;
   }, []);
-  const { name: siteName } = await Site.findByPk(site);
+  const { name: siteName } = await Site.findByPk(uidSite);
   return res.status(200).send({
     rows,
     author: `${name} ${surname} CI: ${ci}`,

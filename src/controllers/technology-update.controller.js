@@ -1,5 +1,6 @@
 import { technologyMSG } from '#Constants/system.js';
 import { Technology } from '#Schemas/technology.schema.js';
+import moment from 'moment';
 
 const technologyUpdateController = async (req, res) => {
   const {
@@ -34,6 +35,8 @@ const technologyUpdateController = async (req, res) => {
   existingTechnologyById.warranty = warranty;
   existingTechnologyById.remarks = remarks;
   existingTechnologyById.codeBN = codeBN;
+  existingTechnologyById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingTechnologyById.updateAtTime = moment().format('hh:mm A');
   await existingTechnologyById.save();
   return res.status(201).send({ msg: technologyMSG.update.msg });
 };

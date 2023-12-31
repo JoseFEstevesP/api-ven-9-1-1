@@ -4,6 +4,7 @@ import { userMSG } from '#Constants/system.js';
 import { validatePermissions } from '#Functions/validatePermissions.js';
 import { User } from '#Schemas/user.schema.js';
 import { hash } from 'bcrypt';
+import moment from 'moment';
 const userRegisterController = async (req, res) => {
   const { uidRol: uidRolUser, uidSite: uidSiteUser } = req;
   const { uid, ci, name, surname, email, password, uidRol, uidSite } = req.body;
@@ -43,6 +44,10 @@ const userRegisterController = async (req, res) => {
     uidSite: validatePermissions({ uidRol: uidRolUser, per: permissions.site })
       ? uidSite
       : uidSiteUser,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await user.save();
   return res.status(201).send({ msg: userMSG.register.msg });

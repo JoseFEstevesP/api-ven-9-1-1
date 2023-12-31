@@ -1,3 +1,4 @@
+import { reportDate } from '#Functions/reportDate.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import moment from 'moment';
@@ -10,13 +11,13 @@ const siteReportController = async (req, res) => {
     order = 'ASC',
     status = '1',
     dataQuantity = 17,
+    endDate,
+    startDate,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
   const siteReport = await Site.findAll({
-    where: {
-      status,
-    },
+    where: reportDate({ endDate, startDate, status }),
     order: [[orderProperty, order]],
   });
   const rows = siteReport.reduce((acc, item, index) => {

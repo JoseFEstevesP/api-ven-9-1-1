@@ -1,5 +1,6 @@
 import { vehicleMSG } from '#Constants/system.js';
 import { Vehicle } from '#Schemas/vehicle.schema.js';
+import moment from 'moment';
 
 const vehicleRegisterController = async (req, res) => {
   const { id, uidSite } = req;
@@ -84,6 +85,10 @@ const vehicleRegisterController = async (req, res) => {
     codeBN,
     uidUser: id,
     uidSite,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await vehicle.save();
   return res.status(201).send({ msg: vehicleMSG.register.msg });

@@ -70,6 +70,8 @@ const assignRegisterController = async (req, res) => {
       ],
     });
   inventoryData.assign = `${fullQuantity}`;
+  inventoryData.updateAtDate = moment().format('YYYY-MM-DD');
+  inventoryData.updateAtTime = moment().format('hh:mm A');
   inventoryData.save();
   const serialOrCodeBN = inventoryData.codeBN || inventoryData.serial;
   const assign = await Assign.create({
@@ -86,6 +88,10 @@ const assignRegisterController = async (req, res) => {
     assignmentTime: moment().format('hh:mm A'),
     uidUser: id,
     uidSite,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await assign.save();
   return res.status(201).send({ msg: assignMSG.register.msg });

@@ -1,5 +1,6 @@
 import { userMSG } from '#Constants/system.js';
 import { User } from '#Schemas/user.schema.js';
+import moment from 'moment';
 
 const userUpdateDataController = async (req, res) => {
   const { id } = req;
@@ -12,6 +13,8 @@ const userUpdateDataController = async (req, res) => {
   existingUserById.ci = ci;
   existingUserById.name = name;
   existingUserById.surname = surname;
+  existingUserById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingUserById.updateAtTime = moment().format('hh:mm A');
   await existingUserById.save();
   return res.send({ msg: userMSG.update.msg });
 };

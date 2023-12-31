@@ -60,6 +60,10 @@ const breakdownReportRegisterController = async (req, res) => {
     serialOrCodeBN,
     uidUser: id,
     uidSite,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await breakdownReport.save();
   return res.status(201).send({ msg: breakdownReportMSG.register.msg });

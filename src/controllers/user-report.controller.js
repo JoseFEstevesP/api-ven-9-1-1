@@ -1,3 +1,4 @@
+import { reportDate } from '#Functions/reportDate.js';
 import { Rol } from '#Schemas/rol.schema.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
@@ -11,14 +12,13 @@ const userReportController = async (req, res) => {
     order = 'ASC',
     status = '1',
     dataQuantity = 17,
+    endDate,
+    startDate,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
   const userReport = await User.findAll({
-    where: {
-      uidSite: site,
-      status,
-    },
+    where: reportDate({ endDate, startDate, status, uidSite: site }),
     attributes: {
       exclude: ['uid', 'password', 'uidRol', 'uidSite'],
     },

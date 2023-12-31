@@ -1,3 +1,4 @@
+import { reportDate } from '#Functions/reportDate.js';
 import { BreakdownReport } from '#Schemas/breakdownReport.schema.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
@@ -11,24 +12,17 @@ const breakdownReportController = async (req, res) => {
     order = 'ASC',
     status = '1',
     dataQuantity = 17,
+    endDate,
+    startDate,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
   const breakdownReport = await BreakdownReport.findAll({
-    where: {
-      uidSite: site,
-      status,
-    },
+    where: reportDate({ endDate, startDate, status, uidSite: site }),
     attributes: {
       exclude: ['uid', 'uidSite', 'uidUser'],
     },
-    include: [
-      {
-        model: User,
-        where: { status },
-        attributes: ['ci'],
-      },
-    ],
+
     order: [[orderProperty, order]],
   });
   const rows = breakdownReport.reduce((acc, item, index) => {

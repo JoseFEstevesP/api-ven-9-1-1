@@ -4,6 +4,7 @@ import { Furniture } from '#Schemas/furniture.schema.js';
 import { Technology } from '#Schemas/technology.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import { Vehicle } from '#Schemas/vehicle.schema.js';
+import moment from 'moment';
 const userDeleteController = async (req, res) => {
   const { uid } = req.body;
   const existingUserById = await User.findOne({ where: { uid, status: '1' } });
@@ -38,6 +39,8 @@ const userDeleteController = async (req, res) => {
       errors: [{ uid: userMSG.delete.vehicle }],
     });
   existingUserById.status = '0';
+  existingUserById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingUserById.updateAtTime = moment().format('hh:mm A');
   await existingUserById.save();
   return res.send({ msg: userMSG.delete.msg });
 };

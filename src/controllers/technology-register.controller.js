@@ -1,5 +1,6 @@
 import { technologyMSG } from '#Constants/system.js';
 import { Technology } from '#Schemas/technology.schema.js';
+import moment from 'moment';
 
 const technologyRegisterController = async (req, res) => {
   const { id, uidSite } = req;
@@ -84,6 +85,10 @@ const technologyRegisterController = async (req, res) => {
     codeBN,
     uidUser: id,
     uidSite,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await technology.save();
   return res.status(201).send({ msg: technologyMSG.register.msg });

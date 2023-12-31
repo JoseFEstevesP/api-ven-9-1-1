@@ -1,5 +1,6 @@
 import { furnitureMSG } from '#Constants/system.js';
 import { Furniture } from '#Schemas/furniture.schema.js';
+import moment from 'moment';
 
 const furnitureUpdateController = async (req, res) => {
   const {
@@ -30,6 +31,8 @@ const furnitureUpdateController = async (req, res) => {
   existingFurnitureById.warranty = warranty;
   existingFurnitureById.remarks = remarks;
   existingFurnitureById.codeBN = codeBN;
+  existingFurnitureById.updateAtDate = moment().format('YYYY-MM-DD');
+  existingFurnitureById.updateAtTime = moment().format('hh:mm A');
   await existingFurnitureById.save();
   return res.status(201).send({ msg: furnitureMSG.update.msg });
 };

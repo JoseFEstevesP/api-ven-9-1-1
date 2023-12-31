@@ -1,5 +1,6 @@
 import { furnitureMSG } from '#Constants/system.js';
 import { Furniture } from '#Schemas/furniture.schema.js';
+import moment from 'moment';
 
 const furnitureRegisterController = async (req, res) => {
   const { id, uidSite } = req;
@@ -80,6 +81,10 @@ const furnitureRegisterController = async (req, res) => {
     codeBN,
     uidUser: id,
     uidSite,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await furniture.save();
   return res.status(201).send({ msg: furnitureMSG.register.msg });

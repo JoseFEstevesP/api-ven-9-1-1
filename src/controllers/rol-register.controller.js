@@ -1,5 +1,6 @@
 import { rolMSG } from '#Constants/system.js';
 import { Rol } from '#Schemas/rol.schema.js';
+import moment from 'moment';
 
 const rolRegisterController = async (req, res) => {
   const { uid, name, permissions } = req.body;
@@ -39,6 +40,10 @@ const rolRegisterController = async (req, res) => {
     uid,
     name,
     permissions,
+    createAtDate: moment().format('YYYY-MM-DD'),
+    createAtTime: moment().format('hh:mm A'),
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
   });
   await rol.save();
   return res.status(201).send({ msg: rolMSG.register.msg });
