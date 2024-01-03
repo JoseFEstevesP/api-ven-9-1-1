@@ -14,11 +14,19 @@ const furnitureReportController = async (req, res) => {
     dataQuantity = 17,
     endDate,
     startDate,
+    search,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
   const furnitureReport = await Furniture.findAll({
-    where: reportDate({ endDate, startDate, status, uidSite: site }),
+    where: reportDate({
+      search,
+      searchItem: 'furniture',
+      endDate,
+      startDate,
+      status,
+      uidSite: site,
+    }),
     attributes: {
       exclude: ['uid', 'uidSite', 'uidUser'],
     },

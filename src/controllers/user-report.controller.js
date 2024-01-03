@@ -14,11 +14,19 @@ const userReportController = async (req, res) => {
     dataQuantity = 17,
     endDate,
     startDate,
+    search,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
   const userReport = await User.findAll({
-    where: reportDate({ endDate, startDate, status, uidSite: site }),
+    where: reportDate({
+      search,
+      searchItem: 'user',
+      endDate,
+      startDate,
+      status,
+      uidSite: site,
+    }),
     attributes: {
       exclude: ['uid', 'password', 'uidRol', 'uidSite'],
     },

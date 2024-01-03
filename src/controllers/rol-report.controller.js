@@ -13,11 +13,18 @@ const rolReportController = async (req, res) => {
     dataQuantity = 17,
     startDate,
     endDate,
+    search,
   } = req.query;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
 
   const rolReport = await Rol.findAll({
-    where: reportDate({ endDate, startDate, status }),
+    where: reportDate({
+      search,
+      searchItem: 'rol',
+      endDate,
+      startDate,
+      status,
+    }),
     attributes: {
       exclude: ['uid'],
     },

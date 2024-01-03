@@ -14,11 +14,19 @@ const breakdownReportController = async (req, res) => {
     dataQuantity = 17,
     endDate,
     startDate,
+    search,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
   const breakdownReport = await BreakdownReport.findAll({
-    where: reportDate({ endDate, startDate, status, uidSite: site }),
+    where: reportDate({
+      search,
+      searchItem: 'breakdownReport',
+      endDate,
+      startDate,
+      status,
+      uidSite: site,
+    }),
     attributes: {
       exclude: ['uid', 'uidSite', 'uidUser'],
     },

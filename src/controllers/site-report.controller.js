@@ -13,11 +13,18 @@ const siteReportController = async (req, res) => {
     dataQuantity = 17,
     endDate,
     startDate,
+    search,
   } = req.query;
   const site = uidSiteQuery || uidSite;
   const { name, surname, ci } = await User.findOne({ where: { uid: id } });
   const siteReport = await Site.findAll({
-    where: reportDate({ endDate, startDate, status }),
+    where: reportDate({
+      search,
+      searchItem: 'site',
+      endDate,
+      startDate,
+      status,
+    }),
     order: [[orderProperty, order]],
   });
   const rows = siteReport.reduce((acc, item, index) => {
