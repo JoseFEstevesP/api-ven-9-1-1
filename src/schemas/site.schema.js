@@ -1,6 +1,5 @@
 import { sequelize } from '#Config/db.js';
 import { DataTypes } from 'sequelize';
-import { AccidentReport } from './accidentReport.schema.js';
 import { Assign } from './assign.schema.js';
 import { BreakdownReport } from './breakdownReport.schema.js';
 import { Consumables } from './consumables.schema.js';
@@ -112,14 +111,6 @@ Site.hasMany(BreakdownReport, {
   sourceKey: 'uid',
 });
 BreakdownReport.belongsTo(Site, {
-  foreignKey: 'uidSite',
-  targetId: 'uid',
-});
-Site.hasMany(AccidentReport, {
-  foreignKey: 'uidSite',
-  sourceKey: 'uid',
-});
-AccidentReport.belongsTo(Site, {
   foreignKey: 'uidSite',
   targetId: 'uid',
 });
