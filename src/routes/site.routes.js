@@ -8,10 +8,12 @@ import siteSearchItemController from '#Controllers/site-searchItem.controller.js
 import siteUpdateController from '#Controllers/site-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import siteRegisterDTO from '#Dto/site-register.dto.js';
-import createPermissions from '#Middleware/rol-create.middleware.js';
-import deletePermissions from '#Middleware/rol-delete.middleware.js';
-import readPermissions from '#Middleware/rol-read.middleware.js';
-import updatePermissions from '#Middleware/rol-update.middleware.js';
+import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
+import createSitePermissions from '#Middleware/site/rol-createSite.middleware.js';
+import deleteSitePermissions from '#Middleware/site/rol-deleteSite.middleware.js';
+import readSitePermissions from '#Middleware/site/rol-readSite.middleware.js';
+import updateSitePermissions from '#Middleware/site/rol-updateSite.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -20,41 +22,59 @@ const siteRoutes = Router();
 siteRoutes.post(
   '/register',
   userJWTDTO,
-  createPermissions,
+  gaPermissions,
+  createSitePermissions,
   siteRegisterDTO,
   siteRegisterController
 );
-siteRoutes.get('/list', userJWTDTO, readPermissions, siteReadController);
+siteRoutes.get(
+  '/list',
+  userJWTDTO,
+  gaPermissions,
+  readSitePermissions,
+  siteReadController
+);
 siteRoutes.get(
   '/list_of_limit',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  readSitePermissions,
   siteReadOfLimitController
 );
 siteRoutes.get(
   '/item/:uid',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  readSitePermissions,
   siteSearchItemController
 );
 siteRoutes.get(
   '/search/:search',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  readSitePermissions,
   siteSearchController
 );
-siteRoutes.get('/report', userJWTDTO, readPermissions, siteReportController);
+siteRoutes.get(
+  '/report',
+  userJWTDTO,
+  gaPermissions,
+  pdfPermissions,
+  siteReportController
+);
 siteRoutes.patch(
   '/update',
   userJWTDTO,
-  updatePermissions,
+  gaPermissions,
+  updateSitePermissions,
   siteRegisterDTO,
   siteUpdateController
 );
 siteRoutes.delete(
   '/delete',
   userJWTDTO,
-  deletePermissions,
+  gaPermissions,
+  deleteSitePermissions,
   deleteDTO,
   siteDeleteController
 );

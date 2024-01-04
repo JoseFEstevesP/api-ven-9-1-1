@@ -7,11 +7,12 @@ import vehicleSearchItemController from '#Controllers/vehicle-searchItem.control
 import vehicleUpdateController from '#Controllers/vehicle-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import vehicleRegisterDTO from '#Dto/vehicle-register.dto.js';
+import createPurchasePermissions from '#Middleware/purchase/rol-createPurchase.middleware.js';
+import deletePurchasePermissions from '#Middleware/purchase/rol-deletePurchase.middleware.js';
+import readPurchasePermissions from '#Middleware/purchase/rol-readPurchase.middleware.js';
+import updatePurchasePermissions from '#Middleware/purchase/rol-updatePurchase.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
-import createPermissions from '#Middleware/rol-create.middleware.js';
-import deletePermissions from '#Middleware/rol-delete.middleware.js';
-import readPermissions from '#Middleware/rol-read.middleware.js';
-import updatePermissions from '#Middleware/rol-update.middleware.js';
+import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -20,51 +21,52 @@ const vehicleRoutes = Router();
 vehicleRoutes.post(
   '/register',
   userJWTDTO,
-  createPermissions,
   gaPermissions,
+  createPurchasePermissions,
   vehicleRegisterDTO,
   vehicleRegisterController
 );
 vehicleRoutes.get(
   '/list',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readPurchasePermissions,
   vehicleReadController
 );
 vehicleRoutes.get(
   '/item/:uid',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readPurchasePermissions,
   vehicleSearchItemController
 );
 vehicleRoutes.get(
   '/search/:search',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readPurchasePermissions,
   vehicleSearchController
 );
 vehicleRoutes.get(
   '/report',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  pdfPermissions,
   vehicleReportController
 );
 vehicleRoutes.patch(
   '/update',
   userJWTDTO,
-  updatePermissions,
   gaPermissions,
+  updatePurchasePermissions,
   vehicleRegisterDTO,
   vehicleUpdateController
 );
 vehicleRoutes.delete(
   '/delete',
   userJWTDTO,
-  deletePermissions,
   gaPermissions,
+  deletePurchasePermissions,
   deleteDTO,
   vehicleDeleteController
 );

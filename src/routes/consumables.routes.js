@@ -7,11 +7,12 @@ import consumablesSearchItemController from '#Controllers/consumables-searchItem
 import consumablesUpdateController from '#Controllers/consumables-update.controller.js';
 import consumablesRegisterDTO from '#Dto/consumables-register.dto.js';
 import deleteDTO from '#Dto/delete.dto.js';
+import createConsumablesPermissions from '#Middleware/consumables/rol-createConsumables.middleware.js';
+import deleteConsumablesPermissions from '#Middleware/consumables/rol-deleteConsumables.middleware.js';
+import readConsumablesPermissions from '#Middleware/consumables/rol-readConsumables.middleware.js';
+import updateConsumablesPermissions from '#Middleware/consumables/rol-updateConsumables.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
-import createPermissions from '#Middleware/rol-create.middleware.js';
-import deletePermissions from '#Middleware/rol-delete.middleware.js';
-import readPermissions from '#Middleware/rol-read.middleware.js';
-import updatePermissions from '#Middleware/rol-update.middleware.js';
+import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -20,51 +21,52 @@ const consumablesRoutes = Router();
 consumablesRoutes.post(
   '/register',
   userJWTDTO,
-  createPermissions,
   gaPermissions,
+  createConsumablesPermissions,
   consumablesRegisterDTO,
   consumablesRegisterController
 );
 consumablesRoutes.get(
   '/list',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readConsumablesPermissions,
   consumablesReadController
 );
 consumablesRoutes.get(
   '/item/:uid',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readConsumablesPermissions,
   consumablesSearchItemController
 );
 consumablesRoutes.get(
   '/search/:search',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readConsumablesPermissions,
   consumablesSearchController
 );
 consumablesRoutes.get(
   '/report',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  pdfPermissions,
   consumablesReportController
 );
 consumablesRoutes.patch(
   '/update',
   userJWTDTO,
-  updatePermissions,
   gaPermissions,
+  updateConsumablesPermissions,
   consumablesRegisterDTO,
   consumablesUpdateController
 );
 consumablesRoutes.delete(
   '/delete',
   userJWTDTO,
-  deletePermissions,
   gaPermissions,
+  deleteConsumablesPermissions,
   deleteDTO,
   consumablesDeleteController
 );

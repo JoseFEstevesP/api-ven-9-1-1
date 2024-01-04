@@ -7,11 +7,12 @@ import purchaseSearchItemController from '#Controllers/purchase-searchItem.contr
 import purchaseUpdateController from '#Controllers/purchase-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import purchaseRegisterDTO from '#Dto/purchase-register.dto.js';
+import createPurchasePermissions from '#Middleware/purchase/rol-createPurchase.middleware.js';
+import deletePurchasePermissions from '#Middleware/purchase/rol-deletePurchase.middleware.js';
+import readPurchasePermissions from '#Middleware/purchase/rol-readPurchase.middleware.js';
+import updatePurchasePermissions from '#Middleware/purchase/rol-updatePurchase.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
-import createPermissions from '#Middleware/rol-create.middleware.js';
-import deletePermissions from '#Middleware/rol-delete.middleware.js';
-import readPermissions from '#Middleware/rol-read.middleware.js';
-import updatePermissions from '#Middleware/rol-update.middleware.js';
+import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -20,51 +21,52 @@ const purchaseRoutes = Router();
 purchaseRoutes.post(
   '/register',
   userJWTDTO,
-  createPermissions,
   gaPermissions,
+  createPurchasePermissions,
   purchaseRegisterDTO,
   purchaseRegisterController
 );
 purchaseRoutes.get(
   '/list',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readPurchasePermissions,
   purchaseReadController
 );
 purchaseRoutes.get(
   '/item/:uid',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readPurchasePermissions,
   purchaseSearchItemController
 );
 purchaseRoutes.get(
   '/search/:search',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readPurchasePermissions,
   purchaseSearchController
 );
 purchaseRoutes.get(
   '/report',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  pdfPermissions,
   purchaseReportController
 );
 purchaseRoutes.patch(
   '/update',
   userJWTDTO,
-  updatePermissions,
   gaPermissions,
+  updatePurchasePermissions,
   purchaseRegisterDTO,
   purchaseUpdateController
 );
 purchaseRoutes.delete(
   '/delete',
   userJWTDTO,
-  deletePermissions,
   gaPermissions,
+  deletePurchasePermissions,
   deleteDTO,
   purchaseDeleteController
 );

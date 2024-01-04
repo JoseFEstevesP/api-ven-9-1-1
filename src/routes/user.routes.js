@@ -19,17 +19,23 @@ import userUpdateDataDTO from '#Dto/user-update-data.dto.js';
 import userUpdateEmailDTO from '#Dto/user-update-email.dto.js';
 import userUpdatePasswordDTO from '#Dto/user-update-password.dto.js';
 import userUpdateDTO from '#Dto/user-update.dto.js';
-import createPermissions from '#Middleware/rol-create.middleware.js';
-import deletePermissions from '#Middleware/rol-delete.middleware.js';
-import profilePermissions from '#Middleware/rol-profile.middleware.js';
-import readPermissions from '#Middleware/rol-read.middleware.js';
+import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
+import createUserPermissions from '#Middleware/user/rol-createUser.middleware.js';
+import deleteUserPermissions from '#Middleware/user/rol-deleteUser.middleware.js';
+import profilePermissions from '#Middleware/user/rol-profile.middleware.js';
+import profileDeletePermissions from '#Middleware/user/rol-profileDelete.middleware.js';
+import profileUpdatePermissions from '#Middleware/user/rol-profileUpdate.middleware.js';
+import readUserPermissions from '#Middleware/user/rol-readUser.middleware.js';
+import updateUserPermissions from '#Middleware/user/rol-updateUser.middleware.js';
 import { Router } from 'express';
 const userRoutes = Router();
 userRoutes.post(
   '/register',
   userJWTDTO,
-  createPermissions,
+  gaPermissions,
+  createUserPermissions,
   userRegisterDTO,
   userRegisterController
 );
@@ -37,62 +43,83 @@ userRoutes.post('/login', userLoginDTO, userLoginController);
 userRoutes.get(
   '/profile',
   userJWTDTO,
+  gaPermissions,
   profilePermissions,
   userProfileController
 );
-userRoutes.get('/list', userJWTDTO, readPermissions, userReadController);
+userRoutes.get(
+  '/list',
+  userJWTDTO,
+  gaPermissions,
+  readUserPermissions,
+  userReadController
+);
 userRoutes.get(
   '/item/:uid',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  readUserPermissions,
   userSearchItemController
 );
 userRoutes.get(
   '/search/:search',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  readUserPermissions,
   userSearchController
 );
-userRoutes.get('/report', userJWTDTO, readPermissions, userReportController);
+userRoutes.get(
+  '/report',
+  userJWTDTO,
+  gaPermissions,
+  pdfPermissions,
+  userReportController
+);
 userRoutes.patch(
   '/update',
   userJWTDTO,
-  profilePermissions,
+  gaPermissions,
+  updateUserPermissions,
   userUpdateDTO,
   userUpdateController
 );
 userRoutes.patch(
   '/update-data',
   userJWTDTO,
-  profilePermissions,
+  gaPermissions,
+  profileUpdatePermissions,
   userUpdateDataDTO,
   userUpdateDataController
 );
 userRoutes.patch(
   '/update-email',
   userJWTDTO,
-  profilePermissions,
+  gaPermissions,
+  profileUpdatePermissions,
   userUpdateEmailDTO,
   userUpdateEmailController
 );
 userRoutes.patch(
   '/update-password',
   userJWTDTO,
-  profilePermissions,
+  gaPermissions,
+  profileUpdatePermissions,
   userUpdatePasswordDTO,
   userUpdatePasswordController
 );
 userRoutes.delete(
   '/unregister',
   userJWTDTO,
-  profilePermissions,
+  gaPermissions,
+  profileDeletePermissions,
   userUnregisterDTO,
   userUnregisterController
 );
 userRoutes.delete(
   '/delete',
   userJWTDTO,
-  deletePermissions,
+  gaPermissions,
+  deleteUserPermissions,
   deleteDTO,
   userDeleteController
 );

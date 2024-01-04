@@ -104,24 +104,6 @@ export const siteMSG = {
     vehicle: 'Sede vinculada con vehículos',
   },
 };
-export const accidentReportMSG = {
-  register: {
-    uid: {
-      status:
-        'Este reporte de accidente ya esta registrado, pero fue deshabilitado',
-      default: 'Este reporte de accidente ya esta registrado',
-    },
-    msg: 'Reporte de accidente registrado con éxito',
-  },
-  noFound: 'No se a encontrado ningun reporte de accidente',
-  update: {
-    msg: 'Reporte de accidente actualizado con éxito',
-  },
-  delete: {
-    msg: 'Reporte de accidente eliminado con éxito',
-    user: 'Reporte de accidente vinculada con usuario',
-  },
-};
 export const rolMSG = {
   register: {
     uid: {

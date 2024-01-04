@@ -7,11 +7,12 @@ import furnitureSearchItemController from '#Controllers/furniture-searchItem.con
 import furnitureUpdateController from '#Controllers/furniture-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import furnitureRegisterDTO from '#Dto/furniture-register.dto.js';
+import createFurniturePermissions from '#Middleware/furniture/rol-createFurniture.middleware.js';
+import deleteFurniturePermissions from '#Middleware/furniture/rol-deleteFurniture.middleware.js';
+import readFurniturePermissions from '#Middleware/furniture/rol-readFurniture.middleware.js';
+import updateFurniturePermissions from '#Middleware/furniture/rol-updateFurniture.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
-import createPermissions from '#Middleware/rol-create.middleware.js';
-import deletePermissions from '#Middleware/rol-delete.middleware.js';
-import readPermissions from '#Middleware/rol-read.middleware.js';
-import updatePermissions from '#Middleware/rol-update.middleware.js';
+import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -20,51 +21,52 @@ const furnitureRoutes = Router();
 furnitureRoutes.post(
   '/register',
   userJWTDTO,
-  createPermissions,
   gaPermissions,
+  createFurniturePermissions,
   furnitureRegisterDTO,
   furnitureRegisterController
 );
 furnitureRoutes.get(
   '/list',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readFurniturePermissions,
   furnitureReadController
 );
 furnitureRoutes.get(
   '/item/:uid',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readFurniturePermissions,
   furnitureSearchItemController
 );
 furnitureRoutes.get(
   '/search/:search',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readFurniturePermissions,
   furnitureSearchController
 );
 furnitureRoutes.get(
   '/report',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  pdfPermissions,
   furnitureReportController
 );
 furnitureRoutes.patch(
   '/update',
   userJWTDTO,
-  updatePermissions,
   gaPermissions,
+  updateFurniturePermissions,
   furnitureRegisterDTO,
   furnitureUpdateController
 );
 furnitureRoutes.delete(
   '/delete',
   userJWTDTO,
-  deletePermissions,
   gaPermissions,
+  deleteFurniturePermissions,
   deleteDTO,
   furnitureDeleteController
 );

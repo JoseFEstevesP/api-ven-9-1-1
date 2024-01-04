@@ -7,11 +7,12 @@ import breakdownReportSearchItemController from '#Controllers/breakdownReport-se
 import breakdownReportUpdateController from '#Controllers/breakdownReport-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import breakdownReportRegisterDTO from '#Dto/report-register.dto.js';
+import createBreakdownReportPermissions from '#Middleware/breakdownReport/rol-createBreakdownReport.middleware.js';
+import deleteBreakdownReportPermissions from '#Middleware/breakdownReport/rol-deleteBreakdownReport.middleware.js';
+import readBreakdownReportPermissions from '#Middleware/breakdownReport/rol-readBreakdownReport.middleware.js';
+import updateBreakdownReportPermissions from '#Middleware/breakdownReport/rol-updateBreakdownReport.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
-import createPermissions from '#Middleware/rol-create.middleware.js';
-import deletePermissions from '#Middleware/rol-delete.middleware.js';
-import readPermissions from '#Middleware/rol-read.middleware.js';
-import updatePermissions from '#Middleware/rol-update.middleware.js';
+import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -20,51 +21,52 @@ const breakdownReportRoutes = Router();
 breakdownReportRoutes.post(
   '/register',
   userJWTDTO,
-  createPermissions,
   gaPermissions,
+  createBreakdownReportPermissions,
   breakdownReportRegisterDTO,
   breakdownReportRegisterController
 );
 breakdownReportRoutes.get(
   '/list',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readBreakdownReportPermissions,
   breakdownReportReadController
 );
 breakdownReportRoutes.get(
   '/item/:uid',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readBreakdownReportPermissions,
   breakdownReportSearchItemController
 );
 breakdownReportRoutes.get(
   '/search/:search',
   userJWTDTO,
-  readPermissions,
   gaPermissions,
+  readBreakdownReportPermissions,
   breakdownReportSearchController
 );
 breakdownReportRoutes.get(
   '/report',
   userJWTDTO,
-  readPermissions,
+  gaPermissions,
+  pdfPermissions,
   breakdownReportController
 );
 breakdownReportRoutes.patch(
   '/update',
   userJWTDTO,
-  updatePermissions,
   gaPermissions,
+  updateBreakdownReportPermissions,
   breakdownReportRegisterDTO,
   breakdownReportUpdateController
 );
 breakdownReportRoutes.delete(
   '/delete',
   userJWTDTO,
-  deletePermissions,
   gaPermissions,
+  deleteBreakdownReportPermissions,
   deleteDTO,
   breakdownReportDeleteController
 );

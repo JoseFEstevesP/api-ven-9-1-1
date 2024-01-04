@@ -1,4 +1,3 @@
-import accidentReportRouter from '#Routes/accidentReport.routes.js';
 import assignRoutes from '#Routes/assign.routes.js';
 import breakdownReportRoutes from '#Routes/breakdownReport.routes.js';
 import consumablesRoutes from '#Routes/consumables.routes.js';
@@ -26,5 +25,4 @@ expressApp.use('/vehicle', vehicleRoutes);
 expressApp.use('/purchase', purchaseRoutes);
 expressApp.use('/breakdownReport', breakdownReportRoutes);
 expressApp.use('/assign', assignRoutes);
-expressApp.use('/accidentReport', accidentReportRouter);
 export default expressApp;
