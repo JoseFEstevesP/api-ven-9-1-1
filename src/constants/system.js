@@ -54,6 +54,10 @@ export const userMSG = {
       status: 'Esta usuario  ya esta registrado, pero fue deshabilitado',
       default: 'Esta usuario ya esta registrado',
     },
+    ci: {
+      status: 'Ya existe un usuario con esa CI, pero fue deshabilitado',
+      default: 'Ya existe un usuario con esa CI',
+    },
     email: {
       status: 'Ya existe un usuario con ese correo, pero fue deshabilitado',
       default: 'Ya existe un usuario con ese correo',

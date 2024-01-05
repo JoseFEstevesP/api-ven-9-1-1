@@ -20,6 +20,18 @@ const userRegisterController = async (req, res) => {
       });
     }
   }
+  const existingUserByCI = await User.findOne({ where: { ci } });
+  if (existingUserByCI) {
+    if (existingUserByCI.status !== '1') {
+      return res.status(410).send({
+        errors: [{ uid: userMSG.register.ci.status }],
+      });
+    } else {
+      return res.status(409).send({
+        errors: [{ uid: userMSG.register.ci.default }],
+      });
+    }
+  }
   const existingUserByEmail = await User.findOne({ where: { email } });
   if (existingUserByEmail) {
     if (existingUserByEmail.status !== '1') {
