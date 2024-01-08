@@ -7,13 +7,14 @@ import vehicleSearchItemController from '#Controllers/vehicle-searchItem.control
 import vehicleUpdateController from '#Controllers/vehicle-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import vehicleRegisterDTO from '#Dto/vehicle-register.dto.js';
-import createPurchasePermissions from '#Middleware/purchase/rol-createPurchase.middleware.js';
-import deletePurchasePermissions from '#Middleware/purchase/rol-deletePurchase.middleware.js';
-import readPurchasePermissions from '#Middleware/purchase/rol-readPurchase.middleware.js';
-import updatePurchasePermissions from '#Middleware/purchase/rol-updatePurchase.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
-import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
+import createVehiclePermissions from '#Middleware/vehicle/rol-createVehicle.middleware.js';
+import deleteVehiclePermissions from '#Middleware/vehicle/rol-deleteVehicle.middleware.js';
+import pdfVehiclePermissions from '#Middleware/vehicle/rol-pdfVehicle.middleware.js';
+import readVehiclePermissions from '#Middleware/vehicle/rol-readVehicle.middleware.js';
+import updateVehiclePermissions from '#Middleware/vehicle/rol-updateVehicle.middleware.js';
+import vehiclePermissions from '#Middleware/vehicle/rol-vehicle.middleware.js';
 import { Router } from 'express';
 
 const vehicleRoutes = Router();
@@ -22,7 +23,8 @@ vehicleRoutes.post(
   '/register',
   userJWTDTO,
   gaPermissions,
-  createPurchasePermissions,
+  vehiclePermissions,
+  createVehiclePermissions,
   vehicleRegisterDTO,
   vehicleRegisterController
 );
@@ -30,35 +32,40 @@ vehicleRoutes.get(
   '/list',
   userJWTDTO,
   gaPermissions,
-  readPurchasePermissions,
+  vehiclePermissions,
+  readVehiclePermissions,
   vehicleReadController
 );
 vehicleRoutes.get(
   '/item/:uid',
   userJWTDTO,
   gaPermissions,
-  readPurchasePermissions,
+  vehiclePermissions,
+  readVehiclePermissions,
   vehicleSearchItemController
 );
 vehicleRoutes.get(
   '/search/:search',
   userJWTDTO,
   gaPermissions,
-  readPurchasePermissions,
+  vehiclePermissions,
+  readVehiclePermissions,
   vehicleSearchController
 );
 vehicleRoutes.get(
   '/report',
   userJWTDTO,
   gaPermissions,
-  pdfPermissions,
+  vehiclePermissions,
+  pdfVehiclePermissions,
   vehicleReportController
 );
 vehicleRoutes.patch(
   '/update',
   userJWTDTO,
   gaPermissions,
-  updatePurchasePermissions,
+  vehiclePermissions,
+  updateVehiclePermissions,
   vehicleRegisterDTO,
   vehicleUpdateController
 );
@@ -66,7 +73,8 @@ vehicleRoutes.delete(
   '/delete',
   userJWTDTO,
   gaPermissions,
-  deletePurchasePermissions,
+  vehiclePermissions,
+  deleteVehiclePermissions,
   deleteDTO,
   vehicleDeleteController
 );

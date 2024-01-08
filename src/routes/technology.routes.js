@@ -8,10 +8,11 @@ import technologyUpdateController from '#Controllers/technology-update.controlle
 import deleteDTO from '#Dto/delete.dto.js';
 import technologyRegisterDTO from '#Dto/technology-register.dto.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
-import pdfPermissions from '#Middleware/rol-pdf.middleware.js';
 import createTechnologyPermissions from '#Middleware/technology/rol-createTechnology.middleware.js';
 import deleteTechnologyPermissions from '#Middleware/technology/rol-deleteTechnology.middleware.js';
+import pdfTechnologyPermissions from '#Middleware/technology/rol-pdfTechnology.middleware.js';
 import readTechnologyPermissions from '#Middleware/technology/rol-readTechnology.middleware.js';
+import technologyPermissions from '#Middleware/technology/rol-technology.middleware.js';
 import updateTechnologyPermissions from '#Middleware/technology/rol-updateTechnology.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
@@ -22,6 +23,7 @@ technologyRoutes.post(
   '/register',
   userJWTDTO,
   gaPermissions,
+  technologyPermissions,
   createTechnologyPermissions,
   technologyRegisterDTO,
   technologyRegisterController
@@ -30,6 +32,7 @@ technologyRoutes.get(
   '/list',
   userJWTDTO,
   gaPermissions,
+  technologyPermissions,
   readTechnologyPermissions,
   technologyReadController
 );
@@ -37,6 +40,7 @@ technologyRoutes.get(
   '/item/:uid',
   userJWTDTO,
   gaPermissions,
+  technologyPermissions,
   readTechnologyPermissions,
   technologySearchItemController
 );
@@ -44,6 +48,7 @@ technologyRoutes.get(
   '/search/:search',
   userJWTDTO,
   gaPermissions,
+  technologyPermissions,
   readTechnologyPermissions,
   technologySearchController
 );
@@ -51,13 +56,15 @@ technologyRoutes.get(
   '/report',
   userJWTDTO,
   gaPermissions,
-  pdfPermissions,
+  technologyPermissions,
+  pdfTechnologyPermissions,
   technologyReportController
 );
 technologyRoutes.patch(
   '/update',
   userJWTDTO,
   gaPermissions,
+  technologyPermissions,
   updateTechnologyPermissions,
   technologyRegisterDTO,
   technologyUpdateController
@@ -66,6 +73,7 @@ technologyRoutes.delete(
   '/delete',
   userJWTDTO,
   gaPermissions,
+  technologyPermissions,
   deleteTechnologyPermissions,
   deleteDTO,
   technologyDeleteController
