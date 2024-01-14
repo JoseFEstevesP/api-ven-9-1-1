@@ -14,6 +14,7 @@ import pdfBreakdownReportPermissions from '#Middleware/breakdownReport/rol-pdfBr
 import readBreakdownReportPermissions from '#Middleware/breakdownReport/rol-readBreakdownReport.middleware.js';
 import updateBreakdownReportPermissions from '#Middleware/breakdownReport/rol-updateBreakdownReport.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -21,6 +22,7 @@ const breakdownReportRoutes = Router();
 
 breakdownReportRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   breakdownReportPermissions,
@@ -30,6 +32,7 @@ breakdownReportRoutes.post(
 );
 breakdownReportRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   breakdownReportPermissions,
@@ -38,6 +41,7 @@ breakdownReportRoutes.get(
 );
 breakdownReportRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   breakdownReportPermissions,
@@ -46,6 +50,7 @@ breakdownReportRoutes.get(
 );
 breakdownReportRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   breakdownReportPermissions,
@@ -54,6 +59,7 @@ breakdownReportRoutes.get(
 );
 breakdownReportRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   breakdownReportPermissions,
@@ -62,6 +68,7 @@ breakdownReportRoutes.get(
 );
 breakdownReportRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   breakdownReportPermissions,
@@ -71,6 +78,7 @@ breakdownReportRoutes.patch(
 );
 breakdownReportRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   breakdownReportPermissions,

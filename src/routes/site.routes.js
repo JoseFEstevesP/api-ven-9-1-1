@@ -15,6 +15,7 @@ import pdfSitePermissions from '#Middleware/site/rol-pdfSite.middleware.js';
 import readSitePermissions from '#Middleware/site/rol-readSite.middleware.js';
 import sitePermissions from '#Middleware/site/rol-site.middleware.js';
 import updateSitePermissions from '#Middleware/site/rol-updateSite.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -22,6 +23,7 @@ const siteRoutes = Router();
 
 siteRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   sitePermissions,
@@ -31,6 +33,7 @@ siteRoutes.post(
 );
 siteRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   sitePermissions,
@@ -39,6 +42,7 @@ siteRoutes.get(
 );
 siteRoutes.get(
   '/list_of_limit',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   sitePermissions,
@@ -46,12 +50,14 @@ siteRoutes.get(
 );
 siteRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   siteSearchItemController
 );
 siteRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   sitePermissions,
@@ -60,6 +66,7 @@ siteRoutes.get(
 );
 siteRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   sitePermissions,
@@ -68,6 +75,7 @@ siteRoutes.get(
 );
 siteRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   sitePermissions,
@@ -77,6 +85,7 @@ siteRoutes.patch(
 );
 siteRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   sitePermissions,

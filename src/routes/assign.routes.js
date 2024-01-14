@@ -15,6 +15,7 @@ import pdfAssignPermissions from '#Middleware/assign/rol-pdfAssign.middleware.js
 import readAssignPermissions from '#Middleware/assign/rol-readAssign.middleware.js';
 import updateAssignPermissions from '#Middleware/assign/rol-updateAssign.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -22,6 +23,7 @@ const assignRoutes = Router();
 
 assignRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,
@@ -31,6 +33,7 @@ assignRoutes.post(
 );
 assignRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,
@@ -39,6 +42,7 @@ assignRoutes.get(
 );
 assignRoutes.get(
   '/listInventory/:inventory',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,
@@ -47,6 +51,7 @@ assignRoutes.get(
 );
 assignRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,
@@ -55,6 +60,7 @@ assignRoutes.get(
 );
 assignRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,
@@ -63,6 +69,7 @@ assignRoutes.get(
 );
 assignRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,
@@ -71,6 +78,7 @@ assignRoutes.get(
 );
 assignRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,
@@ -80,6 +88,7 @@ assignRoutes.patch(
 );
 assignRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   assignPermissions,

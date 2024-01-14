@@ -4,6 +4,7 @@ import coder from '#Functions/coder.js';
 import { Rol } from '#Schemas/rol.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import { compare } from 'bcrypt';
+import crypto from 'crypto-js';
 import { SignJWT } from 'jose';
 const userLoginController = async (req, res) => {
   const { ci, password } = req.body;
@@ -26,10 +27,12 @@ const userLoginController = async (req, res) => {
   const jwt = await jwtConstructor
     .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
     .setIssuedAt()
-    .setExpirationTime('7d')
+    .setExpirationTime('1d')
     .sign(coder(process.env.JWT_PRIVATE_KEY));
+  const cryptoToken = crypto.AES.encrypt(jwt, process.env.CRYPTO_KEY);
+  const dataCrypto = cryptoToken.toString();
   return res.send({
-    JWT: jwt,
+    JWT: dataCrypto,
     rol: permissions,
     site: existingUserByCi.uidSite,
   });

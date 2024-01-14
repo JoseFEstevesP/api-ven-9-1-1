@@ -14,6 +14,7 @@ import pdfConsumablesPermissions from '#Middleware/consumables/rol-pdfConsumable
 import readConsumablesPermissions from '#Middleware/consumables/rol-readConsumables.middleware.js';
 import updateConsumablesPermissions from '#Middleware/consumables/rol-updateConsumables.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -21,6 +22,7 @@ const consumablesRoutes = Router();
 
 consumablesRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   consumablesPermissions,
@@ -30,6 +32,7 @@ consumablesRoutes.post(
 );
 consumablesRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   consumablesPermissions,
@@ -38,6 +41,7 @@ consumablesRoutes.get(
 );
 consumablesRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   consumablesPermissions,
@@ -46,6 +50,7 @@ consumablesRoutes.get(
 );
 consumablesRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   consumablesPermissions,
@@ -54,6 +59,7 @@ consumablesRoutes.get(
 );
 consumablesRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   consumablesPermissions,
@@ -62,6 +68,7 @@ consumablesRoutes.get(
 );
 consumablesRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   consumablesPermissions,
@@ -71,6 +78,7 @@ consumablesRoutes.patch(
 );
 consumablesRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   consumablesPermissions,

@@ -14,6 +14,7 @@ import pdfFurniturePermissions from '#Middleware/furniture/rol-pdfFurniture.midd
 import readFurniturePermissions from '#Middleware/furniture/rol-readFurniture.middleware.js';
 import updateFurniturePermissions from '#Middleware/furniture/rol-updateFurniture.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -21,6 +22,7 @@ const furnitureRoutes = Router();
 
 furnitureRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   furniturePermissions,
@@ -30,6 +32,7 @@ furnitureRoutes.post(
 );
 furnitureRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   furniturePermissions,
@@ -38,6 +41,7 @@ furnitureRoutes.get(
 );
 furnitureRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   furniturePermissions,
@@ -46,6 +50,7 @@ furnitureRoutes.get(
 );
 furnitureRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   furniturePermissions,
@@ -54,6 +59,7 @@ furnitureRoutes.get(
 );
 furnitureRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   furniturePermissions,
@@ -62,6 +68,7 @@ furnitureRoutes.get(
 );
 furnitureRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   furniturePermissions,
@@ -71,6 +78,7 @@ furnitureRoutes.patch(
 );
 furnitureRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   furniturePermissions,

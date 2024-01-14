@@ -20,6 +20,7 @@ import userUpdateEmailDTO from '#Dto/user-update-email.dto.js';
 import userUpdatePasswordDTO from '#Dto/user-update-password.dto.js';
 import userUpdateDTO from '#Dto/user-update.dto.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import createUserPermissions from '#Middleware/user/rol-createUser.middleware.js';
 import deleteUserPermissions from '#Middleware/user/rol-deleteUser.middleware.js';
@@ -34,6 +35,8 @@ import { Router } from 'express';
 const userRoutes = Router();
 userRoutes.post(
   '/register',
+  userCryptoDTO,
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -44,6 +47,7 @@ userRoutes.post(
 userRoutes.post('/login', userLoginDTO, userLoginController);
 userRoutes.get(
   '/profile',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -52,6 +56,7 @@ userRoutes.get(
 );
 userRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -60,6 +65,7 @@ userRoutes.get(
 );
 userRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -68,6 +74,7 @@ userRoutes.get(
 );
 userRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -76,6 +83,7 @@ userRoutes.get(
 );
 userRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -84,6 +92,7 @@ userRoutes.get(
 );
 userRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -93,6 +102,7 @@ userRoutes.patch(
 );
 userRoutes.patch(
   '/update-data',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -102,6 +112,7 @@ userRoutes.patch(
 );
 userRoutes.patch(
   '/update-email',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -111,6 +122,7 @@ userRoutes.patch(
 );
 userRoutes.patch(
   '/update-password',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -120,6 +132,7 @@ userRoutes.patch(
 );
 userRoutes.delete(
   '/unregister',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
@@ -129,6 +142,7 @@ userRoutes.delete(
 );
 userRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,

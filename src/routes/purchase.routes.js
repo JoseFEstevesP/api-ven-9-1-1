@@ -14,6 +14,7 @@ import purchasePermissions from '#Middleware/purchase/rol-purchase.middleware.js
 import readPurchasePermissions from '#Middleware/purchase/rol-readPurchase.middleware.js';
 import updatePurchasePermissions from '#Middleware/purchase/rol-updatePurchase.middleware.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -21,6 +22,7 @@ const purchaseRoutes = Router();
 
 purchaseRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   purchasePermissions,
@@ -30,6 +32,7 @@ purchaseRoutes.post(
 );
 purchaseRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   purchasePermissions,
@@ -38,6 +41,7 @@ purchaseRoutes.get(
 );
 purchaseRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   purchasePermissions,
@@ -46,6 +50,7 @@ purchaseRoutes.get(
 );
 purchaseRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   purchasePermissions,
@@ -54,6 +59,7 @@ purchaseRoutes.get(
 );
 purchaseRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   purchasePermissions,
@@ -62,6 +68,7 @@ purchaseRoutes.get(
 );
 purchaseRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   purchasePermissions,
@@ -71,6 +78,7 @@ purchaseRoutes.patch(
 );
 purchaseRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   purchasePermissions,

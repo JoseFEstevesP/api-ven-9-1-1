@@ -14,6 +14,7 @@ import pdfTechnologyPermissions from '#Middleware/technology/rol-pdfTechnology.m
 import readTechnologyPermissions from '#Middleware/technology/rol-readTechnology.middleware.js';
 import technologyPermissions from '#Middleware/technology/rol-technology.middleware.js';
 import updateTechnologyPermissions from '#Middleware/technology/rol-updateTechnology.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -21,6 +22,7 @@ const technologyRoutes = Router();
 
 technologyRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   technologyPermissions,
@@ -30,6 +32,7 @@ technologyRoutes.post(
 );
 technologyRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   technologyPermissions,
@@ -38,6 +41,7 @@ technologyRoutes.get(
 );
 technologyRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   technologyPermissions,
@@ -46,6 +50,7 @@ technologyRoutes.get(
 );
 technologyRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   technologyPermissions,
@@ -54,6 +59,7 @@ technologyRoutes.get(
 );
 technologyRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   technologyPermissions,
@@ -62,6 +68,7 @@ technologyRoutes.get(
 );
 technologyRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   technologyPermissions,
@@ -71,6 +78,7 @@ technologyRoutes.patch(
 );
 technologyRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   technologyPermissions,

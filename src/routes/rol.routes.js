@@ -15,6 +15,7 @@ import pdfRolPermissions from '#Middleware/rol/rol-pdfRol.middleware.js';
 import readRolPermissions from '#Middleware/rol/rol-readRol.middleware.js';
 import rolPermissions from '#Middleware/rol/rol-rol.middleware.js';
 import updateRolPermissions from '#Middleware/rol/rol-updateRol.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import { Router } from 'express';
 
@@ -22,6 +23,7 @@ const rolRoutes = Router();
 
 rolRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,
@@ -31,6 +33,7 @@ rolRoutes.post(
 );
 rolRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,
@@ -39,6 +42,7 @@ rolRoutes.get(
 );
 rolRoutes.get(
   '/list_of_limit',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,
@@ -47,6 +51,7 @@ rolRoutes.get(
 );
 rolRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,
@@ -55,6 +60,7 @@ rolRoutes.get(
 );
 rolRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,
@@ -63,6 +69,7 @@ rolRoutes.get(
 );
 rolRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,
@@ -71,6 +78,7 @@ rolRoutes.get(
 );
 rolRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,
@@ -80,6 +88,7 @@ rolRoutes.patch(
 );
 rolRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   rolPermissions,

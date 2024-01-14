@@ -8,6 +8,7 @@ import vehicleUpdateController from '#Controllers/vehicle-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import vehicleRegisterDTO from '#Dto/vehicle-register.dto.js';
 import gaPermissions from '#Middleware/rol-GA.middleware.js';
+import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
 import createVehiclePermissions from '#Middleware/vehicle/rol-createVehicle.middleware.js';
 import deleteVehiclePermissions from '#Middleware/vehicle/rol-deleteVehicle.middleware.js';
@@ -21,6 +22,7 @@ const vehicleRoutes = Router();
 
 vehicleRoutes.post(
   '/register',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   vehiclePermissions,
@@ -30,6 +32,7 @@ vehicleRoutes.post(
 );
 vehicleRoutes.get(
   '/list',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   vehiclePermissions,
@@ -38,6 +41,7 @@ vehicleRoutes.get(
 );
 vehicleRoutes.get(
   '/item/:uid',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   vehiclePermissions,
@@ -46,6 +50,7 @@ vehicleRoutes.get(
 );
 vehicleRoutes.get(
   '/search/:search',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   vehiclePermissions,
@@ -54,6 +59,7 @@ vehicleRoutes.get(
 );
 vehicleRoutes.get(
   '/report',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   vehiclePermissions,
@@ -62,6 +68,7 @@ vehicleRoutes.get(
 );
 vehicleRoutes.patch(
   '/update',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   vehiclePermissions,
@@ -71,6 +78,7 @@ vehicleRoutes.patch(
 );
 vehicleRoutes.delete(
   '/delete',
+  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   vehiclePermissions,
