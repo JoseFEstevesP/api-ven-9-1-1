@@ -4,7 +4,7 @@ const userCryptoDTO = async (req, res, next) => {
   if (!authorization)
     return res.status(401).send({ errors: ['Usuario no autorizado'] });
   const cryptoData = crypto.AES.decrypt(
-    authorization,
+    authorization.split(' ')[1],
     process.env.CRYPTO_KEY
   ).toString(crypto.enc.Utf8);
   req.jwt = cryptoData;

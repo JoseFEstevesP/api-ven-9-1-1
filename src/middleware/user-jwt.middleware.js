@@ -3,11 +3,9 @@ import { jwtVerify } from 'jose';
 const userJWTDTO = async (req, res, next) => {
   const { jwt } = req;
   if (!jwt) return res.status(401).send({ errors: ['Usuario no autorizado'] });
-  const JWT = jwt.split(' ')[1];
-  if (!JWT) return res.status(401).send({ errors: ['Usuario no autorizado'] });
   try {
     const { payload } = await jwtVerify(
-      JWT,
+      jwt,
       coder(process.env.JWT_PRIVATE_KEY)
     );
     req.id = payload.id;
