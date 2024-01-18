@@ -36,7 +36,6 @@ const userRoutes = Router();
 userRoutes.post(
   '/register',
   userCryptoDTO,
-  userCryptoDTO,
   userJWTDTO,
   gaPermissions,
   userPermissions,
