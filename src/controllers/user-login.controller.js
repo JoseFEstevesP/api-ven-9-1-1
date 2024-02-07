@@ -27,7 +27,7 @@ const userLoginController = async (req, res) => {
   const jwt = await jwtConstructor
     .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
     .setIssuedAt()
-    .setExpirationTime('1d')
+    .setExpirationTime('7d')
     .sign(coder(process.env.JWT_PRIVATE_KEY));
   const cryptoToken = crypto.AES.encrypt(jwt, process.env.CRYPTO_KEY);
   const dataCrypto = cryptoToken.toString();

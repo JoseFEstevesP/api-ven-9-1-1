@@ -31,7 +31,6 @@ const userReadController = async (req, res) => {
           'updateAtTime',
           'createdAt',
           'updatedAt',
-          'uidSite',
         ],
       },
       include: [
