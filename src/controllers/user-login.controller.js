@@ -1,4 +1,3 @@
-// TODO: validar los datos a yeye le salio un error figarse en registrar
 import { userMSG } from '#Constants/system.js';
 import coder from '#Functions/coder.js';
 import { Rol } from '#Schemas/rol.schema.js';
@@ -9,7 +8,7 @@ import { SignJWT } from 'jose';
 const userLoginController = async (req, res) => {
   const { ci, password } = req.body;
   const existingUserByCi = await User.findOne({ where: { ci } });
-  if (existingUserByCi.status !== '1')
+  if (existingUserByCi?.status !== '1')
     return res.status(410).send({ errors: [{ uid: userMSG.login.status }] });
   if (!existingUserByCi)
     return res.status(401).send({ errors: [{ uid: userMSG.login.error }] });
