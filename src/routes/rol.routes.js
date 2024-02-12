@@ -44,20 +44,9 @@ rolRoutes.get(
   '/list_of_limit',
   userCryptoDTO,
   userJWTDTO,
-  gaPermissions,
-  rolPermissions,
-  readRolPermissions,
   rolReadOfLimitController
 );
-rolRoutes.get(
-  '/item/:uid',
-  userCryptoDTO,
-  userJWTDTO,
-  gaPermissions,
-  rolPermissions,
-  readRolPermissions,
-  rolSearchItemController
-);
+rolRoutes.get('/item/:uid', userCryptoDTO, userJWTDTO, rolSearchItemController);
 rolRoutes.get(
   '/search/:search',
   userCryptoDTO,

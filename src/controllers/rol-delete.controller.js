@@ -7,10 +7,10 @@ const rolDeleteController = async (req, res) => {
   const existingRolById = await Rol.findOne({ where: { uid, status: '1' } });
   if (!existingRolById)
     return res.status(401).send({ errors: [{ uid: rolMSG.noFound }] });
-  const userRelation = await User.findAll({
+  const userRelation = await User.findOne({
     where: { uidRol: uid, status: '1' },
   });
-  if (userRelation.length > 0)
+  if (userRelation)
     return res.status(401).send({ errors: [{ uid: rolMSG.delete.user }] });
   existingRolById.status = '0';
   existingRolById.updateAtDate = moment().format('YYYY-MM-DD');

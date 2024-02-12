@@ -14,6 +14,7 @@ import deleteSitePermissions from '#Middleware/site/rol-deleteSite.middleware.js
 import pdfSitePermissions from '#Middleware/site/rol-pdfSite.middleware.js';
 import readSitePermissions from '#Middleware/site/rol-readSite.middleware.js';
 import sitePermissions from '#Middleware/site/rol-site.middleware.js';
+import assignationSitePermissions from '#Middleware/site/rol-siteAssignation.middleware.js';
 import updateSitePermissions from '#Middleware/site/rol-updateSite.middleware.js';
 import userCryptoDTO from '#Middleware/user-crypto.middleware.js';
 import userJWTDTO from '#Middleware/user-jwt.middleware.js';
@@ -44,15 +45,13 @@ siteRoutes.get(
   '/list_of_limit',
   userCryptoDTO,
   userJWTDTO,
-  gaPermissions,
-  sitePermissions,
+  assignationSitePermissions,
   siteReadOfLimitController
 );
 siteRoutes.get(
   '/item/:uid',
   userCryptoDTO,
   userJWTDTO,
-  gaPermissions,
   siteSearchItemController
 );
 siteRoutes.get(

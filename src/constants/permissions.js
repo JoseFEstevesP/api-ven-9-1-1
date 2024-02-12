@@ -71,4 +71,5 @@ export const permissions = {
   updateUser: 'UPDATE_USER',
   updateVehicle: 'UPDATE_VEHICLE',
   uri: 'URI',
+  siteAssignation: 'SITE_ASSIGNATION',
 };
