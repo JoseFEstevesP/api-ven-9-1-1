@@ -26,7 +26,6 @@ const breakdownReportSearchController = async (req, res) => {
         [Op.or]: [
           { goods: { [Op.iLike]: `%${search}%` } },
           { problem: { [Op.iLike]: `%${search}%` } },
-          { symptoms: { [Op.iLike]: `%${search}%` } },
           { condition: { [Op.iLike]: `%${search}%` } },
           { breakdownDepartment: { [Op.iLike]: `%${search}%` } },
           { location: { [Op.iLike]: `%${search}%` } },

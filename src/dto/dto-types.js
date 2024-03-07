@@ -89,3 +89,8 @@ export const siteDTOSchemas = Type.String({
     type: 'El campo no es valido, debe de ser una cadena de texto',
   },
 });
+export const statusDTOSchemas = Type.String({
+  errorMessage: {
+    type: 'El campo no es valido, debe de ser una cadena de texto',
+  },
+});

@@ -7,7 +7,6 @@ const breakdownReportUpdateController = async (req, res) => {
     uid,
     goods,
     problem,
-    symptoms,
     condition,
     breakdownDepartment,
     location,
@@ -22,7 +21,6 @@ const breakdownReportUpdateController = async (req, res) => {
       .send({ errors: [{ uid: breakdownReportMSG.noFound }] });
   existingReportById.goods = goods;
   existingReportById.problem = problem;
-  existingReportById.symptoms = symptoms;
   existingReportById.condition = condition;
   existingReportById.breakdownDepartment = breakdownDepartment;
   existingReportById.location = location;

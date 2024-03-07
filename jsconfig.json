@@ -10,7 +10,8 @@
       "#Functions/*": ["./src/functions/*"],
       "#Middleware/*": ["./src/middleware/*"],
       "#Routes/*": ["./src/routes/*"],
-      "#Schemas/*": ["./src/schemas/*"]
+      "#Schemas/*": ["./src/schemas/*"],
+      "#Class/*": ["./src/class/*"]
     }
   },
   "exclude": ["node_modules"]

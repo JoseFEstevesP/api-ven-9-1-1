@@ -48,10 +48,6 @@ export const Purchase = sequelize.define('purchases', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  location: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   status: {
     type: DataTypes.STRING,
     allowNull: false,

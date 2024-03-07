@@ -1,10 +1,17 @@
+import ModelOptions from '#Class/ModelOptions.js';
 import { purchaseMSG } from '#Constants/system.js';
 import { Purchase } from '#Schemas/purchase.schema.js';
-import moment from 'moment';
 
 const purchaseUpdateController = async (req, res) => {
+  // Crear instancia de ModelOptions:
+  const purchase = new ModelOptions({ Model: Purchase });
+
+  // Verificar la existencia del modelo:
+  if (!purchase) {
+    // Si la instancia no es válida, enviar error de "no encontrado"
+    return res.status(404).send({ errors: [{ uid: purchaseMSG.noFound }] });
+  }
   const {
-    uid,
     product,
     serial,
     brand,
@@ -15,27 +22,30 @@ const purchaseUpdateController = async (req, res) => {
     supplier,
     warranty,
     orderNumber,
-    location,
+    status,
   } = req.body;
-  const existingPurchaseById = await Purchase.findOne({
-    where: { uid, status: '1' },
+  // Actualizar el elemento de compra:
+  await purchase.updateItem({
+    // Proporcionar los datos para la actualización
+    uid: req.body.uid, // ID del elemento a actualizar
+    status: req.body.olStatus, // Estado que se actualizará
+    data: {
+      product,
+      serial,
+      brand,
+      model,
+      dateOfPurchase,
+      value,
+      quantity,
+      supplier,
+      warranty,
+      orderNumber,
+      status,
+    }, // Datos actualizados para el elemento
   });
-  if (!existingPurchaseById)
-    return res.status(404).send({ errors: [{ uid: purchaseMSG.noFound }] });
-  existingPurchaseById.product = product;
-  existingPurchaseById.serial = serial;
-  existingPurchaseById.brand = brand;
-  existingPurchaseById.model = model;
-  existingPurchaseById.dateOfPurchase = dateOfPurchase;
-  existingPurchaseById.value = value;
-  existingPurchaseById.quantity = quantity;
-  existingPurchaseById.supplier = supplier;
-  existingPurchaseById.warranty = warranty;
-  existingPurchaseById.orderNumber = orderNumber;
-  existingPurchaseById.location = location;
-  existingPurchaseById.updateAtDate = moment().format('YYYY-MM-DD');
-  existingPurchaseById.updateAtTime = moment().format('hh:mm A');
-  await existingPurchaseById.save();
-  return res.status(201).send({ msg: purchaseMSG.update.msg });
+
+  // Enviar respuesta de éxito:
+  return res.status(201).send({ msg: purchaseMSG.update.msg }); // Mensaje de éxito
 };
+
 export default purchaseUpdateController;

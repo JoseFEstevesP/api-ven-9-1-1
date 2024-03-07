@@ -29,19 +29,7 @@ export const Consumables = sequelize.define('consumables', {
     allowNull: false,
     defaultValue: '0',
   },
-  value: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  location: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   dateOfAcquisition: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  remarks: {
     type: DataTypes.STRING,
     allowNull: false,
   },

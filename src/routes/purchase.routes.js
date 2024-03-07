@@ -7,6 +7,7 @@ import purchaseSearchItemController from '#Controllers/purchase-searchItem.contr
 import purchaseUpdateController from '#Controllers/purchase-update.controller.js';
 import deleteDTO from '#Dto/delete.dto.js';
 import purchaseRegisterDTO from '#Dto/purchase-register.dto.js';
+import purchaseUpdateDTO from '#Dto/purchase-update.dto.js';
 import createPurchasePermissions from '#Middleware/purchase/rol-createPurchase.middleware.js';
 import deletePurchasePermissions from '#Middleware/purchase/rol-deletePurchase.middleware.js';
 import pdfPurchasePermissions from '#Middleware/purchase/rol-pdfPurchase.middleware.js';
@@ -73,7 +74,7 @@ purchaseRoutes.patch(
   gaPermissions,
   purchasePermissions,
   updatePurchasePermissions,
-  purchaseRegisterDTO,
+  purchaseUpdateDTO,
   purchaseUpdateController
 );
 purchaseRoutes.delete(

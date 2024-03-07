@@ -21,7 +21,7 @@ const registerDTOSchema = Type.Object(
     supplier: permissionsDTOSchemas,
     warranty: permissionsDTOSchemas,
     orderNumber: permissionsDTOSchemas,
-    location: permissionsDTOSchemas,
+    inventory: permissionsDTOSchemas,
   },
   {
     additionalProperties: false,

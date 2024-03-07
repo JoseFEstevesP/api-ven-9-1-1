@@ -8,11 +8,8 @@ const furnitureUpdateController = async (req, res) => {
     description,
     serial,
     quantity,
-    value,
     condition,
-    location,
     dateOfAcquisition,
-    warranty,
     remarks,
     codeBN,
   } = req.body;
@@ -24,11 +21,8 @@ const furnitureUpdateController = async (req, res) => {
   existingFurnitureById.description = description;
   existingFurnitureById.serial = serial;
   existingFurnitureById.quantity = quantity;
-  existingFurnitureById.value = value;
   existingFurnitureById.condition = condition;
-  existingFurnitureById.location = location;
   existingFurnitureById.dateOfAcquisition = dateOfAcquisition;
-  existingFurnitureById.warranty = warranty;
   existingFurnitureById.remarks = remarks;
   existingFurnitureById.codeBN = codeBN;
   existingFurnitureById.updateAtDate = moment().format('YYYY-MM-DD');

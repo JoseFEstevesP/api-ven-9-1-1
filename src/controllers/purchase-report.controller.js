@@ -1,55 +1,61 @@
-import { reportDate } from '#Functions/reportDate.js';
+import ModelOptions from '#Class/ModelOptions.js';
 import { Purchase } from '#Schemas/purchase.schema.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
-import moment from 'moment';
 
 const purchaseReportController = async (req, res) => {
+  // Extraer parámetros de la solicitud:
   const { id, uidSite } = req;
   const {
     uidSite: uidSiteQuery,
-    orderProperty = 'product',
-    order = 'ASC',
+    orderProperty,
+    order,
     status = '1',
-    dataQuantity = 17,
+    dataQuantity,
     endDate,
     startDate,
     search,
   } = req.query;
+
+  // Determinar ID del sitio:
   const site = uidSiteQuery || uidSite;
-  const { name, surname, ci } = await User.findOne({ where: { uid: id } });
-  const purchaseReport = await Purchase.findAll({
-    where: reportDate({
+
+  // Crear instancia de ModelOptions para el modelo Purchase:
+  const purchase = new ModelOptions({ Model: Purchase });
+
+  // Generar reporte de compras:
+  const { rows, author, siteName, report, date, time } =
+    await purchase.getReport({
+      // Pasar datos necesarios para la generación del reporte
+      userModel: User,
+      siteModel: Site,
+      uid: id,
+      orderProperty,
+      order,
       search,
-      searchItem: 'purchase',
       endDate,
       startDate,
       status,
       uidSite: site,
-    }),
-    attributes: {
-      exclude: ['uid', 'uidSite', 'uidUser'],
-    },
+      params: [
+        // Campos en los que se buscará
+        'product',
+        'serial',
+        'brand',
+        'model',
+        'dateOfPurchase',
+        'value',
+        'quantity',
+        'supplier',
+        'warranty',
+        'orderNumber',
+      ],
+      dataQuantity,
+      reportName: 'Compra', // Nombre del reporte
+    });
 
-    order: [[orderProperty, order]],
-  });
-  const rows = purchaseReport.reduce((acc, item, index) => {
-    if (index % dataQuantity === 0) {
-      acc.push([item]);
-    } else {
-      acc[acc.length - 1].push(item);
-    }
-    return acc;
-  }, []);
-  const { name: siteName } = await Site.findByPk(site);
-  return res.status(200).send({
-    rows,
-    author: `${name} ${surname} CI: ${ci}`,
-    siteName,
-    report: 'Compra',
-    date: moment().format('DD-MM-YYYY'),
-    time: moment().format('hh:mm A'),
-  });
+  // Enviar respuesta con datos del reporte:
+  return res.status(200).send({ rows, author, siteName, report, date, time });
 };
 
 export default purchaseReportController;

@@ -38,7 +38,8 @@
     "#Functions/*": "./src/functions/*",
     "#Middleware/*": "./src/middleware/*",
     "#Routes/*": "./src/routes/*",
-    "#Schemas/*": "./src/schemas/*"
+    "#Schemas/*": "./src/schemas/*",
+    "#Class/*": "./src/class/*"
   },
   "lint-staged": {
     "*.js": "eslint --fix",

@@ -33,27 +33,11 @@ export const Vehicle = sequelize.define('vehicles', {
     allowNull: false,
     defaultValue: '0',
   },
-  value: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   condition: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  location: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   dateOfAcquisition: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  warranty: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  remarks: {
     type: DataTypes.STRING,
     allowNull: false,
   },

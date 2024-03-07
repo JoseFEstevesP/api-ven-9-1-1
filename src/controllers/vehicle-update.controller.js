@@ -10,11 +10,8 @@ const vehicleUpdateController = async (req, res) => {
     model,
     place,
     quantity,
-    value,
     condition,
-    location,
     dateOfAcquisition,
-    warranty,
     remarks,
     codeBN,
   } = req.body;
@@ -28,11 +25,8 @@ const vehicleUpdateController = async (req, res) => {
   existingVehicleById.model = model;
   existingVehicleById.place = place;
   existingVehicleById.quantity = quantity;
-  existingVehicleById.value = value;
   existingVehicleById.condition = condition;
-  existingVehicleById.location = location;
   existingVehicleById.dateOfAcquisition = dateOfAcquisition;
-  existingVehicleById.warranty = warranty;
   existingVehicleById.remarks = remarks;
   existingVehicleById.codeBN = codeBN;
   existingVehicleById.updateAtDate = moment().format('YYYY-MM-DD');

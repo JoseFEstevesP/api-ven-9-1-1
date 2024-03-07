@@ -33,15 +33,7 @@ export const Technology = sequelize.define('technologies', {
     allowNull: false,
     defaultValue: '0',
   },
-  value: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   condition: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  location: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -49,17 +41,8 @@ export const Technology = sequelize.define('technologies', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  warranty: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  remarks: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   codeBN: {
     type: DataTypes.STRING,
-    unique: true,
     allowNull: false,
   },
   status: {

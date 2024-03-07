@@ -9,8 +9,6 @@ const consumablesUpdateController = async (req, res) => {
     serial,
     brand,
     quantity,
-    value,
-    location,
     dateOfAcquisition,
     remarks,
   } = req.body;
@@ -23,8 +21,6 @@ const consumablesUpdateController = async (req, res) => {
   existingConsumablesById.serial = serial;
   existingConsumablesById.brand = brand;
   existingConsumablesById.quantity = quantity;
-  existingConsumablesById.value = value;
-  existingConsumablesById.location = location;
   existingConsumablesById.dateOfAcquisition = dateOfAcquisition;
   existingConsumablesById.remarks = remarks;
   existingConsumablesById.updateAtDate = moment().format('YYYY-MM-DD');

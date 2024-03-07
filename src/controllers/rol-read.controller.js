@@ -20,6 +20,17 @@ const rolReadController = async (req, res) => {
       offset: (page - 1) * limit,
       order: [[orderProperty, order]],
     });
+    rows.map((row) => {
+      row.permissions = Object.values(
+        row.permissions.split(',').reduce((acc, item) => {
+          const name = item.split('_')[1] || item.split('_')[0];
+          acc[name] = acc[name] || [];
+          acc[name].push(item);
+          return acc;
+        }, {})
+      ).map((items) => items);
+      return row;
+    });
 
     // Calcular detalles de paginación
     const pages = Math.ceil(count / limit);

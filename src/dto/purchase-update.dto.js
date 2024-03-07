@@ -6,21 +6,24 @@ import {
   idDTOSchemas,
   permissionsDTOSchemas,
   quantityDTOSchemas,
+  valueDTOSchemas,
 } from './dto-types.js';
-const registerDTOSchema = Type.Object(
+const updateDTOSchema = Type.Object(
   {
     uid: idDTOSchemas,
-    description: permissionsDTOSchemas,
+    product: permissionsDTOSchemas,
+    serial: permissionsDTOSchemas,
     brand: permissionsDTOSchemas,
     model: permissionsDTOSchemas,
-    serial: permissionsDTOSchemas,
+    dateOfPurchase: permissionsDTOSchemas,
+    value: valueDTOSchemas,
     quantity: quantityDTOSchemas,
-    condition: permissionsDTOSchemas,
-    dateOfAcquisition: permissionsDTOSchemas,
-    codeBN: permissionsDTOSchemas,
+    supplier: permissionsDTOSchemas,
+    warranty: permissionsDTOSchemas,
+    orderNumber: permissionsDTOSchemas,
   },
   {
-    additionalProperties: false,
+    additionalProperties: true,
     errorMessage: {
       additionalProperties: 'El formato del objeto no es valido',
     },
@@ -31,8 +34,8 @@ const ajv = new Ajv({ allErrors: true })
   .addKeyword('modifier');
 addFormats(ajv, ['uuid']);
 addErrors(ajv);
-const validateSchema = ajv.compile(registerDTOSchema);
-const technologyRegisterDTO = (req, res, next) => {
+const validateSchema = ajv.compile(updateDTOSchema);
+const purchaseUpdateDTO = (req, res, next) => {
   const isDTOValid = validateSchema(req.body);
   if (!isDTOValid)
     return res.status(400).send({
@@ -42,4 +45,4 @@ const technologyRegisterDTO = (req, res, next) => {
     });
   next();
 };
-export default technologyRegisterDTO;
+export default purchaseUpdateDTO;
