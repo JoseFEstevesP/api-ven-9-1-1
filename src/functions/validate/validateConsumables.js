@@ -11,14 +11,6 @@ export const validateConsumables = async ({ data, Model, msg }) => {
   // Comprobamos si ya existe una tecnologia con el ID proporcionado
   val({ val: isExistById, errors, msg, name: 'uid' });
 
-  // Comprobamos si ya existe una tecnología con ese código de bien nacional
-  if (data.codeBN !== 'No asignado') {
-    const isExistByCodeBN = await Model.findOne({
-      where: { codeBN: data.codeBN },
-    });
-    val({ val: isExistByCodeBN, errors, msg, name: 'codeBN' });
-  }
-
   // Comprobamos si ya existe una tecnología con ese serial de bien nacional
   val({ val: isExistBySerial, errors, msg, name: 'serial' });
 

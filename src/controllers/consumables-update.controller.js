@@ -17,15 +17,17 @@ const consumablesUpdateController = async (req, res) => {
   });
   if (!existingConsumablesById)
     return res.status(404).send({ errors: [{ uid: consumablesMSG.noFound }] });
-  existingConsumablesById.description = description;
-  existingConsumablesById.serial = serial;
-  existingConsumablesById.brand = brand;
-  existingConsumablesById.quantity = quantity;
-  existingConsumablesById.dateOfAcquisition = dateOfAcquisition;
-  existingConsumablesById.remarks = remarks;
-  existingConsumablesById.updateAtDate = moment().format('YYYY-MM-DD');
-  existingConsumablesById.updateAtTime = moment().format('hh:mm A');
-  await existingConsumablesById.save();
+  existingConsumablesById.update({
+    description,
+    serial,
+    brand,
+    quantity,
+    dateOfAcquisition,
+    remarks,
+    updateAtDate: moment().format('YYYY-MM-DD'),
+    updateAtTime: moment().format('hh:mm A'),
+  });
+
   return res.status(201).send({ msg: consumablesMSG.update.msg });
 };
 export default consumablesUpdateController;

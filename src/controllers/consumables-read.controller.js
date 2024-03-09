@@ -11,12 +11,14 @@ const consumablesReadController = async (req, res) => {
     order = 'ASC',
     status = '1',
   } = req.query;
+
   const { uidSite } = req;
   const site = uidSiteQuery || uidSite;
   try {
     const consumable = new ModelOptions({ Model: Consumables });
 
     const { rows, count } = await consumable.getList({
+      limit,
       orderProperty,
       page,
       site,

@@ -114,12 +114,11 @@ class ModelOptions {
     const res = await this.Model.findOne({
       where: { uid, status },
     });
-    for (const [key, value] of Object.entries(data)) {
-      res[key] = value;
-    }
-    res.updateAtDate = moment().format('YYYY-MM-DD');
-    res.updateAtTime = moment().format('hh:mm A');
-    await res.save();
+    res.update({
+      ...data,
+      updateAtDate: moment().format('YYYY-MM-DD'),
+      updateAtTime: moment().format('hh:mm A'),
+    });
   }
 
   async deleteItem({ uid, status }) {

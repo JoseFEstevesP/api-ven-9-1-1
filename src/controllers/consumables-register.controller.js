@@ -5,25 +5,26 @@ import { validateConsumables } from '#Functions/validate/validateConsumables.js'
 import { Consumables } from '#Schemas/consumables.schema.js';
 
 const consumablesRegisterController = async (req, res) => {
-  // Extraer ID de usuario e ID del sitio de la solicitud
-  const { id, uidSite } = req;
-  const { uidSite: uidSiteQuery } = req.body;
-  const site = uidSiteQuery || uidSite;
-
-  // Crear una nueva instancia de ModelOptions para el modelo Consumables
-  const consumable = new ModelOptions({ Model: Consumables });
-
-  // Extraer datos adicionales específicos del usuario y el sitio
-  const exData = extraData({ id, uidSite: site });
-
-  // Combinar datos del cuerpo de la solicitud con datos extraídos y el objeto de mensaje
-  const data = { ...req.body, ...exData, msg: consumablesMSG };
-
   try {
+    // Extraer ID de usuario e ID del sitio de la solicitud
+    const { id, uidSite } = req;
+    const { uidSite: uidSiteQuery } = req.body;
+    const site = uidSiteQuery || uidSite;
+
+    // Crear una nueva instancia de ModelOptions para el modelo Consumables
+    const consumable = new ModelOptions({ Model: Consumables });
+
+    // Extraer datos adicionales específicos del usuario y el sitio
+    const exData = extraData({ id, uidSite: site });
+
+    // Combinar datos del cuerpo de la solicitud con datos extraídos y el objeto de mensaje
+    const data = { ...req.body, ...exData };
+
     // Registrar los datos del consumible utilizando el método postRegister del modelo
     const resConsumable = await consumable.postRegister({
       data,
       validateFunctions: validateConsumables, // Pasar la función de validación
+      msg: consumablesMSG, // Pasar el objeto de mensajes de consumibles
     });
 
     // Comprobar si hay errores en la respuesta

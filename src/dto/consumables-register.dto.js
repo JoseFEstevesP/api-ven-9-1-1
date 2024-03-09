@@ -6,7 +6,6 @@ import {
   idDTOSchemas,
   permissionsDTOSchemas,
   quantityDTOSchemas,
-  valueDTOSchemas,
 } from './dto-types.js';
 const registerDTOSchema = Type.Object(
   {
@@ -15,10 +14,7 @@ const registerDTOSchema = Type.Object(
     serial: permissionsDTOSchemas,
     brand: permissionsDTOSchemas,
     quantity: quantityDTOSchemas,
-    value: valueDTOSchemas,
-    location: permissionsDTOSchemas,
     dateOfAcquisition: permissionsDTOSchemas,
-    remarks: permissionsDTOSchemas,
   },
   {
     additionalProperties: false,
