@@ -1,3 +1,4 @@
+import ModelOptions from '#Class/ModelOptions.js';
 import { limitPage } from '#Constants/system.js';
 import { Vehicle } from '#Schemas/vehicle.schema.js';
 
@@ -13,30 +14,28 @@ const vehicleReadController = async (req, res) => {
       order = 'ASC',
       status = '1',
     } = req.query;
+
     const { uidSite } = req;
     const site = uidSiteQuery || uidSite;
 
-    // Realizar la consulta a la base de datos para obtener los vehículos
-    const { rows, count } = await Vehicle.findAndCountAll({
-      where: { uidSite: site, status },
-      limit,
-      offset: (page - 1) * limit,
-      order: [[orderProperty, order]],
-    });
+    const vehicle = new ModelOptions({ Model: Vehicle });
 
-    // Calcular detalles de paginación
-    const pages = Math.ceil(count / limit);
-    const totalPage = page > pages ? pages : page;
-    const nextPage = Number(totalPage) + 1;
-    const previousPage = Number(totalPage) - 1;
+    const { rows, count, pages, currentPage, nextPage, previousPage } =
+      await vehicle.getList({
+        site,
+        page,
+        limit: Number(limit),
+        orderProperty,
+        order,
+        status,
+      });
 
-    // Enviar la respuesta con los datos y detalles de paginación
     return res.status(200).send({
       rows,
       count,
-      currentPage: Number(totalPage),
-      nextPage: nextPage <= pages ? nextPage : null,
-      previousPage: previousPage > 0 ? previousPage : null,
+      currentPage,
+      nextPage,
+      previousPage,
       limit: Number(limit),
       pages,
     });

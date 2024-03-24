@@ -21,7 +21,7 @@ const registerDTOSchema = Type.Object(
     codeBN: permissionsDTOSchemas,
   },
   {
-    additionalProperties: false,
+    additionalProperties: true,
     errorMessage: {
       additionalProperties: 'El formato del objeto no es valido',
     },
@@ -38,7 +38,7 @@ const vehicleRegisterDTO = (req, res, next) => {
   if (!isDTOValid)
     return res.status(400).send({
       errors: validateSchema.errors.map((error) => {
-        return { [error.instancePath.split('/')[1]]: error.message };
+        return { [error.instancePath.split('/')[1] || 'uid']: error.message };
       }),
     });
   next();

@@ -1,10 +1,9 @@
+import ModelOptions from '#Class/ModelOptions.js';
 import { vehicleMSG } from '#Constants/system.js';
 import { Vehicle } from '#Schemas/vehicle.schema.js';
-import moment from 'moment';
 
 const vehicleUpdateController = async (req, res) => {
   const {
-    uid,
     description,
     brand,
     model,
@@ -14,24 +13,31 @@ const vehicleUpdateController = async (req, res) => {
     dateOfAcquisition,
     remarks,
     codeBN,
+    status,
   } = req.body;
-  const existingVehicleById = await Vehicle.findOne({
-    where: { uid, status: '1' },
+
+  // Crear instancia de ModelOptions:
+  const vehicle = new ModelOptions({ Model: Vehicle });
+
+  // Actualizar el elemento de compra:
+  await vehicle.updateItem({
+    // Proporcionar los datos para la actualización
+    uid: req.body.uid, // ID del elemento a actualizar
+    status: req.body.olStatus, // Estado que se actualizará
+    data: {
+      description,
+      brand,
+      model,
+      place,
+      quantity,
+      condition,
+      dateOfAcquisition,
+      remarks,
+      codeBN,
+      status,
+    }, // Datos actualizados para el elemento
   });
-  if (!existingVehicleById)
-    return res.status(404).send({ errors: [{ uid: vehicleMSG.noFound }] });
-  existingVehicleById.description = description;
-  existingVehicleById.brand = brand;
-  existingVehicleById.model = model;
-  existingVehicleById.place = place;
-  existingVehicleById.quantity = quantity;
-  existingVehicleById.condition = condition;
-  existingVehicleById.dateOfAcquisition = dateOfAcquisition;
-  existingVehicleById.remarks = remarks;
-  existingVehicleById.codeBN = codeBN;
-  existingVehicleById.updateAtDate = moment().format('YYYY-MM-DD');
-  existingVehicleById.updateAtTime = moment().format('hh:mm A');
-  await existingVehicleById.save();
+
   return res.status(201).send({ msg: vehicleMSG.update.msg });
 };
 export default vehicleUpdateController;

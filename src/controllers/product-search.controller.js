@@ -23,54 +23,45 @@ const purchaseSearchController = async (req, res) => {
   const purchase = new ModelOptions({ Model: Purchase });
 
   // Realizar la búsqueda de compras filtrando por sitio, paginando, ordenando, por estado y término de búsqueda
-  const { rows, count } = await purchase.getSearchItem({
-    page,
-    limit,
-    uidSite,
-    orderProperty,
-    order,
-    status,
-    site,
-    search,
-    params: [
-      // Campos en los que se buscará el término
-      'product',
-      'serial',
-      'brand',
-      'model',
-      'dateOfPurchase',
-      'value',
-      'quantity',
-      'supplier',
-      'warranty',
-      'orderNumber',
-    ],
-  });
+  const { rows, count, currentPage, nextPage, pages, previousPage } =
+    await purchase.getSearchItem({
+      page,
+      limit,
+      uidSite,
+      orderProperty,
+      order,
+      status,
+      site,
+      search,
+      params: [
+        // Campos en los que se buscará el término
+        'product',
+        'serial',
+        'brand',
+        'model',
+        'dateOfPurchase',
+        'value',
+        'quantity',
+        'supplier',
+        'warranty',
+        'orderNumber',
+      ],
+    });
 
   // Verificar si se encontraron resultados. Si no, devolver error de "No encontrado".
   if (!rows.length) {
     return res.status(404).send({ errors: [{ uid: purchaseMSG.noFound }] });
   }
 
-  // Calcular el número total de páginas en base al resultado y el límite por página
-  const pages = Math.ceil(count / limit);
-
-  // Ajustar la página actual si excede el número total de páginas
-  const totalPage = page > pages ? pages : page;
-
-  // Calcular la página siguiente y la anterior, teniendo en cuenta los límites
-  const nextPage = Number(totalPage) + 1;
-  const previousPage = Number(totalPage) - 1;
-
   // Devolver una respuesta exitosa (200) con los datos de la búsqueda y metadatos de paginación
   return res.status(200).send({
-    count, // Cantidad total de compras que cumplen con los filtros y búsqueda
-    currentPage: Number(totalPage), // Página actual de la lista
-    nextPage: nextPage <= pages ? nextPage : null, // Página siguiente, si existe
-    previousPage: previousPage > 0 ? previousPage : null, // Página anterior, si existe
-    limit: Number(limit), // Cantidad de compras por página
-    pages, // Número total de páginas de la lista completa
-    rows, // Las compras encontradas que cumplen con los filtros y búsqueda
+    count,
+    currentPage,
+    nextPage,
+    previousPage,
+    limit: Number(limit),
+    pages,
+    rows,
   });
 };
 

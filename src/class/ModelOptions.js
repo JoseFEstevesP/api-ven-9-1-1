@@ -21,7 +21,22 @@ class ModelOptions {
       offset: (page - 1) * limit,
       order: [[orderProperty, order]],
     });
-    return { rows, count };
+
+    const pages = Math.ceil(count / limit);
+
+    const totalPage = page > pages ? pages : page;
+
+    const nextPage = Number(totalPage) + 1;
+    const previousPage = Number(totalPage) - 1;
+
+    return {
+      rows,
+      pages,
+      count,
+      currentPage: Number(totalPage),
+      nextPage: nextPage <= pages ? nextPage : null,
+      previousPage: previousPage > 0 ? previousPage : null,
+    };
   }
 
   async getItem({ uid, status }) {
@@ -50,7 +65,22 @@ class ModelOptions {
       offset: (page - 1) * limit,
       order: [[orderProperty, order]],
     });
-    return { rows, count };
+
+    const pages = Math.ceil(count / limit);
+
+    const totalPage = page > pages ? pages : page;
+
+    const nextPage = Number(totalPage) + 1;
+    const previousPage = Number(totalPage) - 1;
+
+    return {
+      rows,
+      pages,
+      count,
+      currentPage: Number(totalPage),
+      nextPage: nextPage <= pages ? nextPage : null,
+      previousPage: previousPage > 0 ? previousPage : null,
+    };
   }
 
   async getReport({

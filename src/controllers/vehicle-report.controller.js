@@ -1,55 +1,53 @@
-import { reportDate } from '#Functions/reportDate.js';
+import ModelOptions from '#Class/ModelOptions.js';
 import { Site } from '#Schemas/site.schema.js';
 import { User } from '#Schemas/user.schema.js';
 import { Vehicle } from '#Schemas/vehicle.schema.js';
-import moment from 'moment';
 
 const vehicleReportController = async (req, res) => {
   const { id, uidSite } = req;
   const {
     uidSite: uidSiteQuery,
-    orderProperty = 'description',
-    order = 'ASC',
+    orderProperty,
+    order,
     status = '1',
-    dataQuantity = 17,
+    dataQuantity,
     endDate,
     startDate,
     search,
   } = req.query;
+
   const site = uidSiteQuery || uidSite;
-  const { name, surname, ci } = await User.findOne({ where: { uid: id } });
-  const vehicleReport = await Vehicle.findAll({
-    where: reportDate({
+
+  const purchase = new ModelOptions({ Model: Vehicle });
+
+  const { rows, author, siteName, report, date, time } =
+    await purchase.getReport({
+      userModel: User,
+      siteModel: Site,
+      uid: id,
+      orderProperty,
+      order,
       search,
-      searchItem: 'vehicle',
       endDate,
       startDate,
       status,
       uidSite: site,
-    }),
-    attributes: {
-      exclude: ['uid', 'uidSite', 'uidUser'],
-    },
+      params: [
+        'description',
+        'brand',
+        'model',
+        'place',
+        'quantity',
+        'condition',
+        'dateOfAcquisition',
+        'codeBN',
+      ],
+      dataQuantity,
+      reportName: 'Vehículo', // Nombre del reporte
+    });
 
-    order: [[orderProperty, order]],
-  });
-  const rows = vehicleReport.reduce((acc, item, index) => {
-    if (index % dataQuantity === 0) {
-      acc.push([item]);
-    } else {
-      acc[acc.length - 1].push(item);
-    }
-    return acc;
-  }, []);
-  const { name: siteName } = await Site.findByPk(site);
-  return res.status(200).send({
-    rows,
-    author: `${name} ${surname} CI: ${ci}`,
-    siteName,
-    report: 'Vehículo',
-    date: moment().format('DD-MM-YYYY'),
-    time: moment().format('hh:mm A'),
-  });
+  // Enviar respuesta con datos del reporte:
+  return res.status(200).send({ rows, author, siteName, report, date, time });
 };
 
 export default vehicleReportController;

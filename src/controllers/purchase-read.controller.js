@@ -6,7 +6,7 @@ const purchaseReadController = async (req, res) => {
   const {
     page = 1,
     limit = limitPage,
-    uidSiteQuery,
+    uidSite: uidSiteQuery,
     orderProperty = 'product',
     order = 'ASC',
     status = '1',
@@ -17,29 +17,23 @@ const purchaseReadController = async (req, res) => {
 
   const purchase = new ModelOptions({ Model: Purchase });
 
-  const { rows, count } = await purchase.getList({
-    site,
-    page,
-    limit,
-    orderProperty,
-    order,
-    status,
-  });
-
-  const pages = Math.ceil(count / limit);
-
-  const totalPage = page > pages ? pages : page;
-
-  const nextPage = Number(totalPage) + 1;
-  const previousPage = Number(totalPage) - 1;
+  const { rows, count, pages, currentPage, nextPage, previousPage } =
+    await purchase.getList({
+      site,
+      page,
+      limit: Number(limit),
+      orderProperty,
+      order,
+      status,
+    });
 
   return res.status(200).send({
     rows,
     count,
-    currentPage: Number(totalPage),
-    nextPage: nextPage <= pages ? nextPage : null,
-    previousPage: previousPage > 0 ? previousPage : null,
-    limit: Number(limit),
+    currentPage,
+    nextPage,
+    previousPage,
+    limit,
     pages,
   });
 };

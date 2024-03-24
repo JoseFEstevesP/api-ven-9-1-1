@@ -3,14 +3,6 @@ import { purchaseMSG } from '#Constants/system.js';
 import { Purchase } from '#Schemas/purchase.schema.js';
 
 const purchaseUpdateController = async (req, res) => {
-  // Crear instancia de ModelOptions:
-  const purchase = new ModelOptions({ Model: Purchase });
-
-  // Verificar la existencia del modelo:
-  if (!purchase) {
-    // Si la instancia no es válida, enviar error de "no encontrado"
-    return res.status(404).send({ errors: [{ uid: purchaseMSG.noFound }] });
-  }
   const {
     product,
     serial,
@@ -24,6 +16,10 @@ const purchaseUpdateController = async (req, res) => {
     orderNumber,
     status,
   } = req.body;
+
+  // Crear instancia de ModelOptions:
+  const purchase = new ModelOptions({ Model: Purchase });
+
   // Actualizar el elemento de compra:
   await purchase.updateItem({
     // Proporcionar los datos para la actualización
