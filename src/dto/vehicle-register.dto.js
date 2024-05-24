@@ -19,6 +19,8 @@ const registerDTOSchema = Type.Object(
     condition: permissionsDTOSchemas,
     dateOfAcquisition: permissionsDTOSchemas,
     codeBN: permissionsDTOSchemas,
+    fuelCapacity: permissionsDTOSchemas,
+    currentFuel: permissionsDTOSchemas,
   },
   {
     additionalProperties: true,

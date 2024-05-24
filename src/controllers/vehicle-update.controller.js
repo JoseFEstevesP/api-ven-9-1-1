@@ -14,6 +14,8 @@ const vehicleUpdateController = async (req, res) => {
     remarks,
     codeBN,
     status,
+    fuelCapacity,
+    currentFuel,
   } = req.body;
 
   // Crear instancia de ModelOptions:
@@ -35,6 +37,8 @@ const vehicleUpdateController = async (req, res) => {
       remarks,
       codeBN,
       status,
+      fuelCapacity,
+      currentFuel,
     }, // Datos actualizados para el elemento
   });
 
