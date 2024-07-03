@@ -1,3 +1,4 @@
+import userAutoLoginController from '#Controllers/user-autoLogin.controller.js';
 import userDeleteController from '#Controllers/user-delete.controller.js';
 import userLoginController from '#Controllers/user-login.controller.js';
 import userProfileController from '#Controllers/user-profile.controller.js';
@@ -44,6 +45,7 @@ userRoutes.post(
   userRegisterController
 );
 userRoutes.post('/login', userLoginDTO, userLoginController);
+userRoutes.get('/autoLogin/:ci', userAutoLoginController);
 userRoutes.get(
   '/profile',
   userCryptoDTO,
