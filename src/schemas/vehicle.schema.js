@@ -67,4 +67,12 @@ export const Vehicle = sequelize.define('vehicles', {
     type: DataTypes.TIME,
     allowNull: false,
   },
+  fuelCapacity: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  currentFuel: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
