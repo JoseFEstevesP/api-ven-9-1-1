@@ -28,7 +28,7 @@ const userLoginController = async (req, res) => {
     .setIssuedAt()
     .setExpirationTime('7d')
     .sign(coder(process.env.JWT_PRIVATE_KEY));
-  const cryptoToken = crypto.AES.encrypt(jwt, process.env.CRYPTO_KEY);
+  const cryptoToken = crypto.AES.encrypt(jwt, process.env.JWT_PRIVATE_KEY);
   const dataCrypto = cryptoToken.toString();
   return res.send({
     JWT: dataCrypto,
