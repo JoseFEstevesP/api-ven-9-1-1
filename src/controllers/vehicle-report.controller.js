@@ -41,8 +41,6 @@ const vehicleReportController = async (req, res) => {
         'condition',
         'dateOfAcquisition',
         'codeBN',
-        'fuelCapacity',
-        'currentFuel',
       ],
       dataQuantity,
       reportName: 'Vehículo', // Nombre del reporte
